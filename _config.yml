@@ -93,7 +93,7 @@ head: # 删改前确定知道自己在做什么
   - key: rel
     value: stylesheet
   - key: href
-    value: //cdn.jsdelivr.net/gh/wu-kan/wu-kan.github.io/public/css/wu-kan.css
+    value: //cdn.jsdelivr.net/gh/lyp22/lyp22.github.io/public/css/wu-kan.css
 - tag: link
   var:
   - key: rel
@@ -110,7 +110,7 @@ script: # 需要在正文后调用的脚本
 - src: //cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js # jQuery
 - src: //cdn.jsdelivr.net/npm/ribbon.js/dist/ribbon.min.js # 彩带背景
 - src: //cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget/autoload.js # live2d
-- src: //cdn.jsdelivr.net/gh/wu-kan/wu-kan.github.io/public/js/baidu_push.js # 百度推送
+- src: //cdn.jsdelivr.net/gh/lyp22/lyp22.github.io/public/js/baidu_push.js # 百度推送
 - src: //cdn.jsdelivr.net/npm/prismjs/components/prism-core.min.js
 - src: //cdn.jsdelivr.net/npm/prismjs/plugins/autoloader/prism-autoloader.min.js
 - src: //cdn.jsdelivr.net/npm/prismjs/plugins/line-numbers/prism-line-numbers.min.js
