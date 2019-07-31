@@ -1,7 +1,7 @@
-title: wu-kan
-url: http://wu-kan.github.io
+title: ( ﹁ ﹁ )
+url: http://lyp22.github.io
 baseurl: '' # 假如你的博客是建在某个目录下的，请在这里加上目录名，并且下面配置的所有链接里的`/public`前也要加，即`/your_baseurl/public`。这一项结尾不要有'/'
-author: WuK
+author: Auwind
 
 permalink: /posts/:categories/:title # 博文目录
 
@@ -63,13 +63,13 @@ head: # 删改前确定知道自己在做什么
   - key: rel
     value: apple-touch-icon-precomposed
   - key: href
-    value: //www.gravatar.com/avatar/a12c5fff23dde00df79af9aca4e7b6e4?d=wavatar&s=144
+    value: /public/portrait.jpeg
 - tag: link # 小图标，同上
   var:
   - key: rel
     value: 'shortcut icon'
   - key: href
-    value: //www.gravatar.com/avatar/a12c5fff23dde00df79af9aca4e7b6e4?d=wavatar&s=32
+    value: /public/portrait.jpeg
 - tag: link # 下面是博客的css，有些插件的css是单独在插件里引用的，假如需要自己的css可以仿照去加在后面。无脑cdn加速了。
   var:
   - key: rel
@@ -154,7 +154,7 @@ sidebar:
   avatar: # 侧边栏显示的头像
     enable: true
     img: //www.gravatar.com/avatar/a12c5fff23dde00df79af9aca4e7b6e4?d=wavatar&s=600 # 头像的地址
-    info: <br>SYSU17级在读<br>计科超算方向<br>ACMer<br>田宫例四驱车<br>永远喜欢水野爱 # 头像背后的信息
+    info: <br>SYSU17级在读<br> # 头像背后的信息
   description: '<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=100% height=52 src="//music.163.com/outchain/player?type=0&id=155059595&auto=0&height=32"></iframe>'
   social:
   - title: rss # rss
