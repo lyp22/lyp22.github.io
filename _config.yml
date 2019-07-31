@@ -4,7 +4,7 @@
 # ---------------------------------------------------------------
 
 # Site
-title: 秋风流浪猫的学习笔记
+title: ( ﹁ ﹁ )
 subtitle:
 description: The study notes of Auwind Lau
 author: LYP
@@ -75,7 +75,7 @@ plugins:
 # ---------------------------------------------------------------
 
 # Put your favicon.ico into `assets/` directory.
-favicon: assets/portrait.jpg
+favicon: assets/portrait.jpeg
 
 # Set default keywords (Use a comma to separate)
 keywords: "Jekyll, NexT"
