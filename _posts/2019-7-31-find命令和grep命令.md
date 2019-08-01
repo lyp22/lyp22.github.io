@@ -3,7 +3,7 @@ published: true
 title: linux使用find命令和grep命令查找文件和文件内容
 category: linux
 tags: 
-  - linux
+  - 常用
 layout: post
 ---
 
