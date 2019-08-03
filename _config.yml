@@ -99,7 +99,7 @@ script: # 需要在正文后调用的脚本
 - src: //cdn.jsdelivr.net/npm/prismjs/plugins/line-numbers/prism-line-numbers.min.js
 - src: //cdn.jsdelivr.net/npm/prismjs/plugins/toolbar/prism-toolbar.min.js
 - src: /public/js/prism.js
-- src: /public/js/mermaid.min.js
+- src: /public/js/mermaid.js
 - src: /public/js/katex.js
 
 mermaid: # https://github.com/knsv/mermaid
