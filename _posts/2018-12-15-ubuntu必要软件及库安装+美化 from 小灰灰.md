@@ -27,7 +27,7 @@ dpkg -i wps,chrome,electron-ssr,xmind-zero,virtualbox,sogou-pinyin,nautilus_nuts
 veractype,foxitreader
 
 # configure ssr
-ssr://MjA2LjE4OS4yMTkuMjA0OjIzMzM6b3JpZ2luOnJjNC1tZDU6cGxhaW46YUc5MWJHbDZhR2svPw
+
 
 # configure guake
 
