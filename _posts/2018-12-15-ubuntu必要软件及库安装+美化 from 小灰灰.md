@@ -17,7 +17,6 @@ apt install fish tmux guake git build-essential baobab gparted vim gconf2 cmake 
 ```
 
 
-
 # dpkg
 ```
 dpkg -i wps,chrome,electron-ssr,xmind-zero,virtualbox,sogou-pinyin,nautilus_nutstore,teamviewer,vnciewer,netease
@@ -105,9 +104,13 @@ GRUB_DISABLE_OS_PROBER=true
 # theme beauty
 
 ```
-sudo apt install gnome-tweak-tool chrome-gnome-shell gnome-shell-extensions
+sudo apt install gnome gnome-shell
 ```
 
+
+```
+sudo apt install gnome-tweak-tool chrome-gnome-shell gnome-shell-extensions
+```
 
 
 ## papirus图标
