@@ -23,7 +23,7 @@ apt install fish tmux guake git build-essential baobab gparted vim gconf2 cmake 
 dpkg -i wps,chrome,electron-ssr,xmind-zero,virtualbox,sogou-pinyin,nautilus_nutstore,teamviewer,vnciewer,netease
 ```
 
-#install gz...
+# install gz...
 veractype,foxitreader
 
 # configure ssr
@@ -42,7 +42,7 @@ sudo apt-get update
 sudo apt-get install albert
 ```
 
-#uninstall firefox
+# uninstall firefox
 
 # install markdown editor
 ## typora
