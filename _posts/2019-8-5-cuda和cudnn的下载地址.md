@@ -3,7 +3,7 @@ published: true
 title: cuda和cudnn各版本下载地址
 category: cuda
 tags: 
-  - 常用
+  - 下载地址
 layout: post
 ---
 
