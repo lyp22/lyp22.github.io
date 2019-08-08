@@ -1,6 +1,6 @@
 ---
 published: true
-title: Ubuntu16.04解决问题：E: 无法获得锁 /var/lib/dpkg/lock-frontend - open (11: 资源暂时不可用)
+title: Ubuntu dpkg问题：E: 无法获得锁 \var\lib\dpkg\lock-frontend - open (11: 资源暂时不可用)
 category: linux
 tags: 
   - 常用
