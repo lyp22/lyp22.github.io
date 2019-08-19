@@ -229,8 +229,8 @@ post:
 valine:
   enable: true
   src: //cdn.jsdelivr.net/npm/valine
-  appId: u5zhbvG3hNETYcirIb380m5e-gzGzoHsz
-  appKey: egstgteyf7afBFikAjTqXGsH
+  appId: h3Y827lG7R3s3eFGdBDMka2u-MdYXbMMI
+  appKey: 7AyfA498Cr1eGenSgpHgLfxO
   notify: true # 评论回复邮件提醒
   verify: true # 验证码服务
   avatar: identicon
