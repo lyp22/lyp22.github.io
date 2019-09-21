@@ -1,6 +1,6 @@
 ---
 published: true
-title: 报错caffe_.mexa64: undefined symbol
+title: 报错caffe_ mexa64 undefined symbol
 category: caffe
 tags: 
   - matcaffe
