@@ -195,24 +195,33 @@ for p ← 2 to n do
                  j ← j + p
 //copy the remaining elements of A to array L of the primes</code></pre><p>   i ← 0<br>   for p ← 2 to n do<br>        if A[p] ！=  0<br>                L[i] ← A[p]<br>                i ← i+1<br>   return L</p>
 <p>这个算法在做一件什么事情呢？从2开始，将每个质数的倍数标记，剩下的就全都是质数了。<br>此算法的复杂度分析在这里就不做了。</p>
-<h2><span id="algorithm-design-and-analysis-process">Algorithm design and analysis process</span><a href="#algorithm-design-and-analysis-process" class="header-anchor">#</a></h2><p><img src="https://raw.githubusercontent.com/Logos23333/Logos23333.github.io/master/_posts/image/algorithm/0.png" alt="0"></p>
+<h2><span id="algorithm-design-and-analysis-process">Algorithm design and analysis process</span><a href="#algorithm-design-and-analysis-process" class="header-anchor">#</a></h2><img src="/2019/12/20/2018-6-28-算法总结/0.png">
+
 <h1><span id="fundamentals-of-the-analysis-of-algorithm-efficiency">Fundamentals of the Analysis of Algorithm Efficiency</span><a href="#fundamentals-of-the-analysis-of-algorithm-efficiency" class="header-anchor">#</a></h1><p>A problem or algorithm with at most polynomial time complexity is considered tractable (or feasible).  P is the set of all tractable problems.<br>A problem or algorithm that has complexity greater than exponential is considered intractable (or infeasible).<br>Note that n^1,000,000 is technically tractable, but really very hard.  n^(log log log n) is technically intractable, but easy.  Such cases are rare though.</p>
-<h1><span id="brute-force">Brute Force</span><a href="#brute-force" class="header-anchor">#</a></h1><h2><span id="brute-force-sorting">Brute-force Sorting</span><a href="#brute-force-sorting" class="header-anchor">#</a></h2><p>selection sort:<br><img src="https://raw.githubusercontent.com/Logos23333/Logos23333.github.io/master/_posts/image/algorithm/1.png" alt="0"></p>
+<h1><span id="brute-force">Brute Force</span><a href="#brute-force" class="header-anchor">#</a></h1><h2><span id="brute-force-sorting">Brute-force Sorting</span><a href="#brute-force-sorting" class="header-anchor">#</a></h2><p>selection sort:</p>
+<img src="/2019/12/20/2018-6-28-算法总结/1.png">
+
 <p>time complexity:Θ(n^2)</p>
-<p>bubble sort:<br><img src="https://raw.githubusercontent.com/Logos23333/Logos23333.github.io/master/_posts/image/algorithm/2.png" alt="0"></p>
+<p>bubble sort:</p>
+<img src="/2019/12/20/2018-6-28-算法总结/2.png">
+
 <p>time complexity:Θ(n^2)</p>
 <h1><span id="divide-and-conquer">Divide-and-Conquer</span><a href="#divide-and-conquer" class="header-anchor">#</a></h1><h2><span id="zhu-ding-li">主定理</span><a href="#zhu-ding-li" class="header-anchor">#</a></h2><p>主定理的使用请看这篇博文：<a href="http://logos23333.top/algorithm/2018/02/26/%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA%E7%AC%94%E8%AE%B0dacpart3/" target="_blank" rel="noopener">《Introduction to Algorithm》notes:Three methods for solving recurrences</a>。</p>
-<h2><span id="mergesort">MergeSort</span><a href="#mergesort" class="header-anchor">#</a></h2><p><img src="https://raw.githubusercontent.com/Logos23333/Logos23333.github.io/master/_posts/image/algorithm/3.png" alt="0"></p>
-<p><img src="https://raw.githubusercontent.com/Logos23333/Logos23333.github.io/master/_posts/image/algorithm/4.png" alt="0"></p>
+<h2><span id="mergesort">MergeSort</span><a href="#mergesort" class="header-anchor">#</a></h2><img src="/2019/12/20/2018-6-28-算法总结/3.png">
+
+<img src="/2019/12/20/2018-6-28-算法总结/4.png">
+
 <p>Mergesort无论在最差平均还是最好情况下，time complexity都是Θ(nlogn)。</p>
-<h2><span id="quicksort">Quicksort</span><a href="#quicksort" class="header-anchor">#</a></h2><p><img src="https://raw.githubusercontent.com/Logos23333/Logos23333.github.io/master/_posts/image/algorithm/5.png" alt="0"></p>
+<h2><span id="quicksort">Quicksort</span><a href="#quicksort" class="header-anchor">#</a></h2><img src="/2019/12/20/2018-6-28-算法总结/5.png">
+
 <p>Best case: split in the middle — Θ(n log n)<br>Worst case: sorted array! — Θ(n2)<br>Average case: random arrays — Θ(n log n)  </p>
 <h1><span id="decrease-and-conquer">Decrease-and-Conquer</span><a href="#decrease-and-conquer" class="header-anchor">#</a></h1><h2><span id="types-of-decrease-and-conquer">Types of Decrease and Conquer</span><a href="#types-of-decrease-and-conquer" class="header-anchor">#</a></h2><ol>
 <li>Decrease by a constant (usually by 1): insertion sort/graph traversal algorithms (DFS and BFS)/topological sorting/algorithms for generating permutations, subsets    </li>
 <li>Decrease by a constant factor (usually by half):binary search and bisection method/exponentiation by squaring/multiplication à la russe</li>
 <li>Variable-size decrease:Euclid’s algorithm/selection by partition/Nim-like games</li>
 </ol>
-<h2><span id="insertionsort">InsertionSort</span><a href="#insertionsort" class="header-anchor">#</a></h2><p><img src="https://raw.githubusercontent.com/Logos23333/Logos23333.github.io/master/_posts/image/algorithm/6.png" alt="0"></p>
+<h2><span id="insertionsort">InsertionSort</span><a href="#insertionsort" class="header-anchor">#</a></h2><img src="/2019/12/20/2018-6-28-算法总结/6.png">
+
 <p>Time efficiency<br>    Cworst(n) = n(n-1)/2∈Θ(n2)<br>    Cavg(n) ≈ n2/4∈Θ(n2)<br>    Cbest(n) = n - 1∈Θ(n)  (also fast on almost sorted arrays)<br>Space efficiency: in-place<br>Stability: yes<br>Best elementary sorting algorithm overall<br>Binary insertion sort  </p>
 <h1><span id="transform-and-conquer">Transform-and-Conquer</span><a href="#transform-and-conquer" class="header-anchor">#</a></h1><h2><span id="avl-shu">AVL树</span><a href="#avl-shu" class="header-anchor">#</a></h2><p>熟悉好rotation操作就Ok了。<br>Search and insertion are O(log n)<br>Deletion is more complicated but is also O(log n)</p>
 <h2><span id="heapsort">HeapSort</span><a href="#heapsort" class="header-anchor">#</a></h2><p>Both worst-case and average-case efficiency: (nlogn)<br>In-place: yes<br>Stability: no (e.g., 1  1)</p>

@@ -3,6 +3,41 @@
 
 
     <url>
+        <loc>https://qaqu.net/tags/%E4%BA%8C%E5%88%86%E5%9B%BE/</loc>
+        <lastmod>2019-12-20T05:12:28.341Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://qaqu.net/tags/tracklet/</loc>
+        <lastmod>2019-12-20T05:11:23.921Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://qaqu.net/tags/%E6%A6%82%E7%8E%87%E5%9B%BE/</loc>
+        <lastmod>2019-12-20T05:10:12.851Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://qaqu.net/tags/correlation-filter/</loc>
+        <lastmod>2019-12-20T05:08:33.458Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://qaqu.net/tags/%E7%AE%97%E6%B3%95/</loc>
+        <lastmod>2019-12-20T05:06:22.358Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://qaqu.net/tags/matcaffe/</loc>
         <lastmod>2019-12-20T03:55:40.509Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -87,42 +122,7 @@
     </url>
 
     <url>
-        <loc>https://qaqu.net/tags/tracklet/</loc>
-        <lastmod>2019-08-07T06:56:38.608Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://qaqu.net/tags/%E4%BA%8C%E5%88%86%E5%9B%BE/</loc>
-        <lastmod>2019-08-07T06:56:38.608Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://qaqu.net/tags/correlation-filter/</loc>
-        <lastmod>2019-08-07T06:56:38.608Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://qaqu.net/tags/%E6%A6%82%E7%8E%87%E5%9B%BE/</loc>
-        <lastmod>2019-08-07T06:56:38.608Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://qaqu.net/tags/machine-learning/</loc>
-        <lastmod>2019-08-07T06:56:38.608Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://qaqu.net/tags/%E7%AE%97%E6%B3%95/</loc>
         <lastmod>2019-08-07T06:56:38.608Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>

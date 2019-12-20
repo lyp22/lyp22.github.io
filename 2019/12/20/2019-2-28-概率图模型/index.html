@@ -174,26 +174,37 @@
 </blockquote>
 <h1><span id="prerequisite">Prerequisite</span><a href="#prerequisite" class="header-anchor">#</a></h1><h2><span id="gai-lu-tu">概率图</span><a href="#gai-lu-tu" class="header-anchor">#</a></h2><p>之前刚接触CRF时，一上来试图越过一堆繁琐的概率图相关概念，不过sad to say, 这是后面的前驱知识，后面还得反过来补这个点。所以若想整体把握，系统地拿下这一块，应该还是要越过这块门槛的。 当然了，一开始只需略略快速看一篇，后面可再返过来补查。</p>
 <h3><span id="gai-lan">概览</span><a href="#gai-lan" class="header-anchor">#</a></h3><p>在统计概率图（probability graph models）中，参考宗成庆老师的书，是这样的体系结构（个人非常喜欢这种类型的图）：</p>
-<p><img src="https://raw.githubusercontent.com/lyp22/lyp22.github.io/master/_posts/image/CRF/1.jpg" alt="0"></p>
+
+
 <p>在概率图模型中，数据(样本)由公式G=(V,E)建模表示：  V表示节点，即随机变量（放在此处的，可以是一个token或者一个label），具体地，用Y=(y1,y2,……,yn)  为随机变量建模，注意  现在是代表了一批随机变量（想象对应一条sequence，包含了很多的token），  P(Y)为这些随机变量的分布； E表示边，即概率依赖关系。具体咋理解，还是要在后面结合HMM或CRF的graph具体解释。</p>
 <h3><span id="you-xiang-tu-vs-wu-xiang-tu">有向图 vs. 无向图</span><a href="#you-xiang-tu-vs-wu-xiang-tu" class="header-anchor">#</a></h3><p>上图可以看到，贝叶斯网络（信念网络）都是有向的，马尔科夫网络无向。所以，贝叶斯网络适合为有单向依赖的数据建模，马尔科夫网络适合实体之间互相依赖的建模。具体地，他们的核心差异表现在如何求 P=(Y) ，即怎么表示 Y=(y1,y2,……,yn) 这个的联合概率。</p>
-<h4><span id="you-xiang-tu">有向图</span><a href="#you-xiang-tu" class="header-anchor">#</a></h4><p>对于有向图模型，这么求联合概率：<br><img src="https://raw.githubusercontent.com/lyp22/lyp22.github.io/master/_posts/image/CRF/f1.jpg" alt="0"></p>
+<h4><span id="you-xiang-tu">有向图</span><a href="#you-xiang-tu" class="header-anchor">#</a></h4><p>对于有向图模型，这么求联合概率： </p>
+
+
+
 <p>举个例子，对于下面的这个有向图的随机变量(注意，这个图我画的还是比较广义的)：</p>
-<p><img src="https://raw.githubusercontent.com/lyp22/lyp22.github.io/master/_posts/image/CRF/2.jpg" alt="0"></p>
+
+
 <p>应该这样表示他们的联合概率:</p>
-<p><img src="https://raw.githubusercontent.com/lyp22/lyp22.github.io/master/_posts/image/CRF/f2.jpg" alt="0"></p>
+
+
 <h4><span id="wu-xiang-tu">无向图</span><a href="#wu-xiang-tu" class="header-anchor">#</a></h4><p>对于无向图，我看资料一般就指马尔科夫网络(注意，这个图我画的也是比较广义的)。</p>
-<p><img src="https://raw.githubusercontent.com/lyp22/lyp22.github.io/master/_posts/image/CRF/3.jpg" alt="0"></p>
+
+
 <p>如果一个graph太大，可以用因子分解将 P=(Y) 写为若干个联合概率的乘积。咋分解呢，将一个图分为若干个“小团”，注意每个团必须是“最大团”（就是里面任何两个点连在了一块，具体……算了不解释，有点“最大连通子图”的感觉），则有：</p>
-<p><img src="https://raw.githubusercontent.com/lyp22/lyp22.github.io/master/_posts/image/CRF/f3.jpg" alt="0"></p>
-<p>, 其中 <img src="https://raw.githubusercontent.com/lyp22/lyp22.github.io/master/_posts/image/CRF/f4.jpg" alt="0"> ，公式应该不难理解吧，归一化是为了让结果算作概率。</p>
+
+
+<p>, 其中  ，公式应该不难理解吧，归一化是为了让结果算作概率。</p>
 <p>所以像上面的无向图：</p>
-<p><img src="https://raw.githubusercontent.com/lyp22/lyp22.github.io/master/_posts/image/CRF/f5.jpg" alt="0"></p>
-<p>其中，  <img src="https://raw.githubusercontent.com/lyp22/lyp22.github.io/master/_posts/image/CRF/f6.jpg" alt="0">是一个最大团 C 上随机变量们的联合概率，一般取指数函数的：</p>
-<p><img src="https://raw.githubusercontent.com/lyp22/lyp22.github.io/master/_posts/image/CRF/f7.jpg" alt="0"></p>
-<p>好了，管这个东西叫做势函数。注意 <img src="https://raw.githubusercontent.com/lyp22/lyp22.github.io/master/_posts/image/CRF/f8.png" alt="0"> 是否有看到CRF的影子。</p>
+
+
+<p>其中，  是一个最大团 C 上随机变量们的联合概率，一般取指数函数的：</p>
+
+
+<p>好了，管这个东西叫做势函数。注意 <img src="/2019/12/20/2019-2-28-概率图模型/f8.png"> 是否有看到CRF的影子。</p>
 <p>那么概率无向图的联合概率分布可以在因子分解下表示为：</p>
-<p><img src="https://raw.githubusercontent.com/lyp22/lyp22.github.io/master/_posts/image/CRF/f9.png" alt="0"></p>
+<img src="/2019/12/20/2019-2-28-概率图模型/f9.png">
+
 <p>注意，这里的理解还蛮重要的，注意递推过程，敲黑板，这是CRF的开端！<br>这个由Hammersly-Clifford law保证，具体不展开。</p>
 <h3><span id="ma-er-ke-fu-jia-she-amp-ma-er-ke-fu-xing">马尔科夫假设&amp;马尔科夫性</span><a href="#ma-er-ke-fu-jia-she-amp-ma-er-ke-fu-xing" class="header-anchor">#</a></h3><p>这个也属于前馈知识。</p>
 <h4><span id="ma-er-ke-fu-jia-she">马尔科夫假设</span><a href="#ma-er-ke-fu-jia-she" class="header-anchor">#</a></h4><p>额应该是齐次马尔科夫假设，这样假设：马尔科夫链(X1,……,Xn)里的Xi  总是只受Xi-1  一个人的影响。马尔科夫假设这里相当于就是个1-gram。马尔科夫过程呢？即，在一个过程中，每个状态的转移只依赖于前n个状态，并且只是个n阶的模型。最简单的马尔科夫过程是一阶的，即只依赖于器哪一个状态。</p>
