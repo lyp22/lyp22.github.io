@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="一个什么都在学的新手萌二程序员的日常~">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      ubuntu上opencv3.2和opencv_contrib安装中遇到的错误记录(cuda9.0) | QAQuの窝
+    
+  </title>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+  <script src="/js/qrious.js"></script>
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-97900713-1"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-97900713-1');
+  </script>
+<link rel="alternate" href="/atom.xml" title="QAQuの窝" type="application/atom+xml">
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
+</div>
+
+  <body>
+    <header class="header fixed-header">
+<!--  <script type="text/javascript" src="/js/mmd_loader.js"></script>-->
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>QAQuの窝</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">主页</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">分类</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/links/" class="item-link">大佬们</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">关于</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">主页</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">分类</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">归档</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/links/" class="menu-link">大佬们</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">关于</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>ubuntu上opencv3.2和opencv_contrib安装中遇到的错误记录(cuda9.0)</h2>
+  <p class="post-date">2019-12-20</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><h1><span id="gai-zheng-ban-opencv-contrib-3-2-xia-zai-di-zhi">改正版opencv_contrib 3.2下载地址</span><a href="#gai-zheng-ban-opencv-contrib-3-2-xia-zai-di-zhi" class="header-anchor">#</a></h1><p><a href="https://blog.csdn.net/qsczse943062710/article/details/79181831" target="_blank" rel="noopener">https://blog.csdn.net/qsczse943062710/article/details/79181831</a></p>
+<h1><span id="bu-zou">步骤</span><a href="#bu-zou" class="header-anchor">#</a></h1><p>解压opencv-3.2.0，比如为/home/XXX/opencv-3.2.0</p>
+<p>解压我给的opencv_contrib-3.2.0至opencv-3.2.0的目录下（解压完后路径为/home/XXX/opencv-3.2.0/opencv_contrib-3.2.0），并在此处新建一个build文件夹（路径为/home/XXX/opencv-3.2.0/build）</p>
+<p>进入build，执行：</p>
+<pre><code>cmake -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/usr/local -D OPENCV_EXTRA_MODULES_PATH=/home/lyp/Data/Downtown/opencv-3.2.0/opencv_contrib/modules -D CUDA_GENERATION=Kepler ..</code></pre><p>因为是cuda9.0不再支持2.0架构所以要加上-D CUDA_GENERATION=Kepler</p>
+<h1><span id="yu-dao-de-cuo-wu">遇到的错误</span><a href="#yu-dao-de-cuo-wu" class="header-anchor">#</a></h1><h2><span id="di-yi-ge-cuo-wu">第一个错误</span><a href="#di-yi-ge-cuo-wu" class="header-anchor">#</a></h2><p>fatal error: LAPACKE_H_PATH-NOTFOUND/lapacke.h: No such file or directory #include “LAPACKE_H_PATH-NOTFOUND/lapacke.h” </p>
+<p>原因：未找到lapacke.h文件</p>
+<p>方法： </p>
+<p>sudo apt-get install liblapacke-dev checkinstall </p>
+<p>修改出现问题的文件，例如我的文件是 </p>
+<p>opencv-3.2.0/build/opencv_lapack.h </p>
+<p>将第二行中的#include”LAPACKE_H_PATH-NOTFOUND/lapacke.h” 修改为#include”lapacke.h”即可</p>
+<h2><span id="di-er-ge-cuo-wu">第二个错误</span><a href="#di-er-ge-cuo-wu" class="header-anchor">#</a></h2><p>使用Cmake编译opencv源码遇到如下错误</p>
+<pre><code>CMake Error: The following variables are used in this project, but they are set to NOTFOUND.
+Please set them or make sure they are set and tested correctly in the CMake files:
+CUDA_nppi_LIBRARY (ADVANCED)
+linked by target &quot;opencv_cudev&quot; in directory D:/Cproject/opencv/opencv/sources/modules/cudev
+linked by target &quot;opencv_cudev&quot; in directory D:/Cproject/opencv/opencv/sources/modules/cudev</code></pre><h3><span id="1">1</span><a href="#1" class="header-anchor">#</a></h3><p>找到行</p>
+<p>find_cuda_helper_libs(nppi)</p>
+<p>改为</p>
+<pre><code>  find_cuda_helper_libs(nppial)
+  find_cuda_helper_libs(nppicc)
+  find_cuda_helper_libs(nppicom)
+  find_cuda_helper_libs(nppidei)
+  find_cuda_helper_libs(nppif)
+  find_cuda_helper_libs(nppig)
+  find_cuda_helper_libs(nppim)
+  find_cuda_helper_libs(nppist)
+  find_cuda_helper_libs(nppisu)
+  find_cuda_helper_libs(nppitc)</code></pre><h3><span id="2">2</span><a href="#2" class="header-anchor">#</a></h3><p>找到行</p>
+<p>set(CUDA_npp_LIBRARY “${CUDA_nppc_LIBRARY};${CUDA_nppi_LIBRARY};${CUDA_npps_LIBRARY}”)</p>
+<p>改为</p>
+<pre><code>set(CUDA_npp_LIBRARY &quot;${CUDA_nppc_LIBRARY};${CUDA_nppial_LIBRARY};${CUDA_nppicc_LIBRARY};${CUDA_nppicom_LIBRARY};${CUDA_nppidei_LIBRARY};${CUDA_nppif_LIBRARY};${CUDA_nppig_LIBRARY};${CUDA_nppim_LIBRARY};${CUDA_nppist_LIBRARY};${CUDA_nppisu_LIBRARY};${CUDA_nppitc_LIBRARY};${CUDA_npps_LIBRARY}&quot;)</code></pre><h3><span id="3">3</span><a href="#3" class="header-anchor">#</a></h3><p>找到行</p>
+<p>unset(CUDA_nppi_LIBRARY CACHE)</p>
+<p>改为</p>
+<pre><code>unset(CUDA_nppial_LIBRARY CACHE)
+unset(CUDA_nppicc_LIBRARY CACHE)
+unset(CUDA_nppicom_LIBRARY CACHE)
+unset(CUDA_nppidei_LIBRARY CACHE)
+unset(CUDA_nppif_LIBRARY CACHE)
+unset(CUDA_nppig_LIBRARY CACHE)
+unset(CUDA_nppim_LIBRARY CACHE)
+unset(CUDA_nppist_LIBRARY CACHE)
+unset(CUDA_nppisu_LIBRARY CACHE)
+unset(CUDA_nppitc_LIBRARY CACHE)</code></pre><h3><span id="4">4</span><a href="#4" class="header-anchor">#</a></h3><p>找到文件OpenCVDetectCUDA.cmake</p>
+<p>修改以下几行</p>
+<pre><code> ...
+  set(__cuda_arch_ptx &quot;&quot;)
+  if(CUDA_GENERATION STREQUAL &quot;Fermi&quot;)
+    set(__cuda_arch_bin &quot;2.0&quot;)
+  elseif(CUDA_GENERATION STREQUAL &quot;Kepler&quot;)
+    set(__cuda_arch_bin &quot;3.0 3.5 3.7&quot;)
+  ...</code></pre><p>改为</p>
+<pre><code>  ...
+  set(__cuda_arch_ptx &quot;&quot;)
+  if(CUDA_GENERATION STREQUAL &quot;Kepler&quot;)
+    set(__cuda_arch_bin &quot;3.0 3.5 3.7&quot;)
+  elseif(CUDA_GENERATION STREQUAL &quot;Maxwell&quot;)
+    set(__cuda_arch_bin &quot;5.0 5.2&quot;)
+  ...</code></pre><h3><span id="5">5</span><a href="#5" class="header-anchor">#</a></h3><p>cuda9中有一个单独的halffloat(cuda_fp16.h)头文件,也应该被包括在opencv的目录里</p>
+<p>将头文件cuda_fp16.h添加至 opencv\modules\cudev\include\opencv2\cudev\common.hpp</p>
+<p>即在common.hpp中添加</p>
+<pre><code>#include &lt;cuda_fp16.h&gt;</code></pre></section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#opencv" >
+    <span class="tag-code">opencv</span>
+  </a>
+
+      </div>
+    
+    <blockquote style="    border: 1px dashed #e0e0e0;
+    padding: .7rem;
+    margin: 30px 0 5px;
+    background: #fafafa;
+    border-radius: 5px;">
+      <div class="post-about"><p>除另有声明外，本博客文章均采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/">知识共享(Creative Commons) 署名-非商业性使用-相同方式共享 3.0 中国大陆许可协议</a> 进行许可。</p></div>
+    </blockquote>
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/12/20/2019-9-19-报错caffe_ mexa64 undefined symbol/">
+        <span class="nav-arrow">← </span>
+        
+          报错caffe_ mexa64 undefined symbol
+        
+      </a>
+    
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+    <!-- 二维码 END -->
+    
+      <!-- Gitment START -->
+      <div id="comments" class="card-container" style="display: block"></div>
+      <!-- Gitment END -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#null"><span class="toc-nav-text">改正版opencv_contrib 3.2下载地址#</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#null"><span class="toc-nav-text">步骤#</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#null"><span class="toc-nav-text">遇到的错误#</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-text">第一个错误#</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-text">第二个错误#</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-text">1#</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-text">2#</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-text">3#</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-text">4#</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-text">5#</span></a></li></ol></li></ol></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'https://qaqu.net/2019/12/20/2019-12-18-ubuntu上opencv3.2和opencv_contrib安装中遇到的错误记录/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('header.header').removeClass('fixed-header')
+
+     // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+
+    // qrcode
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+
+    // gitment
+    var gitmentConfig = "lyp22";
+    if (gitmentConfig !== 'undefined') {
+      const gitalk = new Gitalk({
+        clientID: "67ffb4d30861d90f34a3",
+        clientSecret: "0582b64b2b67331fab65d738db8b2668066c16c3",
+        repo: "lyp22.github.io",
+        owner: "lyp22",
+        admin: ['haozi23333'],
+        labels: ['gitment'],
+        id: "ubuntu上opencv3.2和opencv_contrib安装中遇到的错误记录(cuda9.0)",      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+      gitalk.render('comments')
+    }
+  })();
+</script>
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy;2016 - 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+    Content by <a href="https://github.com/haozi23333">haozi</a>
+    <br>
+     <a href="https://haozi.moe/atom.xml">RSS 订阅</a>
+  </p>
+</footer>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mermaid/7.1.2/mermaid.min.js'></script>
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({theme: 'forest'});
+  }
+</script>
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2d/models/chitose/model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
