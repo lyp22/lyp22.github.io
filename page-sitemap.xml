@@ -8,6 +8,13 @@
     </url>
     
     <url>
+        <loc>https://qaqu.net/404/</loc>
+        <lastmod>2019-12-20T05:14:22.483Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
         <loc>https://qaqu.net/tags/</loc>
         <lastmod>2019-12-20T03:57:34.082Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -22,13 +29,6 @@
     </url>
     
     <url>
-        <loc>https://qaqu.net/links/</loc>
-        <lastmod>2019-12-20T03:57:34.036Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    
-    <url>
         <loc>https://qaqu.net/about/</loc>
         <lastmod>2019-12-20T03:57:34.036Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -36,8 +36,8 @@
     </url>
     
     <url>
-        <loc>https://qaqu.net/404/</loc>
-        <lastmod>2019-12-20T03:57:33.886Z</lastmod>
+        <loc>https://qaqu.net/links/</loc>
+        <lastmod>2019-12-20T03:57:34.036Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
