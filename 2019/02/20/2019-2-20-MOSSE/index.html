@@ -159,9 +159,10 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><p>Visual Object Tracking using Adaptive Correlation Filters 一文发表于2010的CVPR上，是笔者所知的第一篇将correlation filter引入tracking领域内的文章，文中所提的Minimum Output Sum of Squared Error(MOSSE)，可以说是后来CSK、STC、Color Attributes等tracker的鼻祖。Correlation Filter（以下简称CF）源于信号处理领域，后被运用于图像分类等方面。Correlation包含Cross-correlation和Auto-correlation，在这里我们一般指的就是Cross-correlation。首先看看维基百科上Cross-correlation的定义，假设有f和g两个函数（信号），其cross-correlation f★g 定义为</p>
+    <section class="markdown-content"><p>Visual Object Tracking using Adaptive Correlation Filters 一文发表于2010的CVPR上，是第一篇将correlation filter引入tracking领域内的文章，文中所提的Minimum Output Sum of Squared Error(MOSSE)，可以说是后来CSK、STC、Color Attributes等tracker的鼻祖。Correlation Filter（以下简称CF）源于信号处理领域，后被运用于图像分类等方面。Correlation包含Cross-correlation和Auto-correlation，在这里我们一般指的就是Cross-correlation。首先看看维基百科上Cross-correlation的定义，假设有f和g两个函数（信号），其cross-correlation f★g 定义为</p>
 <img src="/2019/02/20/2019-2-20-MOSSE/f1.png">
 
+<a id="more"></a>
 
 <p>其中f∗表示f的复共轭，correlation的直观解释就是衡量两个函数在某个时刻τ的相似程度，如下图所示。考虑一个最简单的例子，假设f和g的形状一样，但是相差了若干个时刻，那么f★g取得最大值的时候一定是f和g对齐的时候（没谁比自己和自己更像了吧…），但因为两者有时间差，所以要取得最大值，就要把其中一个在时间轴上进行平移，所以g(t+τ)就代表把g平移τ个时刻。其实Convolution和Cross-correlation在图像处理的书里一般都会提到，这里就不多叙述了。</p>
 <img src="/2019/02/20/2019-2-20-MOSSE/1.png">

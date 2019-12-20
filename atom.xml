@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://qaqu.net/"/>
-  <updated>2019-12-20T08:37:53.052Z</updated>
+  <updated>2019-12-20T08:41:44.284Z</updated>
   <id>https://qaqu.net/</id>
   
   <author>
@@ -21,18 +21,16 @@
     <link href="https://qaqu.net/2019/12/18/2019-12-18-ubuntu%E4%B8%8Aopencv3.2%E5%92%8Copencv_contrib%E5%AE%89%E8%A3%85%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%94%99%E8%AF%AF%E8%AE%B0%E5%BD%95/"/>
     <id>https://qaqu.net/2019/12/18/2019-12-18-ubuntu%E4%B8%8Aopencv3.2%E5%92%8Copencv_contrib%E5%AE%89%E8%A3%85%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%94%99%E8%AF%AF%E8%AE%B0%E5%BD%95/</id>
     <published>2019-12-18T00:00:00.000Z</published>
-    <updated>2019-12-20T08:37:53.052Z</updated>
+    <updated>2019-12-20T08:41:44.284Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;p&gt;改正版opencv_contrib 3.2下载地址&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://blog.csdn.net/qsczse943062710/article/details/79181831&quot; target=&quot;_blank&quot;
-        
-      
+      &lt;p&gt;改正版opencv_contrib 3.2下载地址&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://blog.csdn.net/qsczse943062710/article/details/79181831&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://blog.csdn.net/qsczse943062710/article/details/79181831&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;解压opencv-3.2.0，比如为/home/XXX/opencv-3.2.0&lt;/p&gt;
+&lt;p&gt;解压我给的opencv_contrib-3.2.0至opencv-3.2.0的目录下（解压完后路径为/home/XXX/opencv-3.2.0/opencv_contrib-3.2.0），并在此处新建一个build文件夹（路径为/home/XXX/opencv-3.2.0/build）&lt;/p&gt;
+&lt;p&gt;进入build，执行：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;cmake -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/usr/local -D OPENCV_EXTRA_MODULES_PATH=/home/lyp/Data/Downtown/opencv-3.2.0/opencv_contrib/modules -D CUDA_GENERATION=Kepler ..&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;因为是cuda9.0不再支持2.0架构所以要加上-D CUDA_GENERATION=Kepler&lt;/p&gt;
     
     </summary>
     
@@ -49,17 +47,11 @@
     <link href="https://qaqu.net/2019/08/19/2019-9-19-%E6%8A%A5%E9%94%99caffe_%20mexa64%20undefined%20symbol/"/>
     <id>https://qaqu.net/2019/08/19/2019-9-19-%E6%8A%A5%E9%94%99caffe_%20mexa64%20undefined%20symbol/</id>
     <published>2019-08-19T00:00:00.000Z</published>
-    <updated>2019-12-20T05:58:00.467Z</updated>
+    <updated>2019-12-20T08:42:10.367Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;p&gt;报错Invalid
-        
-      
+      &lt;p&gt;报错Invalid MEX-file&lt;br&gt;‘/home/lyp/Data/Downtown/LSART/LSART/caffe/matlab/+caffe/private/caffe_.mexa64’:&lt;br&gt;/home/lyp/Data/Matlab2014a/bin/glnxa64/../../sys/os/glnxa64/libstdc++.so.6:&lt;br&gt;version `GLIBCXX_3.4.21’ not found (required by&lt;br&gt;/home/lyp/Data/Downtown/LSART/LSART/caffe/matlab/+caffe/private/caffe_.mexa64)&lt;/p&gt;
     
     </summary>
     
@@ -76,19 +68,14 @@
     <link href="https://qaqu.net/2019/08/08/2019-8-8-dpkg%E9%94%99%E8%AF%AF/"/>
     <id>https://qaqu.net/2019/08/08/2019-8-8-dpkg%E9%94%99%E8%AF%AF/</id>
     <published>2019-08-08T00:00:00.000Z</published>
-    <updated>2019-12-20T05:57:54.018Z</updated>
+    <updated>2019-12-20T08:42:31.651Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;p&gt;在输入sudo apt-get update后发现终端提示：&lt;/p&gt;
+      &lt;p&gt;在输入sudo apt-get update后发现终端提示：&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;E: 无法获得锁 /var/lib/dpkg/lock-frontend - open (11: 资源暂时不可用)&lt;br&gt;  E: Unable to acquire
-        
-      
+&lt;p&gt;E: 无法获得锁 /var/lib/dpkg/lock-frontend - open (11: 资源暂时不可用)&lt;br&gt;E: Unable to acquire the dpkg frontend lock (/var/lib/dpkg/lock-frontend), is another process using it?&lt;/p&gt;
+&lt;/blockquote&gt;
     
     </summary>
     
@@ -101,75 +88,17 @@
   </entry>
   
   <entry>
-    <title>Ubuntu16.04安装caffe及遇到的问题总结</title>
-    <link href="https://qaqu.net/2019/08/07/2019-8-7-Ubuntu16.04%E5%AE%89%E8%A3%85caffe%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/"/>
-    <id>https://qaqu.net/2019/08/07/2019-8-7-Ubuntu16.04%E5%AE%89%E8%A3%85caffe%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/</id>
-    <published>2019-08-07T00:00:00.000Z</published>
-    <updated>2019-12-20T05:57:35.330Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1&gt;&lt;span id=&quot;ji-chu-ku-an-zhuang&quot;&gt;基础库安装&lt;/span&gt;&lt;a href=&quot;#ji-chu-ku-an-zhuang&quot; class=&quot;header-anchor&quot;&gt;#&lt;/a&gt;&lt;/h1&gt;&lt;pre&gt;&lt;code&gt;sudo apt-get
-        
-      
-    
-    </summary>
-    
-    
-      <category term="caffe" scheme="https://qaqu.net/categories/caffe/"/>
-    
-    
-      <category term="caffe" scheme="https://qaqu.net/tags/caffe/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>提速 git push速度</title>
-    <link href="https://qaqu.net/2019/08/07/2019-8-7-%E6%8F%90%E9%80%9F%20git%20push%E9%80%9F%E5%BA%A6/"/>
-    <id>https://qaqu.net/2019/08/07/2019-8-7-%E6%8F%90%E9%80%9F%20git%20push%E9%80%9F%E5%BA%A6/</id>
-    <published>2019-08-07T00:00:00.000Z</published>
-    <updated>2019-12-20T05:57:47.024Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1&gt;&lt;span id=&quot;dai-li-fu-wu-qi-ti-su&quot;&gt;代理服务器提速&lt;/span&gt;&lt;a href=&quot;#dai-li-fu-wu-qi-ti-su&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="git" scheme="https://qaqu.net/categories/git/"/>
-    
-    
-      <category term="git" scheme="https://qaqu.net/tags/git/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Ubuntu设置系统环境变量和开机自启动</title>
     <link href="https://qaqu.net/2019/08/07/2019-8-7-Ubuntu18.04%E8%AE%BE%E7%BD%AE%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8%E6%9C%8D%E5%8A%A1/"/>
     <id>https://qaqu.net/2019/08/07/2019-8-7-Ubuntu18.04%E8%AE%BE%E7%BD%AE%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8%E6%9C%8D%E5%8A%A1/</id>
     <published>2019-08-07T00:00:00.000Z</published>
-    <updated>2019-12-20T05:57:40.687Z</updated>
+    <updated>2019-12-20T08:42:55.311Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;h1&gt;&lt;span id=&quot;yi-ubuntu-xi-tong-huan-jing-bian-liang-xiang-jie&quot;&gt;一、Ubuntu系统环境变量详解&lt;/span&gt;&lt;a
-        
-      
+      &lt;h1 id=&quot;一、Ubuntu系统环境变量详解&quot;&gt;&lt;a href=&quot;#一、Ubuntu系统环境变量详解&quot; class=&quot;headerlink&quot; title=&quot;一、Ubuntu系统环境变量详解&quot;&gt;&lt;/a&gt;一、Ubuntu系统环境变量详解&lt;/h1&gt;&lt;p&gt;参考这篇文章，讲的非常详细&lt;/p&gt;
+&lt;h1 id=&quot;二、开机自启动&quot;&gt;&lt;a href=&quot;#二、开机自启动&quot; class=&quot;headerlink&quot; title=&quot;二、开机自启动&quot;&gt;&lt;/a&gt;二、开机自启动&lt;/h1&gt;&lt;p&gt;在Linux下设置软件开机自动有三种方式：&lt;/p&gt;
+&lt;h2 id=&quot;1、-自动启动应用程序——rc-local脚本&quot;&gt;&lt;a href=&quot;#1、-自动启动应用程序——rc-local脚本&quot; class=&quot;headerlink&quot; title=&quot;1、 自动启动应用程序——rc.local脚本&quot;&gt;&lt;/a&gt;1、 自动启动应用程序——rc.local脚本&lt;/h2&gt;&lt;h2 id=&quot;2、-自动启动服务——update-rc-d&quot;&gt;&lt;a href=&quot;#2、-自动启动服务——update-rc-d&quot; class=&quot;headerlink&quot; title=&quot;2、 自动启动服务——update-rc.d&quot;&gt;&lt;/a&gt;2、 自动启动服务——update-rc.d&lt;/h2&gt;&lt;h2 id=&quot;3、-启动应用程序首选项&quot;&gt;&lt;a href=&quot;#3、-启动应用程序首选项&quot; class=&quot;headerlink&quot; title=&quot;3、 启动应用程序首选项&quot;&gt;&lt;/a&gt;3、 启动应用程序首选项&lt;/h2&gt;&lt;h2 id=&quot;4、-使用Systemd&quot;&gt;&lt;a href=&quot;#4、-使用Systemd&quot; class=&quot;headerlink&quot; title=&quot;4、 使用Systemd&quot;&gt;&lt;/a&gt;4、 使用Systemd&lt;/h2&gt;
     
     </summary>
     
@@ -182,21 +111,74 @@
   </entry>
   
   <entry>
+    <title>提速 git push速度</title>
+    <link href="https://qaqu.net/2019/08/07/2019-8-7-%E6%8F%90%E9%80%9F%20git%20push%E9%80%9F%E5%BA%A6/"/>
+    <id>https://qaqu.net/2019/08/07/2019-8-7-%E6%8F%90%E9%80%9F%20git%20push%E9%80%9F%E5%BA%A6/</id>
+    <published>2019-08-07T00:00:00.000Z</published>
+    <updated>2019-12-20T08:42:47.019Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;代理服务器提速&quot;&gt;&lt;a href=&quot;#代理服务器提速&quot; class=&quot;headerlink&quot; title=&quot;代理服务器提速&quot;&gt;&lt;/a&gt;代理服务器提速&lt;/h1&gt;&lt;p&gt;如果你有shadowsocks的socket5代理，那么可以使用下面两条语句提速&lt;/p&gt;
+&lt;p&gt;前提是你的代理已经在运行&lt;/p&gt;
+&lt;p&gt;速度提升非常明显，之前几KB变成1-2MB的速度。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;git config --global http.proxy &amp;#39;socks5://127.0.0.1:1080&amp;#39; 
+git config --global https.proxy &amp;#39;socks5://127.0.0.1:1080&amp;#39;&lt;/code&gt;&lt;/pre&gt;
+    
+    </summary>
+    
+    
+      <category term="git" scheme="https://qaqu.net/categories/git/"/>
+    
+    
+      <category term="git" scheme="https://qaqu.net/tags/git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Ubuntu16.04安装caffe及遇到的问题总结</title>
+    <link href="https://qaqu.net/2019/08/07/2019-8-7-Ubuntu16.04%E5%AE%89%E8%A3%85caffe%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/"/>
+    <id>https://qaqu.net/2019/08/07/2019-8-7-Ubuntu16.04%E5%AE%89%E8%A3%85caffe%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/</id>
+    <published>2019-08-07T00:00:00.000Z</published>
+    <updated>2019-12-20T08:44:31.356Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;基础库安装&quot;&gt;&lt;a href=&quot;#基础库安装&quot; class=&quot;headerlink&quot; title=&quot;基础库安装&quot;&gt;&lt;/a&gt;基础库安装&lt;/h1&gt;&lt;pre&gt;&lt;code&gt;sudo apt-get install libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libhdf5-serial-dev protobuf-compiler libopenblas-dev
+sudo apt-get install --no-install-recommends libboost-all-dev
+sudo apt-get install libopenblas-dev&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&quot;克隆caffe代码到本地&quot;&gt;&lt;a href=&quot;#克隆caffe代码到本地&quot; class=&quot;headerlink&quot; title=&quot;克隆caffe代码到本地&quot;&gt;&lt;/a&gt;克隆caffe代码到本地&lt;/h1&gt;&lt;p&gt;git clone &lt;a href=&quot;https://github.com/BVLC/caffe.git&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://github.com/BVLC/caffe.git&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;修改Makefile-config、Makefile&quot;&gt;&lt;a href=&quot;#修改Makefile-config、Makefile&quot; class=&quot;headerlink&quot; title=&quot;修改Makefile.config、Makefile&quot;&gt;&lt;/a&gt;修改Makefile.config、Makefile&lt;/h1&gt;&lt;p&gt;Makefile.config中CUDA_ARCH变量配置。如果cuda 的版本号&amp;gt;=9.0，则在该文件夹下找到CUDA_ARCH变量，并把：&lt;/p&gt;
+&lt;p&gt;gencode arch=compute_20,code=sm_20 \ &lt;/p&gt;
+&lt;p&gt;gencode arch=compute_20,code=sm_21&lt;/p&gt;
+&lt;p&gt;两行注释掉&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="caffe" scheme="https://qaqu.net/categories/caffe/"/>
+    
+    
+      <category term="caffe" scheme="https://qaqu.net/tags/caffe/"/>
+    
+  </entry>
+  
+  <entry>
     <title>LSART编译过程记录</title>
     <link href="https://qaqu.net/2019/08/06/2019-8-6-LSART%E7%AE%97%E6%B3%95%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/"/>
     <id>https://qaqu.net/2019/08/06/2019-8-6-LSART%E7%AE%97%E6%B3%95%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/</id>
     <published>2019-08-06T00:00:00.000Z</published>
-    <updated>2019-12-20T05:57:17.902Z</updated>
+    <updated>2019-12-20T08:45:14.550Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;h1&gt;&lt;span id=&quot;modified-caffe-de-bian-yi&quot;&gt;modified caffe的编译&lt;/span&gt;&lt;a href=&quot;#modified-caffe-de-bian-yi&quot;
-        
-      
+      &lt;h1 id=&quot;modified-caffe的编译&quot;&gt;&lt;a href=&quot;#modified-caffe的编译&quot; class=&quot;headerlink&quot; title=&quot;modified caffe的编译&quot;&gt;&lt;/a&gt;modified caffe的编译&lt;/h1&gt;&lt;p&gt;ubuntu 18.04&lt;/p&gt;
+&lt;p&gt;cuda9.0&lt;/p&gt;
+&lt;p&gt;cudnn V3.0.8 for cuda 7.0&lt;/p&gt;
+&lt;p&gt;g++5.5 gcc5.5&lt;/p&gt;
+&lt;p&gt;opencv 2.4.11 (opencv的编译用g++4.9 gcc4.9)&lt;/p&gt;
+&lt;p&gt;不要修改原文件夹中的cudnn.hpp&lt;/p&gt;
+&lt;h1 id=&quot;matcaffe编译&quot;&gt;&lt;a href=&quot;#matcaffe编译&quot; class=&quot;headerlink&quot; title=&quot;matcaffe编译&quot;&gt;&lt;/a&gt;matcaffe编译&lt;/h1&gt;&lt;p&gt;matlab2015b&lt;/p&gt;
+&lt;p&gt;g++4.9 gcc4.9&lt;/p&gt;
     
     </summary>
     
@@ -213,17 +195,20 @@
     <link href="https://qaqu.net/2019/08/06/2019-8-6-Opencv%E7%9A%84%E5%8D%B8%E8%BD%BD%E5%B9%B6%E5%AE%89%E8%A3%852.4%E7%89%88%E6%9C%AC/"/>
     <id>https://qaqu.net/2019/08/06/2019-8-6-Opencv%E7%9A%84%E5%8D%B8%E8%BD%BD%E5%B9%B6%E5%AE%89%E8%A3%852.4%E7%89%88%E6%9C%AC/</id>
     <published>2019-08-06T00:00:00.000Z</published>
-    <updated>2019-12-20T05:57:23.588Z</updated>
+    <updated>2019-12-20T08:44:57.845Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;h1&gt;&lt;span id=&quot;cha-kan-an-zhuang-de-opencv-ban-ben&quot;&gt;查看安装的opencv版本&lt;/span&gt;&lt;a href=&quot;#cha-kan-an-zhuang-de-opencv-ban-ben&quot;
-        
-      
+      &lt;h1 id=&quot;查看安装的opencv版本&quot;&gt;&lt;a href=&quot;#查看安装的opencv版本&quot; class=&quot;headerlink&quot; title=&quot;查看安装的opencv版本&quot;&gt;&lt;/a&gt;查看安装的opencv版本&lt;/h1&gt;&lt;pre&gt;&lt;code&gt;pkg-config --modversion opencv&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&quot;卸载旧版本opencv&quot;&gt;&lt;a href=&quot;#卸载旧版本opencv&quot; class=&quot;headerlink&quot; title=&quot;卸载旧版本opencv&quot;&gt;&lt;/a&gt;卸载旧版本opencv&lt;/h1&gt;&lt;p&gt;进入到原来安装opencv的build目录，执行卸载操作：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;cd opencv-3.2.0/build
+sudo make uninstall
+cd ..
+sudo rm -r build
+
+sudo rm -r /usr/local/include/opencv2 /usr/local/include/opencv /usr/include/opencv /usr/include/opencv2 /usr/local/share/opencv /usr/local/share/OpenCV /usr/share/opencv /usr/share/OpenCV /usr/local/bin/opencv* /usr/local/lib/libopencv*
+
+cd /usr
+sudo find . -name &amp;quot;*opencv*&amp;quot; | xargs sudo rm -rf&lt;/code&gt;&lt;/pre&gt;
     
     </summary>
     
@@ -240,23 +225,20 @@
     <link href="https://qaqu.net/2019/08/06/2019-8-6-Ubuntu16.04CUDA8.0+cudnn+opencv3.1+%20Caffe%20%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4%E8%AE%B0%E5%BD%95/"/>
     <id>https://qaqu.net/2019/08/06/2019-8-6-Ubuntu16.04CUDA8.0+cudnn+opencv3.1+%20Caffe%20%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4%E8%AE%B0%E5%BD%95/</id>
     <published>2019-08-06T00:00:00.000Z</published>
-    <updated>2019-12-20T05:57:29.337Z</updated>
+    <updated>2019-12-20T08:44:46.548Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;p&gt;1、安装依赖包 &lt;/p&gt;
+      &lt;p&gt;1、安装依赖包 &lt;/p&gt;
 &lt;p&gt;2、禁用 nouveau &lt;/p&gt;
 &lt;p&gt;3、配置环境变量 &lt;/p&gt;
 &lt;p&gt;4、下载 CUDA 8.0 &lt;/p&gt;
 &lt;p&gt;5、安装 CUDA 8.0 &lt;/p&gt;
 &lt;p&gt;6、验证 CUDA 8.0 是否安装成功 &lt;/p&gt;
-&lt;p&gt;7、安装
-        
-      
+&lt;p&gt;7、安装 cudnn &lt;/p&gt;
+&lt;p&gt;8、安装 opencv3.1 &lt;/p&gt;
+&lt;p&gt;9、安装 caffe &lt;/p&gt;
+&lt;p&gt;10、安装 pycaffe notebook 接口环境&lt;/p&gt;
     
     </summary>
     
@@ -269,48 +251,16 @@
   </entry>
   
   <entry>
-    <title>cuda和cudnn各版本下载地址</title>
-    <link href="https://qaqu.net/2019/08/05/2019-8-5-cuda%E5%92%8Ccudnn%E7%9A%84%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80/"/>
-    <id>https://qaqu.net/2019/08/05/2019-8-5-cuda%E5%92%8Ccudnn%E7%9A%84%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80/</id>
-    <published>2019-08-05T00:00:00.000Z</published>
-    <updated>2019-12-20T05:57:06.442Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1&gt;&lt;span id=&quot;xia-zai&quot;&gt;下载&lt;/span&gt;&lt;a href=&quot;#xia-zai&quot; class=&quot;header-anchor&quot;&gt;#&lt;/a&gt;&lt;/h1&gt;&lt;p&gt;进入 &lt;a
-        
-      
-    
-    </summary>
-    
-    
-      <category term="cuda" scheme="https://qaqu.net/categories/cuda/"/>
-    
-    
-      <category term="下载地址" scheme="https://qaqu.net/tags/%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80/"/>
-    
-  </entry>
-  
-  <entry>
     <title>解决ubuntu18.04合盖休眠无法唤醒</title>
     <link href="https://qaqu.net/2019/08/05/2019-8-5-%E8%A7%A3%E5%86%B3ubuntu18.04%E5%90%88%E7%9B%96%E4%BC%91%E7%9C%A0%E6%97%A0%E6%B3%95%E5%94%A4%E9%86%92/"/>
     <id>https://qaqu.net/2019/08/05/2019-8-5-%E8%A7%A3%E5%86%B3ubuntu18.04%E5%90%88%E7%9B%96%E4%BC%91%E7%9C%A0%E6%97%A0%E6%B3%95%E5%94%A4%E9%86%92/</id>
     <published>2019-08-05T00:00:00.000Z</published>
-    <updated>2019-12-20T05:57:12.051Z</updated>
+    <updated>2019-12-20T08:45:21.883Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;h1&gt;&lt;span id=&quot;zhu-yi-hei-ping-zuo-shang-jiao-shi-fou-you-ge-xiao-xia-hua-xian&quot;&gt;注意黑屏左上角是否有个小下划线&lt;/span&gt;&lt;a
-        
-      
+      &lt;h1 id=&quot;注意黑屏左上角是否有个小下划线&quot;&gt;&lt;a href=&quot;#注意黑屏左上角是否有个小下划线&quot; class=&quot;headerlink&quot; title=&quot;注意黑屏左上角是否有个小下划线&quot;&gt;&lt;/a&gt;注意黑屏左上角是否有个小下划线&lt;/h1&gt;&lt;p&gt;在黑屏下，直接按Ctrl+alt+F1或者Ctrl+alt+F7即可唤醒&lt;/p&gt;
+&lt;p&gt;（失败）&lt;/p&gt;
     
     </summary>
     
@@ -323,11 +273,33 @@
   </entry>
   
   <entry>
+    <title>cuda和cudnn各版本下载地址</title>
+    <link href="https://qaqu.net/2019/08/05/2019-8-5-cuda%E5%92%8Ccudnn%E7%9A%84%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80/"/>
+    <id>https://qaqu.net/2019/08/05/2019-8-5-cuda%E5%92%8Ccudnn%E7%9A%84%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80/</id>
+    <published>2019-08-05T00:00:00.000Z</published>
+    <updated>2019-12-20T08:45:26.833Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;下载&quot;&gt;&lt;a href=&quot;#下载&quot; class=&quot;headerlink&quot; title=&quot;下载&quot;&gt;&lt;/a&gt;下载&lt;/h1&gt;&lt;p&gt;进入 &lt;a href=&quot;https://developer.nvidia.com/cuda-downloads&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://developer.nvidia.com/cuda-downloads&lt;/a&gt; ，依次选择 CUDA 类型然后下载即可。&lt;/p&gt;
+&lt;h1 id=&quot;安装-cudnn&quot;&gt;&lt;a href=&quot;#安装-cudnn&quot; class=&quot;headerlink&quot; title=&quot;安装 cudnn&quot;&gt;&lt;/a&gt;安装 cudnn&lt;/h1&gt;&lt;p&gt;登录官网：&lt;a href=&quot;https://developer.nvidia.com/rdp/cudnn-download&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://developer.nvidia.com/rdp/cudnn-download&lt;/a&gt; ，下载对应 cuda 版本且 linux 系统的 cudnn 压缩包 &lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="cuda" scheme="https://qaqu.net/categories/cuda/"/>
+    
+    
+      <category term="下载地址" scheme="https://qaqu.net/tags/%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80/"/>
+    
+  </entry>
+  
+  <entry>
     <title>ubuntu 13.04中g++-4.5和 gcc-4.5安装</title>
     <link href="https://qaqu.net/2019/08/04/2019-8-4-ubuntu%2013.04%E4%B8%ADg++-4.5%E5%92%8C%20gcc-4.5%E5%AE%89%E8%A3%85/"/>
     <id>https://qaqu.net/2019/08/04/2019-8-4-ubuntu%2013.04%E4%B8%ADg++-4.5%E5%92%8C%20gcc-4.5%E5%AE%89%E8%A3%85/</id>
     <published>2019-08-04T00:00:00.000Z</published>
-    <updated>2019-12-20T05:57:00.814Z</updated>
+    <updated>2019-12-20T08:45:44.882Z</updated>
     
     <summary type="html">
     
@@ -335,7 +307,8 @@
       
         
         
-          &lt;p&gt;1、安装包的下载与安装&lt;br&gt;1)gcc-4.5-base安装&lt;/p&gt;
+          &lt;p&gt;1、安装包的下载与安装&lt;/p&gt;
+&lt;p&gt;1)gcc-4.5-base安装&lt;/p&gt;
 &lt;p&gt;下载地址：&lt;a href=&quot;https://launchpad.net/ubuntu/quantal/amd64/gcc-4.5-base/4.5.4-1ubuntu2&quot;
         
       
@@ -411,19 +384,18 @@
     <link href="https://qaqu.net/2019/08/01/2019-8-1-g++%E5%A4%9A%E7%89%88%E6%9C%AC%E5%AE%89%E8%A3%85%E5%88%87%E6%8D%A2/"/>
     <id>https://qaqu.net/2019/08/01/2019-8-1-g++%E5%A4%9A%E7%89%88%E6%9C%AC%E5%AE%89%E8%A3%85%E5%88%87%E6%8D%A2/</id>
     <published>2019-08-01T00:00:00.000Z</published>
-    <updated>2019-12-20T05:56:43.584Z</updated>
+    <updated>2019-12-20T08:47:49.532Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;p&gt;先看看我们系统用的gcc和g++是什么版本&lt;/p&gt;
+      &lt;p&gt;先看看我们系统用的gcc和g++是什么版本&lt;/p&gt;
 &lt;p&gt;gcc -v&lt;/p&gt;
-&lt;p&gt;sudo apt-get install gcc-4.5 gcc-4.5-multilib g++-4.5
-        
-      
+&lt;p&gt;sudo apt-get install gcc-4.5 gcc-4.5-multilib g++-4.5 g++-4.5-multilib&lt;/p&gt;
+&lt;p&gt;安装好后输入以下指令：&lt;/p&gt;
+&lt;p&gt;sudo update-alternatives –install /usr/bin/gcc gcc /usr/bin/gcc-4.4 50&lt;/p&gt;
+&lt;p&gt;sudo update-alternatives –install /usr/bin/gcc gcc /usr/bin/gcc-4.5 40&lt;/p&gt;
+&lt;p&gt;接着输入：&lt;/p&gt;
+&lt;p&gt;sudo update-alternatives –config gcc&lt;/p&gt;
     
     </summary>
     
@@ -440,17 +412,13 @@
     <link href="https://qaqu.net/2019/07/31/2019-7-31-find%E5%91%BD%E4%BB%A4%E5%92%8Cgrep%E5%91%BD%E4%BB%A4/"/>
     <id>https://qaqu.net/2019/07/31/2019-7-31-find%E5%91%BD%E4%BB%A4%E5%92%8Cgrep%E5%91%BD%E4%BB%A4/</id>
     <published>2019-07-31T00:00:00.000Z</published>
-    <updated>2019-12-20T05:56:33.347Z</updated>
+    <updated>2019-12-20T08:48:11.179Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;h1&gt;&lt;span id=&quot;qu-bie&quot;&gt;区别：&lt;/span&gt;&lt;a href=&quot;#qu-bie&quot;
-        
-      
+      &lt;h1 id=&quot;区别：&quot;&gt;&lt;a href=&quot;#区别：&quot; class=&quot;headerlink&quot; title=&quot;区别：&quot;&gt;&lt;/a&gt;区别：&lt;/h1&gt;&lt;p&gt;在使用linux时，经常需要进行文件查找。其中查找的命令主要有find和grep。两个命令是有区的。&lt;/p&gt;
+&lt;p&gt;find命令是根据文件的属性进行查找，如文件名，文件大小，所有者，所属组，是否为空，访问时间，修改时间等。&lt;/p&gt;
+&lt;p&gt;grep是根据文件的内容进行查找，会对文件的每一行按照给定的模式(patter)进行匹配查找。&lt;/p&gt;
     
     </summary>
     
@@ -494,17 +462,12 @@
     <link href="https://qaqu.net/2019/05/01/2019-5-1-Ubuntu%E5%88%9B%E5%BB%BA%E6%A1%8C%E9%9D%A2%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F/"/>
     <id>https://qaqu.net/2019/05/01/2019-5-1-Ubuntu%E5%88%9B%E5%BB%BA%E6%A1%8C%E9%9D%A2%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F/</id>
     <published>2019-05-01T00:00:00.000Z</published>
-    <updated>2019-12-20T05:56:18.895Z</updated>
+    <updated>2019-12-20T08:48:22.087Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;p&gt;默认情况下，Ubuntu会将自动安装的软件快捷方式保存在/usr/share/applications目录下，如果我们要创建桌面快捷方式，只需要右键-复制-桌面
-        
-      
+      &lt;p&gt;默认情况下，Ubuntu会将自动安装的软件快捷方式保存在/usr/share/applications目录下，如果我们要创建桌面快捷方式，只需要右键-复制-桌面 。&lt;/p&gt;
+&lt;p&gt;上面的方法是通过系统自动安装软件后实现的，有时候我们自己会从网上下载一些软件手动安装，那么，又该怎样创建软件的桌面快捷方式呢？这里以Eclipse 为例，首先到官网下载Eclipse软件包，直接解压在某个目录下，双击其中的eclipse文件，就可以启动eclipse了，不过如果每次要打开eclipse，都要从安装目录启动，是不是有些麻烦？依照下面的操作，来创建一个桌面快捷方式吧。&lt;/p&gt;
     
     </summary>
     
@@ -549,17 +512,12 @@
     <link href="https://qaqu.net/2019/03/08/2019-3-8-Hungarian%E4%BA%8C%E5%88%86%E5%9B%BE%E5%8C%B9%E9%85%8D/"/>
     <id>https://qaqu.net/2019/03/08/2019-3-8-Hungarian%E4%BA%8C%E5%88%86%E5%9B%BE%E5%8C%B9%E9%85%8D/</id>
     <published>2019-03-08T00:00:00.000Z</published>
-    <updated>2019-12-20T05:56:00.068Z</updated>
+    <updated>2019-12-20T08:48:35.706Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;h1&gt;&lt;span id=&quot;ji-ben-gai-nian&quot;&gt;基本概念&lt;/span&gt;&lt;a href=&quot;#ji-ben-gai-nian&quot; class=&quot;header-anchor&quot;&gt;#&lt;/a&gt;&lt;/h1&gt;&lt;h2&gt;&lt;span id=&quot;er-fen-tu&quot;&gt;二分图&lt;/span&gt;&lt;a
-        
-      
+      &lt;h1 id=&quot;基本概念&quot;&gt;&lt;a href=&quot;#基本概念&quot; class=&quot;headerlink&quot; title=&quot;基本概念&quot;&gt;&lt;/a&gt;基本概念&lt;/h1&gt;&lt;h2 id=&quot;二分图&quot;&gt;&lt;a href=&quot;#二分图&quot; class=&quot;headerlink&quot; title=&quot;二分图&quot;&gt;&lt;/a&gt;二分图&lt;/h2&gt;&lt;p&gt;是图论中的一种特殊模型。若能将无向图G=(V,E)的顶点V划分为两个交集为空的顶点集，并且任意边的两个端点都分属于两个集合，则称图G为一个为二分图。&lt;/p&gt;
+&lt;img src=&quot;/2019/03/08/2019-3-8-Hungarian二分图匹配/1.png&quot;&gt;
     
     </summary>
     

@@ -153,24 +153,23 @@
   
     <article class="article-card">
       <h2 class="article-head">
-        <a href="/2019/08/05/2019-8-5-解决ubuntu18.04合盖休眠无法唤醒/">解决ubuntu18.04合盖休眠无法唤醒</a>
+        <a href="/2019/08/05/2019-8-5-cuda和cudnn的下载地址/">cuda和cudnn各版本下载地址</a>
       </h2>
       <p class="article-date">2019年8月5日</p>
       
         
-  <a href="/tags#ubuntu" >
-    <span class="tag-code">ubuntu</span>
+  <a href="/tags#下载地址" >
+    <span class="tag-code">下载地址</span>
   </a>
 
       
       <div class="article-summary">
         
-          注意黑屏左上角是否有个小下划线#在黑屏下，直接按Ctrl+alt+F1或者Ctrl+alt+F7即可唤醒
-（失败）
-
+          <h1 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h1><p>进入 <a href="https://developer.nvidia.com/cuda-downloads" target="_blank" rel="noopener">https://developer.nvidia.com/cuda-downloads</a> ，依次选择 CUDA 类型然后下载即可。</p>
+<h1 id="安装-cudnn"><a href="#安装-cudnn" class="headerlink" title="安装 cudnn"></a>安装 cudnn</h1><p>登录官网：<a href="https://developer.nvidia.com/rdp/cudnn-download" target="_blank" rel="noopener">https://developer.nvidia.com/rdp/cudnn-download</a> ，下载对应 cuda 版本且 linux 系统的 cudnn 压缩包 </p>
         
       </div>
-      <a class="more" href="/2019/08/05/2019-8-5-解决ubuntu18.04合盖休眠无法唤醒/">Read more</a>
+      <a class="more" href="/2019/08/05/2019-8-5-cuda和cudnn的下载地址/">Read more</a>
     </article>
   
     <article class="article-card">
@@ -187,9 +186,10 @@
       
       <div class="article-summary">
         
-          1、安装包的下载与安装1)gcc-4.5-base安装
+          1、安装包的下载与安装
+1)gcc-4.5-base安装
 下载地址：https://launchpad.net/ubuntu/quantal/amd64/gcc-4.5-base/4.5.4-1ubuntu2
-在终端输入安装命令：$ sudo dpkg -igcc-4.5-base_4.5.4 ...
+在终端输入安装命令：$ sudo dpkg -igcc-4.5-base_4.5. ...
         
       </div>
       <a class="more" href="/2019/08/04/2019-8-4-ubuntu 13.04中g++-4.5和 gcc-4.5安装/">Read more</a>
@@ -256,11 +256,14 @@ dpkg –get-selections | grep “软件名称”
       
       <div class="article-summary">
         
-          先看看我们系统用的gcc和g++是什么版本
-gcc -v
-sudo apt-get install gcc-4.5 gcc-4.5-multilib g++-4.5 g++-4.5-multilib
-安装好后输入以下指令：
-sudo update-alternatives –install  ...
+          <p>先看看我们系统用的gcc和g++是什么版本</p>
+<p>gcc -v</p>
+<p>sudo apt-get install gcc-4.5 gcc-4.5-multilib g++-4.5 g++-4.5-multilib</p>
+<p>安装好后输入以下指令：</p>
+<p>sudo update-alternatives –install /usr/bin/gcc gcc /usr/bin/gcc-4.4 50</p>
+<p>sudo update-alternatives –install /usr/bin/gcc gcc /usr/bin/gcc-4.5 40</p>
+<p>接着输入：</p>
+<p>sudo update-alternatives –config gcc</p>
         
       </div>
       <a class="more" href="/2019/08/01/2019-8-1-g++多版本安装切换/">Read more</a>
@@ -280,9 +283,9 @@ sudo update-alternatives –install  ...
       
       <div class="article-summary">
         
-          区别：#在使用linux时，经常需要进行文件查找。其中查找的命令主要有find和grep。两个命令是有区的。
-find命令是根据文件的属性进行查找，如文件名，文件大小，所有者，所属组，是否为空，访问时间，修改时间等。
-grep是根据文件的内容进行查找，会对文件的每一行按照给定的模式(patt ...
+          <h1 id="区别："><a href="#区别：" class="headerlink" title="区别："></a>区别：</h1><p>在使用linux时，经常需要进行文件查找。其中查找的命令主要有find和grep。两个命令是有区的。</p>
+<p>find命令是根据文件的属性进行查找，如文件名，文件大小，所有者，所属组，是否为空，访问时间，修改时间等。</p>
+<p>grep是根据文件的内容进行查找，会对文件的每一行按照给定的模式(patter)进行匹配查找。</p>
         
       </div>
       <a class="more" href="/2019/07/31/2019-7-31-find命令和grep命令/">Read more</a>
@@ -326,8 +329,8 @@ public:
       
       <div class="article-summary">
         
-          默认情况下，Ubuntu会将自动安装的软件快捷方式保存在/usr/share/applications目录下，如果我们要创建桌面快捷方式，只需要右键-复制-桌面 。
-上面的方法是通过系统自动安装软件后实现的，有时候我们自己会从网上下载一些软件手动安装，那么，又该怎样创建软件的桌面快捷方式呢？ ...
+          <p>默认情况下，Ubuntu会将自动安装的软件快捷方式保存在/usr/share/applications目录下，如果我们要创建桌面快捷方式，只需要右键-复制-桌面 。</p>
+<p>上面的方法是通过系统自动安装软件后实现的，有时候我们自己会从网上下载一些软件手动安装，那么，又该怎样创建软件的桌面快捷方式呢？这里以Eclipse 为例，首先到官网下载Eclipse软件包，直接解压在某个目录下，双击其中的eclipse文件，就可以启动eclipse了，不过如果每次要打开eclipse，都要从安装目录启动，是不是有些麻烦？依照下面的操作，来创建一个桌面快捷方式吧。</p>
         
       </div>
       <a class="more" href="/2019/05/01/2019-5-1-Ubuntu创建桌面快捷方式/">Read more</a>
@@ -369,15 +372,8 @@ public:
       
       <div class="article-summary">
         
-          基本概念#二分图#是图论中的一种特殊模型。若能将无向图G=(V,E)的顶点V划分为两个交集为空的顶点集，并且任意边的两个端点都分属于两个集合，则称图G为一个为二分图。
-
-
-匹配#一个匹配即一个包含若干条边的集合，且其中任意两条边没有公共端点。如下图，图3的红边即为图2的一个匹配。
-
-
-
-
-最 ...
+          <h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><h2 id="二分图"><a href="#二分图" class="headerlink" title="二分图"></a>二分图</h2><p>是图论中的一种特殊模型。若能将无向图G=(V,E)的顶点V划分为两个交集为空的顶点集，并且任意边的两个端点都分属于两个集合，则称图G为一个为二分图。</p>
+<img src="/2019/03/08/2019-3-8-Hungarian二分图匹配/1.png">
         
       </div>
       <a class="more" href="/2019/03/08/2019-3-8-Hungarian二分图匹配/">Read more</a>

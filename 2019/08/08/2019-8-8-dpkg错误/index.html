@@ -161,8 +161,10 @@
   <article class="post-article">
     <section class="markdown-content"><p>在输入sudo apt-get update后发现终端提示：</p>
 <blockquote>
-<p>E: 无法获得锁 /var/lib/dpkg/lock-frontend - open (11: 资源暂时不可用)<br>  E: Unable to acquire the dpkg frontend lock (/var/lib/dpkg/lock-frontend), is another process using it?</p>
+<p>E: 无法获得锁 /var/lib/dpkg/lock-frontend - open (11: 资源暂时不可用)<br>E: Unable to acquire the dpkg frontend lock (/var/lib/dpkg/lock-frontend), is another process using it?</p>
 </blockquote>
+<a id="more"></a>
+
 <h1><span id="jie-jue-fang-an-yi">解决方案一：</span><a href="#jie-jue-fang-an-yi" class="header-anchor">#</a></h1><pre><code>ps -e | grep apt</code></pre><p>然后执行：<code>sudo kill</code> 进程号</p>
 <h1><span id="jie-jue-fang-an-er">解决方案二：</span><a href="#jie-jue-fang-an-er" class="header-anchor">#</a></h1><p>有一种情况是</p>
 <pre><code>sudo rm /var/cache/apt/archives/lock
@@ -193,10 +195,10 @@ sudo rm /var/lib/dpkg/lock-frontend</code></pre></section>
   <div class="nav-container">
     <!-- reverse left and right to put prev and next in a more logic postition -->
     
-      <a class="nav-left" href="/2019/08/07/2019-8-7-Ubuntu16.04安装caffe中遇到的问题总结/">
+      <a class="nav-left" href="/2019/08/07/2019-8-7-Ubuntu18.04设置开机启动服务/">
         <span class="nav-arrow">← </span>
         
-          Ubuntu16.04安装caffe及遇到的问题总结
+          Ubuntu设置系统环境变量和开机自启动
         
       </a>
     

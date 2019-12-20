@@ -9,6 +9,8 @@
 <p>解压我给的opencv_contrib-3.2.0至opencv-3.2.0的目录下（解压完后路径为/home/XXX/opencv-3.2.0/opencv_contrib-3.2.0），并在此处新建一个build文件夹（路径为/home/XXX/opencv-3.2.0/build）</p>
 <p>进入build，执行：</p>
 <pre><code>cmake -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/usr/local -D OPENCV_EXTRA_MODULES_PATH=/home/lyp/Data/Downtown/opencv-3.2.0/opencv_contrib/modules -D CUDA_GENERATION=Kepler ..</code></pre><p>因为是cuda9.0不再支持2.0架构所以要加上-D CUDA_GENERATION=Kepler</p>
+<a id="more"></a>
+
 <h1><span id="yu-dao-de-cuo-wu">遇到的错误</span><a href="#yu-dao-de-cuo-wu" class="header-anchor">#</a></h1><h2><span id="di-yi-ge-cuo-wu">第一个错误</span><a href="#di-yi-ge-cuo-wu" class="header-anchor">#</a></h2><p>fatal error: LAPACKE_H_PATH-NOTFOUND/lapacke.h: No such file or directory #include “LAPACKE_H_PATH-NOTFOUND/lapacke.h” </p>
 <p>原因：未找到lapacke.h文件</p>
 <p>方法： </p>
@@ -78,6 +80,8 @@ unset(CUDA_nppitc_LIBRARY CACHE)</code></pre><h3><span id="4">4</span><a href="#
     <title>报错caffe_ mexa64 undefined symbol</title>
     <url>/2019/08/19/2019-9-19-%E6%8A%A5%E9%94%99caffe_%20mexa64%20undefined%20symbol/</url>
     <content><![CDATA[<p>报错Invalid MEX-file<br>‘/home/lyp/Data/Downtown/LSART/LSART/caffe/matlab/+caffe/private/caffe_.mexa64’:<br>/home/lyp/Data/Matlab2014a/bin/glnxa64/../../sys/os/glnxa64/libstdc++.so.6:<br>version `GLIBCXX_3.4.21’ not found (required by<br>/home/lyp/Data/Downtown/LSART/LSART/caffe/matlab/+caffe/private/caffe_.mexa64)</p>
+<a id="more"></a>
+
 <pre><code>在目录下~/Data/Matlab2014a/sys/os/glnxa64 更改软链接指向
 libstdc++.so.6 -&gt; /usr/lib/x86_64-linux-gnu/libstdc++.so.6
 </code></pre><p>用matlab执行.m文件时报错：</p>
@@ -102,8 +106,10 @@ libopencv_imgproc.so.2.4</code></pre><p>/usr/lib/libharfbuzz.so.0: undefined sym
     <url>/2019/08/08/2019-8-8-dpkg%E9%94%99%E8%AF%AF/</url>
     <content><![CDATA[<p>在输入sudo apt-get update后发现终端提示：</p>
 <blockquote>
-<p>E: 无法获得锁 /var/lib/dpkg/lock-frontend - open (11: 资源暂时不可用)<br>  E: Unable to acquire the dpkg frontend lock (/var/lib/dpkg/lock-frontend), is another process using it?</p>
+<p>E: 无法获得锁 /var/lib/dpkg/lock-frontend - open (11: 资源暂时不可用)<br>E: Unable to acquire the dpkg frontend lock (/var/lib/dpkg/lock-frontend), is another process using it?</p>
 </blockquote>
+<a id="more"></a>
+
 <h1><span id="jie-jue-fang-an-yi">解决方案一：</span><a href="#jie-jue-fang-an-yi" class="header-anchor">#</a></h1><pre><code>ps -e | grep apt</code></pre><p>然后执行：<code>sudo kill</code> 进程号</p>
 <h1><span id="jie-jue-fang-an-er">解决方案二：</span><a href="#jie-jue-fang-an-er" class="header-anchor">#</a></h1><p>有一种情况是</p>
 <pre><code>sudo rm /var/cache/apt/archives/lock
@@ -118,71 +124,13 @@ sudo rm /var/lib/dpkg/lock-frontend</code></pre>]]></content>
       </tags>
   </entry>
   <entry>
-    <title>Ubuntu16.04安装caffe及遇到的问题总结</title>
-    <url>/2019/08/07/2019-8-7-Ubuntu16.04%E5%AE%89%E8%A3%85caffe%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/</url>
-    <content><![CDATA[<h1><span id="ji-chu-ku-an-zhuang">基础库安装</span><a href="#ji-chu-ku-an-zhuang" class="header-anchor">#</a></h1><pre><code>sudo apt-get install libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libhdf5-serial-dev protobuf-compiler libopenblas-dev
-sudo apt-get install --no-install-recommends libboost-all-dev
-sudo apt-get install libopenblas-dev</code></pre><h1><span id="ke-long-caffe-dai-ma-dao-ben-di">克隆caffe代码到本地</span><a href="#ke-long-caffe-dai-ma-dao-ben-di" class="header-anchor">#</a></h1><p>git clone <a href="https://github.com/BVLC/caffe.git" target="_blank" rel="noopener">https://github.com/BVLC/caffe.git</a></p>
-<h1><span id="xiu-gai-makefile-config-makefile">修改Makefile.config、Makefile</span><a href="#xiu-gai-makefile-config-makefile" class="header-anchor">#</a></h1><p>Makefile.config中CUDA_ARCH变量配置。如果cuda 的版本号&gt;=9.0，则在该文件夹下找到CUDA_ARCH变量，并把：</p>
-<p>gencode arch=compute_20,code=sm_20 \ </p>
-<p>gencode arch=compute_20,code=sm_21</p>
-<p>两行注释掉</p>
-<h1><span id="wen-ti">问题</span><a href="#wen-ti" class="header-anchor">#</a></h1><p>解决办法是依据出现错误的顺序而给出的，为了方便，可以直接先执行所有解决办法后再安装caffe。</p>
-<ol>
-<li>./include/caffe/common.hpp:5:27: fatal error: gflags/gflags.h: No such file or directory</li>
-</ol>
-<p>解决办法：sudo apt-get install libgflags-dev</p>
-<ol start="2">
-<li>./include/caffe/util/mkl_alternate.hpp:14:19: fatal error: cblas.h: No such file or directory</li>
-</ol>
-<p>解决办法：sudo apt-get install libblas-dev</p>
-<ol start="3">
-<li>./include/caffe/util/hdf5.hpp:6:18: fatal error: hdf5.h: No such file or directory</li>
-</ol>
-<p>解决办法：在Makefile.config找到以下行并添加蓝色部分</p>
-<p>INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include <font color="Blue">/usr/include/hdf5/serial</font> </p>
-<p>LIBRARY_DIRS := $(PYTHON_LIB) /usr/local/lib /usr/lib <font color="Blue">/usr/lib/x86_64-linux-gnu/hdf5/serial</font></p>
-<ol start="4">
-<li>./include/caffe/util/db_lmdb.hpp:8:18: fatal error: lmdb.h: No such file or directory</li>
-</ol>
-<p>解决办法：sudo apt install liblmdb-dev</p>
-<ol start="5">
-<li>/usr/bin/ld: cannot find -lcblas<br> /usr/bin/ld: cannot find -latlas</li>
-</ol>
-<p>解决办法：sudo apt install libatlas-base-dev</p>
-<ol start="6">
-<li>./include/caffe/common.hpp:6:26: fatal error: glog/logging.h: No such file or directory</li>
-</ol>
-<p>解决方法：sudo apt-get install libgoogle-glog-dev</p>
-]]></content>
-      <categories>
-        <category>caffe</category>
-      </categories>
-      <tags>
-        <tag>caffe</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>提速 git push速度</title>
-    <url>/2019/08/07/2019-8-7-%E6%8F%90%E9%80%9F%20git%20push%E9%80%9F%E5%BA%A6/</url>
-    <content><![CDATA[<h1><span id="dai-li-fu-wu-qi-ti-su">代理服务器提速</span><a href="#dai-li-fu-wu-qi-ti-su" class="header-anchor">#</a></h1><p>如果你有shadowsocks的socket5代理，那么可以使用下面两条语句提速</p>
-<p>前提是你的代理已经在运行</p>
-<p>速度提升非常明显，之前几KB变成1-2MB的速度。</p>
-<pre><code>git config --global http.proxy &#39;socks5://127.0.0.1:1080&#39; 
-git config --global https.proxy &#39;socks5://127.0.0.1:1080&#39;</code></pre>]]></content>
-      <categories>
-        <category>git</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Ubuntu设置系统环境变量和开机自启动</title>
     <url>/2019/08/07/2019-8-7-Ubuntu18.04%E8%AE%BE%E7%BD%AE%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8%E6%9C%8D%E5%8A%A1/</url>
     <content><![CDATA[<h1><span id="yi-ubuntu-xi-tong-huan-jing-bian-liang-xiang-jie">一、Ubuntu系统环境变量详解</span><a href="#yi-ubuntu-xi-tong-huan-jing-bian-liang-xiang-jie" class="header-anchor">#</a></h1><p>参考这篇文章，讲的非常详细</p>
 <h1><span id="er-kai-ji-zi-qi-dong">二、开机自启动</span><a href="#er-kai-ji-zi-qi-dong" class="header-anchor">#</a></h1><p>在Linux下设置软件开机自动有三种方式：</p>
-<h2><span id="1-zi-dong-qi-dong-ying-yong-cheng-xu-rc-local-jiao-ben">1、 自动启动应用程序——rc.local脚本</span><a href="#1-zi-dong-qi-dong-ying-yong-cheng-xu-rc-local-jiao-ben" class="header-anchor">#</a></h2><h2><span id="2-zi-dong-qi-dong-fu-wu-update-rc-d">2、 自动启动服务——update-rc.d</span><a href="#2-zi-dong-qi-dong-fu-wu-update-rc-d" class="header-anchor">#</a></h2><h2><span id="3-qi-dong-ying-yong-cheng-xu-shou-xuan-xiang">3、 启动应用程序首选项</span><a href="#3-qi-dong-ying-yong-cheng-xu-shou-xuan-xiang" class="header-anchor">#</a></h2><h2><span id="4-shi-yong-systemd">4、 使用Systemd</span><a href="#4-shi-yong-systemd" class="header-anchor">#</a></h2><p>下面来介绍这四种方式：</p>
+<h2><span id="1-zi-dong-qi-dong-ying-yong-cheng-xu-rc-local-jiao-ben">1、 自动启动应用程序——rc.local脚本</span><a href="#1-zi-dong-qi-dong-ying-yong-cheng-xu-rc-local-jiao-ben" class="header-anchor">#</a></h2><h2><span id="2-zi-dong-qi-dong-fu-wu-update-rc-d">2、 自动启动服务——update-rc.d</span><a href="#2-zi-dong-qi-dong-fu-wu-update-rc-d" class="header-anchor">#</a></h2><h2><span id="3-qi-dong-ying-yong-cheng-xu-shou-xuan-xiang">3、 启动应用程序首选项</span><a href="#3-qi-dong-ying-yong-cheng-xu-shou-xuan-xiang" class="header-anchor">#</a></h2><h2><span id="4-shi-yong-systemd">4、 使用Systemd</span><a href="#4-shi-yong-systemd" class="header-anchor">#</a></h2><a id="more"></a>
+
+<p>下面来介绍这四种方式：</p>
 <h1><span id="1-zi-dong-qi-dong-ying-yong-cheng-xu-rc-local-jiao-ben">1、自动启动应用程序——rc.local脚本</span><a href="#1-zi-dong-qi-dong-ying-yong-cheng-xu-rc-local-jiao-ben" class="header-anchor">#</a></h1><p>rc.local脚本是一个Ubuntu开机后会自动执行的脚本，在该脚本内添加命令行，开机时会自动执行。</p>
 <p>脚本路径/etc/rc.local</p>
 <p>需要root权限才能修改。</p>
@@ -265,6 +213,69 @@ sudo service xxx restart</code></pre><p>9、查看全部服务列表</p>
       </tags>
   </entry>
   <entry>
+    <title>提速 git push速度</title>
+    <url>/2019/08/07/2019-8-7-%E6%8F%90%E9%80%9F%20git%20push%E9%80%9F%E5%BA%A6/</url>
+    <content><![CDATA[<h1><span id="dai-li-fu-wu-qi-ti-su">代理服务器提速</span><a href="#dai-li-fu-wu-qi-ti-su" class="header-anchor">#</a></h1><p>如果你有shadowsocks的socket5代理，那么可以使用下面两条语句提速</p>
+<p>前提是你的代理已经在运行</p>
+<p>速度提升非常明显，之前几KB变成1-2MB的速度。</p>
+<pre><code>git config --global http.proxy &#39;socks5://127.0.0.1:1080&#39; 
+git config --global https.proxy &#39;socks5://127.0.0.1:1080&#39;</code></pre><a id="more"></a>
+]]></content>
+      <categories>
+        <category>git</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Ubuntu16.04安装caffe及遇到的问题总结</title>
+    <url>/2019/08/07/2019-8-7-Ubuntu16.04%E5%AE%89%E8%A3%85caffe%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<h1><span id="ji-chu-ku-an-zhuang">基础库安装</span><a href="#ji-chu-ku-an-zhuang" class="header-anchor">#</a></h1><pre><code>sudo apt-get install libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libhdf5-serial-dev protobuf-compiler libopenblas-dev
+sudo apt-get install --no-install-recommends libboost-all-dev
+sudo apt-get install libopenblas-dev</code></pre><h1><span id="ke-long-caffe-dai-ma-dao-ben-di">克隆caffe代码到本地</span><a href="#ke-long-caffe-dai-ma-dao-ben-di" class="header-anchor">#</a></h1><p>git clone <a href="https://github.com/BVLC/caffe.git" target="_blank" rel="noopener">https://github.com/BVLC/caffe.git</a></p>
+<h1><span id="xiu-gai-makefile-config-makefile">修改Makefile.config、Makefile</span><a href="#xiu-gai-makefile-config-makefile" class="header-anchor">#</a></h1><p>Makefile.config中CUDA_ARCH变量配置。如果cuda 的版本号&gt;=9.0，则在该文件夹下找到CUDA_ARCH变量，并把：</p>
+<p>gencode arch=compute_20,code=sm_20 \ </p>
+<p>gencode arch=compute_20,code=sm_21</p>
+<p>两行注释掉</p>
+<a id="more"></a>
+
+<h1><span id="wen-ti">问题</span><a href="#wen-ti" class="header-anchor">#</a></h1><p>解决办法是依据出现错误的顺序而给出的，为了方便，可以直接先执行所有解决办法后再安装caffe。</p>
+<ol>
+<li>./include/caffe/common.hpp:5:27: fatal error: gflags/gflags.h: No such file or directory</li>
+</ol>
+<p>解决办法：sudo apt-get install libgflags-dev</p>
+<ol start="2">
+<li>./include/caffe/util/mkl_alternate.hpp:14:19: fatal error: cblas.h: No such file or directory</li>
+</ol>
+<p>解决办法：sudo apt-get install libblas-dev</p>
+<ol start="3">
+<li>./include/caffe/util/hdf5.hpp:6:18: fatal error: hdf5.h: No such file or directory</li>
+</ol>
+<p>解决办法：在Makefile.config找到以下行并添加蓝色部分</p>
+<p>INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include <font color="Blue">/usr/include/hdf5/serial</font> </p>
+<p>LIBRARY_DIRS := $(PYTHON_LIB) /usr/local/lib /usr/lib <font color="Blue">/usr/lib/x86_64-linux-gnu/hdf5/serial</font></p>
+<ol start="4">
+<li>./include/caffe/util/db_lmdb.hpp:8:18: fatal error: lmdb.h: No such file or directory</li>
+</ol>
+<p>解决办法：sudo apt install liblmdb-dev</p>
+<ol start="5">
+<li>/usr/bin/ld: cannot find -lcblas<br> /usr/bin/ld: cannot find -latlas</li>
+</ol>
+<p>解决办法：sudo apt install libatlas-base-dev</p>
+<ol start="6">
+<li>./include/caffe/common.hpp:6:26: fatal error: glog/logging.h: No such file or directory</li>
+</ol>
+<p>解决方法：sudo apt-get install libgoogle-glog-dev</p>
+]]></content>
+      <categories>
+        <category>caffe</category>
+      </categories>
+      <tags>
+        <tag>caffe</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>LSART编译过程记录</title>
     <url>/2019/08/06/2019-8-6-LSART%E7%AE%97%E6%B3%95%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/</url>
     <content><![CDATA[<h1><span id="modified-caffe-de-bian-yi">modified caffe的编译</span><a href="#modified-caffe-de-bian-yi" class="header-anchor">#</a></h1><p>ubuntu 18.04</p>
@@ -275,6 +286,8 @@ sudo service xxx restart</code></pre><p>9、查看全部服务列表</p>
 <p>不要修改原文件夹中的cudnn.hpp</p>
 <h1><span id="matcaffe-bian-yi">matcaffe编译</span><a href="#matcaffe-bian-yi" class="header-anchor">#</a></h1><p>matlab2015b</p>
 <p>g++4.9 gcc4.9</p>
+<a id="more"></a>
+
 <h1><span id="ke-neng-de-wen-ti">可能的问题</span><a href="#ke-neng-de-wen-ti" class="header-anchor">#</a></h1><p>报错：</p>
 <pre><code>Invalid MEX-file
 &#39;/home/xw/caffeBuild/caffe-master/matlab/+caffe/private/caffe_.mexa64&#39;:
@@ -305,7 +318,9 @@ sudo rm -r build
 sudo rm -r /usr/local/include/opencv2 /usr/local/include/opencv /usr/include/opencv /usr/include/opencv2 /usr/local/share/opencv /usr/local/share/OpenCV /usr/share/opencv /usr/share/OpenCV /usr/local/bin/opencv* /usr/local/lib/libopencv*
 
 cd /usr
-sudo find . -name &quot;*opencv*&quot; | xargs sudo rm -rf</code></pre><h1><span id="an-zhuang-opencv2-4">安装opencv2.4</span><a href="#an-zhuang-opencv2-4" class="header-anchor">#</a></h1><ol>
+sudo find . -name &quot;*opencv*&quot; | xargs sudo rm -rf</code></pre><a id="more"></a>
+
+<h1><span id="an-zhuang-opencv2-4">安装opencv2.4</span><a href="#an-zhuang-opencv2-4" class="header-anchor">#</a></h1><ol>
 <li>先从sourceforge上下载OpenCV的源码</li>
 </ol>
 <p><a href="http://jaist.dl.sourceforge.net/project/opencvlibrary/opencv-unix/2.4.9/opencv-2.4.9.zip" target="_blank" rel="noopener">http://jaist.dl.sourceforge.net/project/opencvlibrary/opencv-unix/2.4.9/opencv-2.4.9.zip</a></p>
@@ -405,6 +420,8 @@ unset(CUDA_nppitc_LIBRARY CACHE)</code></pre><p>4）.找到文件OpenCVDetectCUD
 <p>8、安装 opencv3.1 </p>
 <p>9、安装 caffe </p>
 <p>10、安装 pycaffe notebook 接口环境</p>
+<a id="more"></a>
+
 <h1><span id="di-1-bu-an-zhuang-yi-lai-bao">第1步 安装依赖包</span><a href="#di-1-bu-an-zhuang-yi-lai-bao" class="header-anchor">#</a></h1><p>安装后续步骤或环境必需的依赖包，依次输入以下命令:</p>
 <pre><code>sudo apt-get install libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libhdf5-serial-dev protobuf-compiler
 
@@ -532,24 +549,11 @@ Cuda compilation tools, release 8.0, V8.0.61</code></pre>]]></content>
       </tags>
   </entry>
   <entry>
-    <title>cuda和cudnn各版本下载地址</title>
-    <url>/2019/08/05/2019-8-5-cuda%E5%92%8Ccudnn%E7%9A%84%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80/</url>
-    <content><![CDATA[<h1><span id="xia-zai">下载</span><a href="#xia-zai" class="header-anchor">#</a></h1><p>进入 <a href="https://developer.nvidia.com/cuda-downloads" target="_blank" rel="noopener">https://developer.nvidia.com/cuda-downloads</a> ，依次选择 CUDA 类型然后下载即可。</p>
-<h1><span id="an-zhuang-cudnn">安装 cudnn</span><a href="#an-zhuang-cudnn" class="header-anchor">#</a></h1><p>登录官网：<a href="https://developer.nvidia.com/rdp/cudnn-download" target="_blank" rel="noopener">https://developer.nvidia.com/rdp/cudnn-download</a> ，下载对应 cuda 版本且 linux 系统的 cudnn 压缩包</p>
-]]></content>
-      <categories>
-        <category>cuda</category>
-      </categories>
-      <tags>
-        <tag>下载地址</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>解决ubuntu18.04合盖休眠无法唤醒</title>
     <url>/2019/08/05/2019-8-5-%E8%A7%A3%E5%86%B3ubuntu18.04%E5%90%88%E7%9B%96%E4%BC%91%E7%9C%A0%E6%97%A0%E6%B3%95%E5%94%A4%E9%86%92/</url>
     <content><![CDATA[<h1><span id="zhu-yi-hei-ping-zuo-shang-jiao-shi-fou-you-ge-xiao-xia-hua-xian">注意黑屏左上角是否有个小下划线</span><a href="#zhu-yi-hei-ping-zuo-shang-jiao-shi-fou-you-ge-xiao-xia-hua-xian" class="header-anchor">#</a></h1><p>在黑屏下，直接按Ctrl+alt+F1或者Ctrl+alt+F7即可唤醒</p>
 <p>（失败）</p>
-]]></content>
+<a id="more"></a>]]></content>
       <categories>
         <category>linux</category>
       </categories>
@@ -558,9 +562,23 @@ Cuda compilation tools, release 8.0, V8.0.61</code></pre>]]></content>
       </tags>
   </entry>
   <entry>
+    <title>cuda和cudnn各版本下载地址</title>
+    <url>/2019/08/05/2019-8-5-cuda%E5%92%8Ccudnn%E7%9A%84%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80/</url>
+    <content><![CDATA[<h1><span id="xia-zai">下载</span><a href="#xia-zai" class="header-anchor">#</a></h1><p>进入 <a href="https://developer.nvidia.com/cuda-downloads" target="_blank" rel="noopener">https://developer.nvidia.com/cuda-downloads</a> ，依次选择 CUDA 类型然后下载即可。</p>
+<h1><span id="an-zhuang-cudnn">安装 cudnn</span><a href="#an-zhuang-cudnn" class="header-anchor">#</a></h1><p>登录官网：<a href="https://developer.nvidia.com/rdp/cudnn-download" target="_blank" rel="noopener">https://developer.nvidia.com/rdp/cudnn-download</a> ，下载对应 cuda 版本且 linux 系统的 cudnn 压缩包 </p>
+<a id="more"></a>]]></content>
+      <categories>
+        <category>cuda</category>
+      </categories>
+      <tags>
+        <tag>下载地址</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>ubuntu 13.04中g++-4.5和 gcc-4.5安装</title>
     <url>/2019/08/04/2019-8-4-ubuntu%2013.04%E4%B8%ADg++-4.5%E5%92%8C%20gcc-4.5%E5%AE%89%E8%A3%85/</url>
-    <content><![CDATA[<p>1、安装包的下载与安装<br>1)gcc-4.5-base安装</p>
+    <content><![CDATA[<p>1、安装包的下载与安装</p>
+<p>1)gcc-4.5-base安装</p>
 <p>下载地址：<a href="https://launchpad.net/ubuntu/quantal/amd64/gcc-4.5-base/4.5.4-1ubuntu2" target="_blank" rel="noopener">https://launchpad.net/ubuntu/quantal/amd64/gcc-4.5-base/4.5.4-1ubuntu2</a></p>
 <p>在终端输入安装命令：$ sudo dpkg -igcc-4.5-base_4.5.4-1ubuntu2_amd64.deb</p>
 <p>2）cpp-4.5安装</p>
@@ -647,6 +665,8 @@ Cuda compilation tools, release 8.0, V8.0.61</code></pre>]]></content>
 <p>sudo update-alternatives –install /usr/bin/gcc gcc /usr/bin/gcc-4.5 40</p>
 <p>接着输入：</p>
 <p>sudo update-alternatives –config gcc</p>
+<a id="more"></a>
+
 <p>会看到如下的选项</p>
 <p>有 3 个候选项可用于替换 gcc (提供 /usr/bin/gcc)。</p>
 <p>  选择      路径            优先级  状态</p>
@@ -680,6 +700,8 @@ Cuda compilation tools, release 8.0, V8.0.61</code></pre>]]></content>
     <content><![CDATA[<h1><span id="qu-bie">区别：</span><a href="#qu-bie" class="header-anchor">#</a></h1><p>在使用linux时，经常需要进行文件查找。其中查找的命令主要有find和grep。两个命令是有区的。</p>
 <p>find命令是根据文件的属性进行查找，如文件名，文件大小，所有者，所属组，是否为空，访问时间，修改时间等。</p>
 <p>grep是根据文件的内容进行查找，会对文件的每一行按照给定的模式(patter)进行匹配查找。</p>
+<a id="more"></a>
+
 <h1><span id="yi-find-ming-ling">一.find命令</span><a href="#yi-find-ming-ling" class="header-anchor">#</a></h1><p>基本格式：find path expression</p>
 <ol>
 <li>按照文件名查找</li>
@@ -857,6 +879,8 @@ Person析构
     <url>/2019/05/01/2019-5-1-Ubuntu%E5%88%9B%E5%BB%BA%E6%A1%8C%E9%9D%A2%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F/</url>
     <content><![CDATA[<p>默认情况下，Ubuntu会将自动安装的软件快捷方式保存在/usr/share/applications目录下，如果我们要创建桌面快捷方式，只需要右键-复制-桌面 。</p>
 <p>上面的方法是通过系统自动安装软件后实现的，有时候我们自己会从网上下载一些软件手动安装，那么，又该怎样创建软件的桌面快捷方式呢？这里以Eclipse 为例，首先到官网下载Eclipse软件包，直接解压在某个目录下，双击其中的eclipse文件，就可以启动eclipse了，不过如果每次要打开eclipse，都要从安装目录启动，是不是有些麻烦？依照下面的操作，来创建一个桌面快捷方式吧。</p>
+ <a id="more"></a>
+
 <p>1、创建一个文件，将下面的代码拷贝进去</p>
 <p>这里我们只需要关注3个地方，分别为Exec=软件执行文件的路径，Icon=快捷方式图标（如果有的话），Name=快捷方式名称。根据自己软件按转的位置修改代码，保存之后关闭文件。</p>
 <pre><code>[Desktop Entry]
@@ -924,6 +948,8 @@ X-KDE-Username=owen</code></pre><p>2、将文件名修改为eclipse.desktop</p>
     <url>/2019/03/08/2019-3-8-Hungarian%E4%BA%8C%E5%88%86%E5%9B%BE%E5%8C%B9%E9%85%8D/</url>
     <content><![CDATA[<h1><span id="ji-ben-gai-nian">基本概念</span><a href="#ji-ben-gai-nian" class="header-anchor">#</a></h1><h2><span id="er-fen-tu">二分图</span><a href="#er-fen-tu" class="header-anchor">#</a></h2><p>是图论中的一种特殊模型。若能将无向图G=(V,E)的顶点V划分为两个交集为空的顶点集，并且任意边的两个端点都分属于两个集合，则称图G为一个为二分图。</p>
 <img src="/2019/03/08/2019-3-8-Hungarian二分图匹配/1.png">
+
+<a id="more"></a>
 
 <h2><span id="pi-pei">匹配</span><a href="#pi-pei" class="header-anchor">#</a></h2><p>一个匹配即一个包含若干条边的集合，且其中任意两条边没有公共端点。如下图，图3的红边即为图2的一个匹配。</p>
 <img src="/2019/03/08/2019-3-8-Hungarian二分图匹配/2.png">
@@ -1013,6 +1039,8 @@ X-KDE-Username=owen</code></pre><p>2、将文件名修改为eclipse.desktop</p>
     <title>综述_tracklet</title>
     <url>/2019/03/01/2019-3-1-%E7%BB%BC%E8%BF%B0_tracklet/</url>
     <content><![CDATA[<p>近年来,由于计算机视觉技术的发展和计算机硬件性能的提高,基于视觉的目标跟踪方法得到了飞速的发展.其中,基于踪片(Tracklet)关联的目标跟踪方法因为具有对目标遮挡的强鲁棒性、算法运行的快速性等优点得到了广泛关注,本文对这类方法的最新研究进展进行了综述.首先,简明地介绍了视觉目标跟踪的基本知识、研究意义和研究现状.然后,通过感兴趣目标检测、跟踪特征提取、踪片生成、踪片关联与补全四个步骤,系统详尽地介绍了基于踪片关联的目标跟踪方法,分析了近年来提出的一些踪片关联方法的优缺点.最后,本文指出了该研究问题的发展方向,一方面要提出更先进的目标跟踪模型,另一方面要采用平行视觉方法进行虚实互动的模型学习与评估.</p>
+<a id="more"></a>
+
 
 
 
@@ -1051,6 +1079,8 @@ X-KDE-Username=owen</code></pre><p>2、将文件名修改为eclipse.desktop</p>
     <title>概率图模型：HMM、MEMM、CRF</title>
     <url>/2019/02/28/2019-2-28-%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B/</url>
     <content><![CDATA[<p>概率图模型学习笔记：HMM、MEMM、CRF</p>
+<a id="more"></a>
+
 <h1><span id="preface">Preface</span><a href="#preface" class="header-anchor">#</a></h1><blockquote>
 <p>统计机器学习所有的模型（个别instant model和优化算法以及其他的特种工程知识点除外）的工作流程都是如此：</p>
 </blockquote>
@@ -1127,7 +1157,7 @@ X-KDE-Username=owen</code></pre><p>2、将文件名修改为eclipse.desktop</p>
 <h2><span id="ying-jian-ge-zhi-chi-xiang-liang-ji-xian-xing-ke-fen-zhi-chi-xiang-liang-ji">硬间隔支持向量机（线性可分支持向量机）</span><a href="#ying-jian-ge-zhi-chi-xiang-liang-ji-xian-xing-ke-fen-zhi-chi-xiang-liang-ji" class="header-anchor">#</a></h2><p>当训练数据线性可分时，可通过硬间隔最大化学得一个线性可分支持向量机。</p>
 <h2><span id="ruan-jian-ge-zhi-chi-xiang-liang-ji">软间隔支持向量机</span><a href="#ruan-jian-ge-zhi-chi-xiang-liang-ji" class="header-anchor">#</a></h2><p>当训练数据近似线性可分时，可通过软间隔最大化学得一个线性支持向量机。</p>
 <h2><span id="fei-xian-xing-zhi-chi-xiang-liang-ji">非线性支持向量机</span><a href="#fei-xian-xing-zhi-chi-xiang-liang-ji" class="header-anchor">#</a></h2><p>当训练数据线性不可分时，可通过核方法以及软间隔最大化学得一个非线性支持向量机。</p>
-]]></content>
+<a id="more"></a>]]></content>
       <categories>
         <category>Algorithm</category>
       </categories>
@@ -1138,9 +1168,10 @@ X-KDE-Username=owen</code></pre><p>2、将文件名修改为eclipse.desktop</p>
   <entry>
     <title>MOSSE</title>
     <url>/2019/02/20/2019-2-20-MOSSE/</url>
-    <content><![CDATA[<p>Visual Object Tracking using Adaptive Correlation Filters 一文发表于2010的CVPR上，是笔者所知的第一篇将correlation filter引入tracking领域内的文章，文中所提的Minimum Output Sum of Squared Error(MOSSE)，可以说是后来CSK、STC、Color Attributes等tracker的鼻祖。Correlation Filter（以下简称CF）源于信号处理领域，后被运用于图像分类等方面。Correlation包含Cross-correlation和Auto-correlation，在这里我们一般指的就是Cross-correlation。首先看看维基百科上Cross-correlation的定义，假设有f和g两个函数（信号），其cross-correlation f★g 定义为</p>
+    <content><![CDATA[<p>Visual Object Tracking using Adaptive Correlation Filters 一文发表于2010的CVPR上，是第一篇将correlation filter引入tracking领域内的文章，文中所提的Minimum Output Sum of Squared Error(MOSSE)，可以说是后来CSK、STC、Color Attributes等tracker的鼻祖。Correlation Filter（以下简称CF）源于信号处理领域，后被运用于图像分类等方面。Correlation包含Cross-correlation和Auto-correlation，在这里我们一般指的就是Cross-correlation。首先看看维基百科上Cross-correlation的定义，假设有f和g两个函数（信号），其cross-correlation f★g 定义为</p>
 <img src="/2019/02/20/2019-2-20-MOSSE/f1.png">
 
+<a id="more"></a>
 
 <p>其中f∗表示f的复共轭，correlation的直观解释就是衡量两个函数在某个时刻τ的相似程度，如下图所示。考虑一个最简单的例子，假设f和g的形状一样，但是相差了若干个时刻，那么f★g取得最大值的时候一定是f和g对齐的时候（没谁比自己和自己更像了吧…），但因为两者有时间差，所以要取得最大值，就要把其中一个在时间轴上进行平移，所以g(t+τ)就代表把g平移τ个时刻。其实Convolution和Cross-correlation在图像处理的书里一般都会提到，这里就不多叙述了。</p>
 <img src="/2019/02/20/2019-2-20-MOSSE/1.png">
@@ -1304,6 +1335,8 @@ interval:
     <title>算法设计小结</title>
     <url>/2018/06/28/2018-6-28-%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/</url>
     <content><![CDATA[<p>每个算法会给出思想和伪代码，对于复杂的算法会做出详尽的解释。</p>
+<a id="more"></a>
+
 <h1><span id="introduction">Introduction</span><a href="#introduction" class="header-anchor">#</a></h1><h2><span id="she-ji-suan-fa-de-5-ge-yao-qiu">设计算法的5个要求</span><a href="#she-ji-suan-fa-de-5-ge-yao-qiu" class="header-anchor">#</a></h2><ol>
 <li>Finiteness。terminates after a finite number of steps</li>
 <li>Definiteness。rigorously and unambiguously specified</li>

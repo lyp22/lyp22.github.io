@@ -165,6 +165,8 @@
 <p>解压我给的opencv_contrib-3.2.0至opencv-3.2.0的目录下（解压完后路径为/home/XXX/opencv-3.2.0/opencv_contrib-3.2.0），并在此处新建一个build文件夹（路径为/home/XXX/opencv-3.2.0/build）</p>
 <p>进入build，执行：</p>
 <pre><code>cmake -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/usr/local -D OPENCV_EXTRA_MODULES_PATH=/home/lyp/Data/Downtown/opencv-3.2.0/opencv_contrib/modules -D CUDA_GENERATION=Kepler ..</code></pre><p>因为是cuda9.0不再支持2.0架构所以要加上-D CUDA_GENERATION=Kepler</p>
+<a id="more"></a>
+
 <h1><span id="yu-dao-de-cuo-wu">遇到的错误</span><a href="#yu-dao-de-cuo-wu" class="header-anchor">#</a></h1><h2><span id="di-yi-ge-cuo-wu">第一个错误</span><a href="#di-yi-ge-cuo-wu" class="header-anchor">#</a></h2><p>fatal error: LAPACKE_H_PATH-NOTFOUND/lapacke.h: No such file or directory #include “LAPACKE_H_PATH-NOTFOUND/lapacke.h” </p>
 <p>原因：未找到lapacke.h文件</p>
 <p>方法： </p>
