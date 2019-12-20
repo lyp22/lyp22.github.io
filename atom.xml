@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://qaqu.net/"/>
-  <updated>2019-12-20T03:55:40.509Z</updated>
+  <updated>2019-12-20T05:58:08.248Z</updated>
   <id>https://qaqu.net/</id>
   
   <author>
@@ -18,10 +18,10 @@
   
   <entry>
     <title>ubuntu上opencv3.2和opencv_contrib安装中遇到的错误记录(cuda9.0)</title>
-    <link href="https://qaqu.net/2019/12/20/2019-12-18-ubuntu%E4%B8%8Aopencv3.2%E5%92%8Copencv_contrib%E5%AE%89%E8%A3%85%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%94%99%E8%AF%AF%E8%AE%B0%E5%BD%95/"/>
-    <id>https://qaqu.net/2019/12/20/2019-12-18-ubuntu%E4%B8%8Aopencv3.2%E5%92%8Copencv_contrib%E5%AE%89%E8%A3%85%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%94%99%E8%AF%AF%E8%AE%B0%E5%BD%95/</id>
-    <published>2019-12-20T04:20:53.442Z</published>
-    <updated>2019-12-20T03:55:40.509Z</updated>
+    <link href="https://qaqu.net/2019/12/18/2019-12-18-ubuntu%E4%B8%8Aopencv3.2%E5%92%8Copencv_contrib%E5%AE%89%E8%A3%85%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%94%99%E8%AF%AF%E8%AE%B0%E5%BD%95/"/>
+    <id>https://qaqu.net/2019/12/18/2019-12-18-ubuntu%E4%B8%8Aopencv3.2%E5%92%8Copencv_contrib%E5%AE%89%E8%A3%85%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%94%99%E8%AF%AF%E8%AE%B0%E5%BD%95/</id>
+    <published>2019-12-18T00:00:00.000Z</published>
+    <updated>2019-12-20T05:58:08.248Z</updated>
     
     <summary type="html">
     
@@ -45,10 +45,10 @@
   
   <entry>
     <title>报错caffe_ mexa64 undefined symbol</title>
-    <link href="https://qaqu.net/2019/12/20/2019-9-19-%E6%8A%A5%E9%94%99caffe_%20mexa64%20undefined%20symbol/"/>
-    <id>https://qaqu.net/2019/12/20/2019-9-19-%E6%8A%A5%E9%94%99caffe_%20mexa64%20undefined%20symbol/</id>
-    <published>2019-12-20T04:20:53.441Z</published>
-    <updated>2019-12-20T03:55:40.509Z</updated>
+    <link href="https://qaqu.net/2019/08/19/2019-9-19-%E6%8A%A5%E9%94%99caffe_%20mexa64%20undefined%20symbol/"/>
+    <id>https://qaqu.net/2019/08/19/2019-9-19-%E6%8A%A5%E9%94%99caffe_%20mexa64%20undefined%20symbol/</id>
+    <published>2019-08-19T00:00:00.000Z</published>
+    <updated>2019-12-20T05:58:00.467Z</updated>
     
     <summary type="html">
     
@@ -72,10 +72,10 @@
   
   <entry>
     <title>dpkg错误</title>
-    <link href="https://qaqu.net/2019/12/20/2019-8-8-dpkg%E9%94%99%E8%AF%AF/"/>
-    <id>https://qaqu.net/2019/12/20/2019-8-8-dpkg%E9%94%99%E8%AF%AF/</id>
-    <published>2019-12-20T04:20:53.439Z</published>
-    <updated>2019-08-19T08:36:48.002Z</updated>
+    <link href="https://qaqu.net/2019/08/08/2019-8-8-dpkg%E9%94%99%E8%AF%AF/"/>
+    <id>https://qaqu.net/2019/08/08/2019-8-8-dpkg%E9%94%99%E8%AF%AF/</id>
+    <published>2019-08-08T00:00:00.000Z</published>
+    <updated>2019-12-20T05:57:54.018Z</updated>
     
     <summary type="html">
     
@@ -100,65 +100,11 @@
   </entry>
   
   <entry>
-    <title>提速 git push速度</title>
-    <link href="https://qaqu.net/2019/12/20/2019-8-7-%E6%8F%90%E9%80%9F%20git%20push%E9%80%9F%E5%BA%A6/"/>
-    <id>https://qaqu.net/2019/12/20/2019-8-7-%E6%8F%90%E9%80%9F%20git%20push%E9%80%9F%E5%BA%A6/</id>
-    <published>2019-12-20T04:20:53.438Z</published>
-    <updated>2019-08-07T06:59:44.263Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1&gt;&lt;span id=&quot;dai-li-fu-wu-qi-ti-su&quot;&gt;代理服务器提速&lt;/span&gt;&lt;a href=&quot;#dai-li-fu-wu-qi-ti-su&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="git" scheme="https://qaqu.net/categories/git/"/>
-    
-    
-      <category term="git" scheme="https://qaqu.net/tags/git/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Ubuntu设置系统环境变量和开机自启动</title>
-    <link href="https://qaqu.net/2019/12/20/2019-8-7-Ubuntu18.04%E8%AE%BE%E7%BD%AE%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8%E6%9C%8D%E5%8A%A1/"/>
-    <id>https://qaqu.net/2019/12/20/2019-8-7-Ubuntu18.04%E8%AE%BE%E7%BD%AE%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8%E6%9C%8D%E5%8A%A1/</id>
-    <published>2019-12-20T04:20:53.437Z</published>
-    <updated>2019-08-07T06:56:38.624Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1&gt;&lt;span id=&quot;yi-ubuntu-xi-tong-huan-jing-bian-liang-xiang-jie&quot;&gt;一、Ubuntu系统环境变量详解&lt;/span&gt;&lt;a
-        
-      
-    
-    </summary>
-    
-    
-      <category term="linux" scheme="https://qaqu.net/categories/linux/"/>
-    
-    
-      <category term="ubuntu" scheme="https://qaqu.net/tags/ubuntu/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Ubuntu16.04安装caffe及遇到的问题总结</title>
-    <link href="https://qaqu.net/2019/12/20/2019-8-7-Ubuntu16.04%E5%AE%89%E8%A3%85caffe%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/"/>
-    <id>https://qaqu.net/2019/12/20/2019-8-7-Ubuntu16.04%E5%AE%89%E8%A3%85caffe%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/</id>
-    <published>2019-12-20T04:20:53.435Z</published>
-    <updated>2019-08-19T08:36:48.001Z</updated>
+    <link href="https://qaqu.net/2019/08/07/2019-8-7-Ubuntu16.04%E5%AE%89%E8%A3%85caffe%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/"/>
+    <id>https://qaqu.net/2019/08/07/2019-8-7-Ubuntu16.04%E5%AE%89%E8%A3%85caffe%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/</id>
+    <published>2019-08-07T00:00:00.000Z</published>
+    <updated>2019-12-20T05:57:35.330Z</updated>
     
     <summary type="html">
     
@@ -181,11 +127,119 @@
   </entry>
   
   <entry>
+    <title>Ubuntu设置系统环境变量和开机自启动</title>
+    <link href="https://qaqu.net/2019/08/07/2019-8-7-Ubuntu18.04%E8%AE%BE%E7%BD%AE%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8%E6%9C%8D%E5%8A%A1/"/>
+    <id>https://qaqu.net/2019/08/07/2019-8-7-Ubuntu18.04%E8%AE%BE%E7%BD%AE%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8%E6%9C%8D%E5%8A%A1/</id>
+    <published>2019-08-07T00:00:00.000Z</published>
+    <updated>2019-12-20T05:57:40.687Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1&gt;&lt;span id=&quot;yi-ubuntu-xi-tong-huan-jing-bian-liang-xiang-jie&quot;&gt;一、Ubuntu系统环境变量详解&lt;/span&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="linux" scheme="https://qaqu.net/categories/linux/"/>
+    
+    
+      <category term="ubuntu" scheme="https://qaqu.net/tags/ubuntu/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>提速 git push速度</title>
+    <link href="https://qaqu.net/2019/08/07/2019-8-7-%E6%8F%90%E9%80%9F%20git%20push%E9%80%9F%E5%BA%A6/"/>
+    <id>https://qaqu.net/2019/08/07/2019-8-7-%E6%8F%90%E9%80%9F%20git%20push%E9%80%9F%E5%BA%A6/</id>
+    <published>2019-08-07T00:00:00.000Z</published>
+    <updated>2019-12-20T05:57:47.024Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1&gt;&lt;span id=&quot;dai-li-fu-wu-qi-ti-su&quot;&gt;代理服务器提速&lt;/span&gt;&lt;a href=&quot;#dai-li-fu-wu-qi-ti-su&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="git" scheme="https://qaqu.net/categories/git/"/>
+    
+    
+      <category term="git" scheme="https://qaqu.net/tags/git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>LSART编译过程记录</title>
+    <link href="https://qaqu.net/2019/08/06/2019-8-6-LSART%E7%AE%97%E6%B3%95%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/"/>
+    <id>https://qaqu.net/2019/08/06/2019-8-6-LSART%E7%AE%97%E6%B3%95%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/</id>
+    <published>2019-08-06T00:00:00.000Z</published>
+    <updated>2019-12-20T05:57:17.902Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1&gt;&lt;span id=&quot;modified-caffe-de-bian-yi&quot;&gt;modified caffe的编译&lt;/span&gt;&lt;a href=&quot;#modified-caffe-de-bian-yi&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="目标跟踪" scheme="https://qaqu.net/categories/%E7%9B%AE%E6%A0%87%E8%B7%9F%E8%B8%AA/"/>
+    
+    
+      <category term="LSART" scheme="https://qaqu.net/tags/LSART/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Opencv的卸载并安装2.4版本(无cuda+cuda9.0)</title>
+    <link href="https://qaqu.net/2019/08/06/2019-8-6-Opencv%E7%9A%84%E5%8D%B8%E8%BD%BD%E5%B9%B6%E5%AE%89%E8%A3%852.4%E7%89%88%E6%9C%AC/"/>
+    <id>https://qaqu.net/2019/08/06/2019-8-6-Opencv%E7%9A%84%E5%8D%B8%E8%BD%BD%E5%B9%B6%E5%AE%89%E8%A3%852.4%E7%89%88%E6%9C%AC/</id>
+    <published>2019-08-06T00:00:00.000Z</published>
+    <updated>2019-12-20T05:57:23.588Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1&gt;&lt;span id=&quot;cha-kan-an-zhuang-de-opencv-ban-ben&quot;&gt;查看安装的opencv版本&lt;/span&gt;&lt;a href=&quot;#cha-kan-an-zhuang-de-opencv-ban-ben&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="opencv" scheme="https://qaqu.net/categories/opencv/"/>
+    
+    
+      <category term="常用" scheme="https://qaqu.net/tags/%E5%B8%B8%E7%94%A8/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Ubuntu16.04CUDA8.0+cudnn+opencv3.1+ Caffe 安装步骤记录</title>
-    <link href="https://qaqu.net/2019/12/20/2019-8-6-Ubuntu16.04CUDA8.0+cudnn+opencv3.1+%20Caffe%20%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4%E8%AE%B0%E5%BD%95/"/>
-    <id>https://qaqu.net/2019/12/20/2019-8-6-Ubuntu16.04CUDA8.0+cudnn+opencv3.1+%20Caffe%20%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4%E8%AE%B0%E5%BD%95/</id>
-    <published>2019-12-20T04:20:53.434Z</published>
-    <updated>2019-08-07T06:56:38.624Z</updated>
+    <link href="https://qaqu.net/2019/08/06/2019-8-6-Ubuntu16.04CUDA8.0+cudnn+opencv3.1+%20Caffe%20%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4%E8%AE%B0%E5%BD%95/"/>
+    <id>https://qaqu.net/2019/08/06/2019-8-6-Ubuntu16.04CUDA8.0+cudnn+opencv3.1+%20Caffe%20%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4%E8%AE%B0%E5%BD%95/</id>
+    <published>2019-08-06T00:00:00.000Z</published>
+    <updated>2019-12-20T05:57:29.337Z</updated>
     
     <summary type="html">
     
@@ -214,92 +268,11 @@
   </entry>
   
   <entry>
-    <title>Opencv的卸载并安装2.4版本(无cuda+cuda9.0)</title>
-    <link href="https://qaqu.net/2019/12/20/2019-8-6-Opencv%E7%9A%84%E5%8D%B8%E8%BD%BD%E5%B9%B6%E5%AE%89%E8%A3%852.4%E7%89%88%E6%9C%AC/"/>
-    <id>https://qaqu.net/2019/12/20/2019-8-6-Opencv%E7%9A%84%E5%8D%B8%E8%BD%BD%E5%B9%B6%E5%AE%89%E8%A3%852.4%E7%89%88%E6%9C%AC/</id>
-    <published>2019-12-20T04:20:53.432Z</published>
-    <updated>2019-08-07T06:56:38.624Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1&gt;&lt;span id=&quot;cha-kan-an-zhuang-de-opencv-ban-ben&quot;&gt;查看安装的opencv版本&lt;/span&gt;&lt;a href=&quot;#cha-kan-an-zhuang-de-opencv-ban-ben&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="opencv" scheme="https://qaqu.net/categories/opencv/"/>
-    
-    
-      <category term="常用" scheme="https://qaqu.net/tags/%E5%B8%B8%E7%94%A8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LSART编译过程记录</title>
-    <link href="https://qaqu.net/2019/12/20/2019-8-6-LSART%E7%AE%97%E6%B3%95%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/"/>
-    <id>https://qaqu.net/2019/12/20/2019-8-6-LSART%E7%AE%97%E6%B3%95%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/</id>
-    <published>2019-12-20T04:20:53.431Z</published>
-    <updated>2019-08-07T06:56:38.624Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1&gt;&lt;span id=&quot;modified-caffe-de-bian-yi&quot;&gt;modified caffe的编译&lt;/span&gt;&lt;a href=&quot;#modified-caffe-de-bian-yi&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="目标跟踪" scheme="https://qaqu.net/categories/%E7%9B%AE%E6%A0%87%E8%B7%9F%E8%B8%AA/"/>
-    
-    
-      <category term="LSART" scheme="https://qaqu.net/tags/LSART/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>解决ubuntu18.04合盖休眠无法唤醒</title>
-    <link href="https://qaqu.net/2019/12/20/2019-8-5-%E8%A7%A3%E5%86%B3ubuntu18.04%E5%90%88%E7%9B%96%E4%BC%91%E7%9C%A0%E6%97%A0%E6%B3%95%E5%94%A4%E9%86%92/"/>
-    <id>https://qaqu.net/2019/12/20/2019-8-5-%E8%A7%A3%E5%86%B3ubuntu18.04%E5%90%88%E7%9B%96%E4%BC%91%E7%9C%A0%E6%97%A0%E6%B3%95%E5%94%A4%E9%86%92/</id>
-    <published>2019-12-20T04:20:53.430Z</published>
-    <updated>2019-08-07T06:56:38.624Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1&gt;&lt;span id=&quot;zhu-yi-hei-ping-zuo-shang-jiao-shi-fou-you-ge-xiao-xia-hua-xian&quot;&gt;注意黑屏左上角是否有个小下划线&lt;/span&gt;&lt;a
-        
-      
-    
-    </summary>
-    
-    
-      <category term="linux" scheme="https://qaqu.net/categories/linux/"/>
-    
-    
-      <category term="ubuntu" scheme="https://qaqu.net/tags/ubuntu/"/>
-    
-  </entry>
-  
-  <entry>
     <title>cuda和cudnn各版本下载地址</title>
-    <link href="https://qaqu.net/2019/12/20/2019-8-5-cuda%E5%92%8Ccudnn%E7%9A%84%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80/"/>
-    <id>https://qaqu.net/2019/12/20/2019-8-5-cuda%E5%92%8Ccudnn%E7%9A%84%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80/</id>
-    <published>2019-12-20T04:20:53.428Z</published>
-    <updated>2019-08-19T08:36:48.000Z</updated>
+    <link href="https://qaqu.net/2019/08/05/2019-8-5-cuda%E5%92%8Ccudnn%E7%9A%84%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80/"/>
+    <id>https://qaqu.net/2019/08/05/2019-8-5-cuda%E5%92%8Ccudnn%E7%9A%84%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80/</id>
+    <published>2019-08-05T00:00:00.000Z</published>
+    <updated>2019-12-20T05:57:06.442Z</updated>
     
     <summary type="html">
     
@@ -322,11 +295,38 @@
   </entry>
   
   <entry>
+    <title>解决ubuntu18.04合盖休眠无法唤醒</title>
+    <link href="https://qaqu.net/2019/08/05/2019-8-5-%E8%A7%A3%E5%86%B3ubuntu18.04%E5%90%88%E7%9B%96%E4%BC%91%E7%9C%A0%E6%97%A0%E6%B3%95%E5%94%A4%E9%86%92/"/>
+    <id>https://qaqu.net/2019/08/05/2019-8-5-%E8%A7%A3%E5%86%B3ubuntu18.04%E5%90%88%E7%9B%96%E4%BC%91%E7%9C%A0%E6%97%A0%E6%B3%95%E5%94%A4%E9%86%92/</id>
+    <published>2019-08-05T00:00:00.000Z</published>
+    <updated>2019-12-20T05:57:12.051Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1&gt;&lt;span id=&quot;zhu-yi-hei-ping-zuo-shang-jiao-shi-fou-you-ge-xiao-xia-hua-xian&quot;&gt;注意黑屏左上角是否有个小下划线&lt;/span&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="linux" scheme="https://qaqu.net/categories/linux/"/>
+    
+    
+      <category term="ubuntu" scheme="https://qaqu.net/tags/ubuntu/"/>
+    
+  </entry>
+  
+  <entry>
     <title>ubuntu 13.04中g++-4.5和 gcc-4.5安装</title>
-    <link href="https://qaqu.net/2019/12/20/2019-8-4-ubuntu%2013.04%E4%B8%ADg++-4.5%E5%92%8C%20gcc-4.5%E5%AE%89%E8%A3%85/"/>
-    <id>https://qaqu.net/2019/12/20/2019-8-4-ubuntu%2013.04%E4%B8%ADg++-4.5%E5%92%8C%20gcc-4.5%E5%AE%89%E8%A3%85/</id>
-    <published>2019-12-20T04:20:53.427Z</published>
-    <updated>2019-08-07T06:56:38.624Z</updated>
+    <link href="https://qaqu.net/2019/08/04/2019-8-4-ubuntu%2013.04%E4%B8%ADg++-4.5%E5%92%8C%20gcc-4.5%E5%AE%89%E8%A3%85/"/>
+    <id>https://qaqu.net/2019/08/04/2019-8-4-ubuntu%2013.04%E4%B8%ADg++-4.5%E5%92%8C%20gcc-4.5%E5%AE%89%E8%A3%85/</id>
+    <published>2019-08-04T00:00:00.000Z</published>
+    <updated>2019-12-20T05:57:00.814Z</updated>
     
     <summary type="html">
     
@@ -351,10 +351,10 @@
   
   <entry>
     <title>linux软件卸载方法及dpkg命令的使用</title>
-    <link href="https://qaqu.net/2019/12/20/2019-8-3-linux%E8%BD%AF%E4%BB%B6%E5%8D%B8%E8%BD%BD%E6%96%B9%E6%B3%95%E5%8F%8Adpkg%E5%91%BD%E4%BB%A4%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
-    <id>https://qaqu.net/2019/12/20/2019-8-3-linux%E8%BD%AF%E4%BB%B6%E5%8D%B8%E8%BD%BD%E6%96%B9%E6%B3%95%E5%8F%8Adpkg%E5%91%BD%E4%BB%A4%E7%9A%84%E4%BD%BF%E7%94%A8/</id>
-    <published>2019-12-20T04:20:53.425Z</published>
-    <updated>2019-08-07T06:56:38.624Z</updated>
+    <link href="https://qaqu.net/2019/08/03/2019-8-3-linux%E8%BD%AF%E4%BB%B6%E5%8D%B8%E8%BD%BD%E6%96%B9%E6%B3%95%E5%8F%8Adpkg%E5%91%BD%E4%BB%A4%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
+    <id>https://qaqu.net/2019/08/03/2019-8-3-linux%E8%BD%AF%E4%BB%B6%E5%8D%B8%E8%BD%BD%E6%96%B9%E6%B3%95%E5%8F%8Adpkg%E5%91%BD%E4%BB%A4%E7%9A%84%E4%BD%BF%E7%94%A8/</id>
+    <published>2019-08-03T00:00:00.000Z</published>
+    <updated>2019-12-20T05:56:55.302Z</updated>
     
     <summary type="html">
     
@@ -379,10 +379,10 @@
   
   <entry>
     <title>Linux cuda 10.1 run版 卸载方法</title>
-    <link href="https://qaqu.net/2019/12/20/2019-8-2-Linux%20cuda%2010.1%20run%E7%89%88%20%E5%8D%B8%E8%BD%BD%E6%96%B9%E6%B3%95/"/>
-    <id>https://qaqu.net/2019/12/20/2019-8-2-Linux%20cuda%2010.1%20run%E7%89%88%20%E5%8D%B8%E8%BD%BD%E6%96%B9%E6%B3%95/</id>
-    <published>2019-12-20T04:20:53.424Z</published>
-    <updated>2019-08-07T06:56:38.624Z</updated>
+    <link href="https://qaqu.net/2019/08/02/2019-8-2-Linux%20cuda%2010.1%20run%E7%89%88%20%E5%8D%B8%E8%BD%BD%E6%96%B9%E6%B3%95/"/>
+    <id>https://qaqu.net/2019/08/02/2019-8-2-Linux%20cuda%2010.1%20run%E7%89%88%20%E5%8D%B8%E8%BD%BD%E6%96%B9%E6%B3%95/</id>
+    <published>2019-08-02T00:00:00.000Z</published>
+    <updated>2019-12-20T05:56:49.378Z</updated>
     
     <summary type="html">
     
@@ -407,10 +407,10 @@
   
   <entry>
     <title>g++多版本安装切换</title>
-    <link href="https://qaqu.net/2019/12/20/2019-8-1-g++%E5%A4%9A%E7%89%88%E6%9C%AC%E5%AE%89%E8%A3%85%E5%88%87%E6%8D%A2/"/>
-    <id>https://qaqu.net/2019/12/20/2019-8-1-g++%E5%A4%9A%E7%89%88%E6%9C%AC%E5%AE%89%E8%A3%85%E5%88%87%E6%8D%A2/</id>
-    <published>2019-12-20T04:20:53.423Z</published>
-    <updated>2019-08-07T06:56:38.624Z</updated>
+    <link href="https://qaqu.net/2019/08/01/2019-8-1-g++%E5%A4%9A%E7%89%88%E6%9C%AC%E5%AE%89%E8%A3%85%E5%88%87%E6%8D%A2/"/>
+    <id>https://qaqu.net/2019/08/01/2019-8-1-g++%E5%A4%9A%E7%89%88%E6%9C%AC%E5%AE%89%E8%A3%85%E5%88%87%E6%8D%A2/</id>
+    <published>2019-08-01T00:00:00.000Z</published>
+    <updated>2019-12-20T05:56:43.584Z</updated>
     
     <summary type="html">
     
@@ -436,10 +436,10 @@
   
   <entry>
     <title>linux使用find命令和grep命令查找文件和文件内容</title>
-    <link href="https://qaqu.net/2019/12/20/2019-7-31-find%E5%91%BD%E4%BB%A4%E5%92%8Cgrep%E5%91%BD%E4%BB%A4/"/>
-    <id>https://qaqu.net/2019/12/20/2019-7-31-find%E5%91%BD%E4%BB%A4%E5%92%8Cgrep%E5%91%BD%E4%BB%A4/</id>
-    <published>2019-12-20T04:20:53.421Z</published>
-    <updated>2019-08-07T06:56:38.624Z</updated>
+    <link href="https://qaqu.net/2019/07/31/2019-7-31-find%E5%91%BD%E4%BB%A4%E5%92%8Cgrep%E5%91%BD%E4%BB%A4/"/>
+    <id>https://qaqu.net/2019/07/31/2019-7-31-find%E5%91%BD%E4%BB%A4%E5%92%8Cgrep%E5%91%BD%E4%BB%A4/</id>
+    <published>2019-07-31T00:00:00.000Z</published>
+    <updated>2019-12-20T05:56:33.347Z</updated>
     
     <summary type="html">
     
@@ -463,10 +463,10 @@
   
   <entry>
     <title>C++中virtual的三种用法</title>
-    <link href="https://qaqu.net/2019/12/20/2019-7-1-C++%E4%B8%ADvirtual%E7%9A%84%E4%B8%89%E7%A7%8D%E7%94%A8%E6%B3%95/"/>
-    <id>https://qaqu.net/2019/12/20/2019-7-1-C++%E4%B8%ADvirtual%E7%9A%84%E4%B8%89%E7%A7%8D%E7%94%A8%E6%B3%95/</id>
-    <published>2019-12-20T04:20:53.420Z</published>
-    <updated>2019-08-07T06:56:38.624Z</updated>
+    <link href="https://qaqu.net/2019/07/01/2019-7-1-C++%E4%B8%ADvirtual%E7%9A%84%E4%B8%89%E7%A7%8D%E7%94%A8%E6%B3%95/"/>
+    <id>https://qaqu.net/2019/07/01/2019-7-1-C++%E4%B8%ADvirtual%E7%9A%84%E4%B8%89%E7%A7%8D%E7%94%A8%E6%B3%95/</id>
+    <published>2019-07-01T00:00:00.000Z</published>
+    <updated>2019-12-20T05:56:25.459Z</updated>
     
     <summary type="html">
     
@@ -490,10 +490,10 @@
   
   <entry>
     <title>Ubuntu创建桌面快捷方式</title>
-    <link href="https://qaqu.net/2019/12/20/2019-5-1-Ubuntu%E5%88%9B%E5%BB%BA%E6%A1%8C%E9%9D%A2%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F/"/>
-    <id>https://qaqu.net/2019/12/20/2019-5-1-Ubuntu%E5%88%9B%E5%BB%BA%E6%A1%8C%E9%9D%A2%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F/</id>
-    <published>2019-12-20T04:20:53.418Z</published>
-    <updated>2019-08-07T06:56:38.624Z</updated>
+    <link href="https://qaqu.net/2019/05/01/2019-5-1-Ubuntu%E5%88%9B%E5%BB%BA%E6%A1%8C%E9%9D%A2%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F/"/>
+    <id>https://qaqu.net/2019/05/01/2019-5-1-Ubuntu%E5%88%9B%E5%BB%BA%E6%A1%8C%E9%9D%A2%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F/</id>
+    <published>2019-05-01T00:00:00.000Z</published>
+    <updated>2019-12-20T05:56:18.895Z</updated>
     
     <summary type="html">
     
@@ -517,10 +517,10 @@
   
   <entry>
     <title>Linux下matlab打开出现启动桌面时错误</title>
-    <link href="https://qaqu.net/2019/12/20/2019-4-1-Linux%E4%B8%8Bmatlab%E6%89%93%E5%BC%80%E5%87%BA%E7%8E%B0%E5%90%AF%E5%8A%A8%E6%A1%8C%E9%9D%A2%E6%97%B6%E9%94%99%E8%AF%AF/"/>
-    <id>https://qaqu.net/2019/12/20/2019-4-1-Linux%E4%B8%8Bmatlab%E6%89%93%E5%BC%80%E5%87%BA%E7%8E%B0%E5%90%AF%E5%8A%A8%E6%A1%8C%E9%9D%A2%E6%97%B6%E9%94%99%E8%AF%AF/</id>
-    <published>2019-12-20T04:20:53.416Z</published>
-    <updated>2019-08-07T06:56:38.608Z</updated>
+    <link href="https://qaqu.net/2019/04/01/2019-4-1-Linux%E4%B8%8Bmatlab%E6%89%93%E5%BC%80%E5%87%BA%E7%8E%B0%E5%90%AF%E5%8A%A8%E6%A1%8C%E9%9D%A2%E6%97%B6%E9%94%99%E8%AF%AF/"/>
+    <id>https://qaqu.net/2019/04/01/2019-4-1-Linux%E4%B8%8Bmatlab%E6%89%93%E5%BC%80%E5%87%BA%E7%8E%B0%E5%90%AF%E5%8A%A8%E6%A1%8C%E9%9D%A2%E6%97%B6%E9%94%99%E8%AF%AF/</id>
+    <published>2019-04-01T00:00:00.000Z</published>
+    <updated>2019-12-20T05:56:12.202Z</updated>
     
     <summary type="html">
     
@@ -545,10 +545,10 @@
   
   <entry>
     <title>Hungarian二分图匹配</title>
-    <link href="https://qaqu.net/2019/12/20/2019-3-8-Hungarian%E4%BA%8C%E5%88%86%E5%9B%BE%E5%8C%B9%E9%85%8D/"/>
-    <id>https://qaqu.net/2019/12/20/2019-3-8-Hungarian%E4%BA%8C%E5%88%86%E5%9B%BE%E5%8C%B9%E9%85%8D/</id>
-    <published>2019-12-20T04:20:53.415Z</published>
-    <updated>2019-12-20T05:12:28.341Z</updated>
+    <link href="https://qaqu.net/2019/03/08/2019-3-8-Hungarian%E4%BA%8C%E5%88%86%E5%9B%BE%E5%8C%B9%E9%85%8D/"/>
+    <id>https://qaqu.net/2019/03/08/2019-3-8-Hungarian%E4%BA%8C%E5%88%86%E5%9B%BE%E5%8C%B9%E9%85%8D/</id>
+    <published>2019-03-08T00:00:00.000Z</published>
+    <updated>2019-12-20T05:56:00.068Z</updated>
     
     <summary type="html">
     
