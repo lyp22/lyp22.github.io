@@ -112,6 +112,22 @@
     </url>
 
     <url>
+        <loc>https://qaqu.net/2019/12/20/2019-8-2-Linux%20cuda%2010.1%20run%E7%89%88%20%E5%8D%B8%E8%BD%BD%E6%96%B9%E6%B3%95/</loc>
+        <lastmod>2019-08-07T06:56:38.624Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://qaqu.net/2019/12/20/2019-8-3-linux%E8%BD%AF%E4%BB%B6%E5%8D%B8%E8%BD%BD%E6%96%B9%E6%B3%95%E5%8F%8Adpkg%E5%91%BD%E4%BB%A4%E7%9A%84%E4%BD%BF%E7%94%A8/</loc>
+        <lastmod>2019-08-07T06:56:38.624Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://qaqu.net/2019/12/20/2019-7-1-C++%E4%B8%ADvirtual%E7%9A%84%E4%B8%89%E7%A7%8D%E7%94%A8%E6%B3%95/</loc>
         <lastmod>2019-08-07T06:56:38.624Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -128,23 +144,7 @@
     </url>
 
     <url>
-        <loc>https://qaqu.net/2019/12/20/2019-8-2-Linux%20cuda%2010.1%20run%E7%89%88%20%E5%8D%B8%E8%BD%BD%E6%96%B9%E6%B3%95/</loc>
-        <lastmod>2019-08-07T06:56:38.624Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>https://qaqu.net/2019/12/20/2019-8-4-ubuntu%2013.04%E4%B8%ADg++-4.5%E5%92%8C%20gcc-4.5%E5%AE%89%E8%A3%85/</loc>
-        <lastmod>2019-08-07T06:56:38.624Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://qaqu.net/2019/12/20/2019-8-3-linux%E8%BD%AF%E4%BB%B6%E5%8D%B8%E8%BD%BD%E6%96%B9%E6%B3%95%E5%8F%8Adpkg%E5%91%BD%E4%BB%A4%E7%9A%84%E4%BD%BF%E7%94%A8/</loc>
         <lastmod>2019-08-07T06:56:38.624Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
