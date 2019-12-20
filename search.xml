@@ -1,0 +1,1380 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>ubuntu上opencv3.2和opencv_contrib安装中遇到的错误记录(cuda9.0)</title>
+    <url>/2019/12/18/2019-12-18-ubuntu%E4%B8%8Aopencv3.2%E5%92%8Copencv_contrib%E5%AE%89%E8%A3%85%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%94%99%E8%AF%AF%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<p>改正版opencv_contrib 3.2下载地址</p>
+<p><a href="https://blog.csdn.net/qsczse943062710/article/details/79181831" target="_blank" rel="noopener">https://blog.csdn.net/qsczse943062710/article/details/79181831</a></p>
+<p>解压opencv-3.2.0，比如为/home/XXX/opencv-3.2.0</p>
+<p>解压我给的opencv_contrib-3.2.0至opencv-3.2.0的目录下（解压完后路径为/home/XXX/opencv-3.2.0/opencv_contrib-3.2.0），并在此处新建一个build文件夹（路径为/home/XXX/opencv-3.2.0/build）</p>
+<p>进入build，执行：</p>
+<pre><code>cmake -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/usr/local -D OPENCV_EXTRA_MODULES_PATH=/home/lyp/Data/Downtown/opencv-3.2.0/opencv_contrib/modules -D CUDA_GENERATION=Kepler ..</code></pre><p>因为是cuda9.0不再支持2.0架构所以要加上-D CUDA_GENERATION=Kepler</p>
+<h1><span id="yu-dao-de-cuo-wu">遇到的错误</span><a href="#yu-dao-de-cuo-wu" class="header-anchor">#</a></h1><h2><span id="di-yi-ge-cuo-wu">第一个错误</span><a href="#di-yi-ge-cuo-wu" class="header-anchor">#</a></h2><p>fatal error: LAPACKE_H_PATH-NOTFOUND/lapacke.h: No such file or directory #include “LAPACKE_H_PATH-NOTFOUND/lapacke.h” </p>
+<p>原因：未找到lapacke.h文件</p>
+<p>方法： </p>
+<p>sudo apt-get install liblapacke-dev checkinstall </p>
+<p>修改出现问题的文件，例如我的文件是 </p>
+<p>opencv-3.2.0/build/opencv_lapack.h </p>
+<p>将第二行中的#include”LAPACKE_H_PATH-NOTFOUND/lapacke.h” 修改为#include”lapacke.h”即可</p>
+<h2><span id="di-er-ge-cuo-wu">第二个错误</span><a href="#di-er-ge-cuo-wu" class="header-anchor">#</a></h2><p>使用Cmake编译opencv源码遇到如下错误</p>
+<pre><code>CMake Error: The following variables are used in this project, but they are set to NOTFOUND.
+Please set them or make sure they are set and tested correctly in the CMake files:
+CUDA_nppi_LIBRARY (ADVANCED)
+linked by target &quot;opencv_cudev&quot; in directory D:/Cproject/opencv/opencv/sources/modules/cudev
+linked by target &quot;opencv_cudev&quot; in directory D:/Cproject/opencv/opencv/sources/modules/cudev</code></pre><h3><span id="1">1</span><a href="#1" class="header-anchor">#</a></h3><p>找到行</p>
+<p>find_cuda_helper_libs(nppi)</p>
+<p>改为</p>
+<pre><code>  find_cuda_helper_libs(nppial)
+  find_cuda_helper_libs(nppicc)
+  find_cuda_helper_libs(nppicom)
+  find_cuda_helper_libs(nppidei)
+  find_cuda_helper_libs(nppif)
+  find_cuda_helper_libs(nppig)
+  find_cuda_helper_libs(nppim)
+  find_cuda_helper_libs(nppist)
+  find_cuda_helper_libs(nppisu)
+  find_cuda_helper_libs(nppitc)</code></pre><h3><span id="2">2</span><a href="#2" class="header-anchor">#</a></h3><p>找到行</p>
+<p>set(CUDA_npp_LIBRARY “${CUDA_nppc_LIBRARY};${CUDA_nppi_LIBRARY};${CUDA_npps_LIBRARY}”)</p>
+<p>改为</p>
+<pre><code>set(CUDA_npp_LIBRARY &quot;${CUDA_nppc_LIBRARY};${CUDA_nppial_LIBRARY};${CUDA_nppicc_LIBRARY};${CUDA_nppicom_LIBRARY};${CUDA_nppidei_LIBRARY};${CUDA_nppif_LIBRARY};${CUDA_nppig_LIBRARY};${CUDA_nppim_LIBRARY};${CUDA_nppist_LIBRARY};${CUDA_nppisu_LIBRARY};${CUDA_nppitc_LIBRARY};${CUDA_npps_LIBRARY}&quot;)</code></pre><h3><span id="3">3</span><a href="#3" class="header-anchor">#</a></h3><p>找到行</p>
+<p>unset(CUDA_nppi_LIBRARY CACHE)</p>
+<p>改为</p>
+<pre><code>unset(CUDA_nppial_LIBRARY CACHE)
+unset(CUDA_nppicc_LIBRARY CACHE)
+unset(CUDA_nppicom_LIBRARY CACHE)
+unset(CUDA_nppidei_LIBRARY CACHE)
+unset(CUDA_nppif_LIBRARY CACHE)
+unset(CUDA_nppig_LIBRARY CACHE)
+unset(CUDA_nppim_LIBRARY CACHE)
+unset(CUDA_nppist_LIBRARY CACHE)
+unset(CUDA_nppisu_LIBRARY CACHE)
+unset(CUDA_nppitc_LIBRARY CACHE)</code></pre><h3><span id="4">4</span><a href="#4" class="header-anchor">#</a></h3><p>找到文件OpenCVDetectCUDA.cmake</p>
+<p>修改以下几行</p>
+<pre><code> ...
+  set(__cuda_arch_ptx &quot;&quot;)
+  if(CUDA_GENERATION STREQUAL &quot;Fermi&quot;)
+    set(__cuda_arch_bin &quot;2.0&quot;)
+  elseif(CUDA_GENERATION STREQUAL &quot;Kepler&quot;)
+    set(__cuda_arch_bin &quot;3.0 3.5 3.7&quot;)
+  ...</code></pre><p>改为</p>
+<pre><code>  ...
+  set(__cuda_arch_ptx &quot;&quot;)
+  if(CUDA_GENERATION STREQUAL &quot;Kepler&quot;)
+    set(__cuda_arch_bin &quot;3.0 3.5 3.7&quot;)
+  elseif(CUDA_GENERATION STREQUAL &quot;Maxwell&quot;)
+    set(__cuda_arch_bin &quot;5.0 5.2&quot;)
+  ...</code></pre><h3><span id="5">5</span><a href="#5" class="header-anchor">#</a></h3><p>cuda9中有一个单独的halffloat(cuda_fp16.h)头文件,也应该被包括在opencv的目录里</p>
+<p>将头文件cuda_fp16.h添加至 opencv\modules\cudev\include\opencv2\cudev\common.hpp</p>
+<p>即在common.hpp中添加</p>
+<pre><code>#include &lt;cuda_fp16.h&gt;</code></pre>]]></content>
+      <categories>
+        <category>opencv</category>
+      </categories>
+      <tags>
+        <tag>opencv</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>报错caffe_ mexa64 undefined symbol</title>
+    <url>/2019/08/19/2019-9-19-%E6%8A%A5%E9%94%99caffe_%20mexa64%20undefined%20symbol/</url>
+    <content><![CDATA[<p>报错Invalid MEX-file<br>‘/home/lyp/Data/Downtown/LSART/LSART/caffe/matlab/+caffe/private/caffe_.mexa64’:<br>/home/lyp/Data/Matlab2014a/bin/glnxa64/../../sys/os/glnxa64/libstdc++.so.6:<br>version `GLIBCXX_3.4.21’ not found (required by<br>/home/lyp/Data/Downtown/LSART/LSART/caffe/matlab/+caffe/private/caffe_.mexa64)</p>
+<pre><code>在目录下~/Data/Matlab2014a/sys/os/glnxa64 更改软链接指向
+libstdc++.so.6 -&gt; /usr/lib/x86_64-linux-gnu/libstdc++.so.6
+</code></pre><p>用matlab执行.m文件时报错：</p>
+<pre><code>Invalid MEX-file &#39;/home/dorothy/environment/caffe-master/matlab/+caffe/private
+/caffe_.mexa64&#39;: /home/dorothy/environment/caffe-master/matlab/+caffe/private
+/caffe_.mexa64: undefined symbol: 
+_ZN2cv8imencodeERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaI</code></pre><p>解决办法：</p>
+<p>将usr/local/MATLAB/R2015b/bin/glnxa64中，以下三个文件删掉，最好备份一下以防万一：</p>
+<pre><code>libopencv_core.so.2.4
+libopencv_highgui.so.2.4
+libopencv_imgproc.so.2.4</code></pre><p>/usr/lib/libharfbuzz.so.0: undefined symbol: FT_Get_Var_Blend_Coordinates问题的解决</p>
+<pre><code>sudo ln -sf  /usr/lib/x86_64-linux-gnu/libfreetype.so.6 /opt/MATLAB/R2012a/bin/glnx86/libfreetype.so.6</code></pre>]]></content>
+      <categories>
+        <category>caffe</category>
+      </categories>
+      <tags>
+        <tag>matcaffe</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>dpkg错误</title>
+    <url>/2019/08/08/2019-8-8-dpkg%E9%94%99%E8%AF%AF/</url>
+    <content><![CDATA[<p>在输入sudo apt-get update后发现终端提示：</p>
+<blockquote>
+<p>E: 无法获得锁 /var/lib/dpkg/lock-frontend - open (11: 资源暂时不可用)<br>  E: Unable to acquire the dpkg frontend lock (/var/lib/dpkg/lock-frontend), is another process using it?</p>
+</blockquote>
+<h1><span id="jie-jue-fang-an-yi">解决方案一：</span><a href="#jie-jue-fang-an-yi" class="header-anchor">#</a></h1><pre><code>ps -e | grep apt</code></pre><p>然后执行：<code>sudo kill</code> 进程号</p>
+<h1><span id="jie-jue-fang-an-er">解决方案二：</span><a href="#jie-jue-fang-an-er" class="header-anchor">#</a></h1><p>有一种情况是</p>
+<pre><code>sudo rm /var/cache/apt/archives/lock
+sudo rm /var/lib/dpkg/lock</code></pre><p>但我遇到的情况是：E: Unable to acquire the dpkg frontend lock (/var/lib/dpkg/lock-frontend), is another process using it? </p>
+<pre><code>sudo rm /var/cache/apt/archives/lock
+sudo rm /var/lib/dpkg/lock-frontend</code></pre>]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>常用</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Ubuntu16.04安装caffe及遇到的问题总结</title>
+    <url>/2019/08/07/2019-8-7-Ubuntu16.04%E5%AE%89%E8%A3%85caffe%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<h1><span id="ji-chu-ku-an-zhuang">基础库安装</span><a href="#ji-chu-ku-an-zhuang" class="header-anchor">#</a></h1><pre><code>sudo apt-get install libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libhdf5-serial-dev protobuf-compiler libopenblas-dev
+sudo apt-get install --no-install-recommends libboost-all-dev
+sudo apt-get install libopenblas-dev</code></pre><h1><span id="ke-long-caffe-dai-ma-dao-ben-di">克隆caffe代码到本地</span><a href="#ke-long-caffe-dai-ma-dao-ben-di" class="header-anchor">#</a></h1><p>git clone <a href="https://github.com/BVLC/caffe.git" target="_blank" rel="noopener">https://github.com/BVLC/caffe.git</a></p>
+<h1><span id="xiu-gai-makefile-config-makefile">修改Makefile.config、Makefile</span><a href="#xiu-gai-makefile-config-makefile" class="header-anchor">#</a></h1><p>Makefile.config中CUDA_ARCH变量配置。如果cuda 的版本号&gt;=9.0，则在该文件夹下找到CUDA_ARCH变量，并把：</p>
+<p>gencode arch=compute_20,code=sm_20 \ </p>
+<p>gencode arch=compute_20,code=sm_21</p>
+<p>两行注释掉</p>
+<h1><span id="wen-ti">问题</span><a href="#wen-ti" class="header-anchor">#</a></h1><p>解决办法是依据出现错误的顺序而给出的，为了方便，可以直接先执行所有解决办法后再安装caffe。</p>
+<ol>
+<li>./include/caffe/common.hpp:5:27: fatal error: gflags/gflags.h: No such file or directory</li>
+</ol>
+<p>解决办法：sudo apt-get install libgflags-dev</p>
+<ol start="2">
+<li>./include/caffe/util/mkl_alternate.hpp:14:19: fatal error: cblas.h: No such file or directory</li>
+</ol>
+<p>解决办法：sudo apt-get install libblas-dev</p>
+<ol start="3">
+<li>./include/caffe/util/hdf5.hpp:6:18: fatal error: hdf5.h: No such file or directory</li>
+</ol>
+<p>解决办法：在Makefile.config找到以下行并添加蓝色部分</p>
+<p>INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include <font color="Blue">/usr/include/hdf5/serial</font> </p>
+<p>LIBRARY_DIRS := $(PYTHON_LIB) /usr/local/lib /usr/lib <font color="Blue">/usr/lib/x86_64-linux-gnu/hdf5/serial</font></p>
+<ol start="4">
+<li>./include/caffe/util/db_lmdb.hpp:8:18: fatal error: lmdb.h: No such file or directory</li>
+</ol>
+<p>解决办法：sudo apt install liblmdb-dev</p>
+<ol start="5">
+<li>/usr/bin/ld: cannot find -lcblas<br> /usr/bin/ld: cannot find -latlas</li>
+</ol>
+<p>解决办法：sudo apt install libatlas-base-dev</p>
+<ol start="6">
+<li>./include/caffe/common.hpp:6:26: fatal error: glog/logging.h: No such file or directory</li>
+</ol>
+<p>解决方法：sudo apt-get install libgoogle-glog-dev</p>
+]]></content>
+      <categories>
+        <category>caffe</category>
+      </categories>
+      <tags>
+        <tag>caffe</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>提速 git push速度</title>
+    <url>/2019/08/07/2019-8-7-%E6%8F%90%E9%80%9F%20git%20push%E9%80%9F%E5%BA%A6/</url>
+    <content><![CDATA[<h1><span id="dai-li-fu-wu-qi-ti-su">代理服务器提速</span><a href="#dai-li-fu-wu-qi-ti-su" class="header-anchor">#</a></h1><p>如果你有shadowsocks的socket5代理，那么可以使用下面两条语句提速</p>
+<p>前提是你的代理已经在运行</p>
+<p>速度提升非常明显，之前几KB变成1-2MB的速度。</p>
+<pre><code>git config --global http.proxy &#39;socks5://127.0.0.1:1080&#39; 
+git config --global https.proxy &#39;socks5://127.0.0.1:1080&#39;</code></pre>]]></content>
+      <categories>
+        <category>git</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Ubuntu设置系统环境变量和开机自启动</title>
+    <url>/2019/08/07/2019-8-7-Ubuntu18.04%E8%AE%BE%E7%BD%AE%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8%E6%9C%8D%E5%8A%A1/</url>
+    <content><![CDATA[<h1><span id="yi-ubuntu-xi-tong-huan-jing-bian-liang-xiang-jie">一、Ubuntu系统环境变量详解</span><a href="#yi-ubuntu-xi-tong-huan-jing-bian-liang-xiang-jie" class="header-anchor">#</a></h1><p>参考这篇文章，讲的非常详细</p>
+<h1><span id="er-kai-ji-zi-qi-dong">二、开机自启动</span><a href="#er-kai-ji-zi-qi-dong" class="header-anchor">#</a></h1><p>在Linux下设置软件开机自动有三种方式：</p>
+<h2><span id="1-zi-dong-qi-dong-ying-yong-cheng-xu-rc-local-jiao-ben">1、 自动启动应用程序——rc.local脚本</span><a href="#1-zi-dong-qi-dong-ying-yong-cheng-xu-rc-local-jiao-ben" class="header-anchor">#</a></h2><h2><span id="2-zi-dong-qi-dong-fu-wu-update-rc-d">2、 自动启动服务——update-rc.d</span><a href="#2-zi-dong-qi-dong-fu-wu-update-rc-d" class="header-anchor">#</a></h2><h2><span id="3-qi-dong-ying-yong-cheng-xu-shou-xuan-xiang">3、 启动应用程序首选项</span><a href="#3-qi-dong-ying-yong-cheng-xu-shou-xuan-xiang" class="header-anchor">#</a></h2><h2><span id="4-shi-yong-systemd">4、 使用Systemd</span><a href="#4-shi-yong-systemd" class="header-anchor">#</a></h2><p>下面来介绍这四种方式：</p>
+<h1><span id="1-zi-dong-qi-dong-ying-yong-cheng-xu-rc-local-jiao-ben">1、自动启动应用程序——rc.local脚本</span><a href="#1-zi-dong-qi-dong-ying-yong-cheng-xu-rc-local-jiao-ben" class="header-anchor">#</a></h1><p>rc.local脚本是一个Ubuntu开机后会自动执行的脚本，在该脚本内添加命令行，开机时会自动执行。</p>
+<p>脚本路径/etc/rc.local</p>
+<p>需要root权限才能修改。</p>
+<p>添加命令</p>
+<p>打开文件，在exit 0前添加要执行的命令，里面可以直接写命令或者执行Shell脚本文件sh。</p>
+<p>如下，添加的5行命令</p>
+<p>第1,2行是用于输出log 的</p>
+<p>第4,5行，是启动程序的</p>
+<pre><code>#!/bin/sh -e
+#
+# rc.local
+#
+# This script is executed at the end of each multiuser runlevel.
+# Make sure that the script will &quot;exit 0&quot; on success or any other
+# value on error.
+#
+# In order to enable or disable this script just change the execution
+# bits.
+#
+# By default this script does nothing.:
+/bin/bash /usr/local/XX-Net-3.10.4/xx_net.sh 1&gt;&gt; /etc/mylog   # send stderr from rc.local to a log file 
+2&gt;&amp;1   # send stdout to the same log file 
+set -x    # tell sh to display commands before execution 
+sudo miredo
+sudo /usr/local/XX-Net-3.10.4/xx_net.sh start
+exit 0</code></pre><p>这里的设置开机自动执行的sudo命令也是可以执行的</p>
+<p>rc.local命令不执行，程序不启动的问题</p>
+<p>1、如下面所示，添加log，查看程序执行情况</p>
+<p>2、rc.local文件头部/bin/sh修改为/bin/bash</p>
+<p>3、如果是执行sh文件，那么要赋予执行权限sudo chmod +x xxx.sh，然后启动时加上sudo sh xxx.sh</p>
+<h1><span id="2-zi-dong-qi-dong-fu-wu-update-rc-d">2、自动启动服务——update-rc.d</span><a href="#2-zi-dong-qi-dong-fu-wu-update-rc-d" class="header-anchor">#</a></h1><p>使用 update-rc.d增加开机启动服务，给Ubuntu添加一个开机启动脚本，操作如下：</p>
+<p>1、新建个脚本文件new_service.sh</p>
+<pre><code>#!/bin/bash
+# command content
+
+exit 0</code></pre><p>2、设置权限</p>
+<pre><code>sudo chmod 755 new_service.sh
+#或者
+sudo chmod +x new_service.sh</code></pre><p>3、把脚本放置到启动目录下</p>
+<pre><code>sudo mv new_service.sh /etc/init.d/</code></pre><p>4、将脚本添加到开机启动脚本</p>
+<p>执行如下指令，在这里90表明一个优先级，越高表示执行的越晚</p>
+<pre><code>cd /etc/init.d/
+sudo update-rc.d new_service.sh defaults 90</code></pre><p>5、移除开机启动脚本</p>
+<pre><code>sudo update-rc.d -f new_service.sh remove</code></pre><p>6、通过sysv-rc-conf来管理上面启动服务的启动级别等，是否是开机启动</p>
+<pre><code>sudo sysv-rc-conf </code></pre><p>7、update-rc.d的详细参数</p>
+<p>使用update-rc.d命令需要指定脚本名称和一些参数，它的格式看起来是这样的（需要在 root 权限下）：</p>
+<pre><code>update-rc.d [-n] [-f] &lt;basename&gt; remove
+update-rc.d [-n] &lt;basename&gt; defaults
+update-rc.d [-n] &lt;basename&gt; disable|enable [S|2|3|4|5]
+update-rc.d &lt;basename&gt; start|stop &lt;NN&gt; &lt;runlevels&gt;</code></pre><p>-n: not really</p>
+<p>-f: force</p>
+<p>disable|enable：代表脚本还在/etc/init.d中，并设置当前状态是手动启动还是自动启动。</p>
+<p>start|stop：代表脚本还在/etc/init.d中，开机，并设置当前状态是开始运行还是停止运行。（启用后可配置开始运行与否）</p>
+<p>NN：是一个决定启动顺序的两位数字值。（例如90大于80，因此80对应的脚本先启动或先停止）</p>
+<p>runlevels：则指定了运行级别。</p>
+<p>实例：</p>
+<p>（1）、添加一个新的启动脚本sample_init_script，并且指定为默认启动顺序、默认运行级别：</p>
+<pre><code>update-rc.d sample_init_script defaults
+上一条命令等效于（中间是一个英文句点符号）：
+update-rc.d sample_init_script start 20 2 3 4 5 . stop 20 0 1 6</code></pre><p>（2）、安装一个启动脚本sample_init_script，指定默认运行级别，但启动顺序为50：</p>
+<pre><code>update-rc.d sample_init_script defaults 50</code></pre><p>（3）、安装两个启动脚本A、B，让A先于B启动，后于B停止：</p>
+<pre><code>update-rc.d A 10 40
+update-rc.d B 20 30</code></pre><p>（4）、删除一个启动脚本sample_init_script，如果脚本不存在则直接跳过：</p>
+<pre><code>update-rc.d -f sample_init_script remove</code></pre><p>这一条命令实际上做的就是一一删除所有位于/etc/rcX.d目录下指向/etc/init.d中sample_init_script的链接（可能存在多个链接文件），update-rc.d只不过简化了这一步骤。</p>
+<p>（5）禁止Apache/MySQL相关组件开机自启：</p>
+<pre><code>update-rc.d -f apache2 remove
+update-rc.d -f mysql remove</code></pre><p>8、服务的启动停止状态</p>
+<pre><code>sudo service xxx status
+sudo service xxx start
+sudo service xxx stop
+sudo service xxx restart</code></pre><p>9、查看全部服务列表</p>
+<pre><code>sudo service --status-all</code></pre><h1><span id="3-qi-dong-ying-yong-cheng-xu-shou-xuan-xiang">3、启动应用程序首选项</span><a href="#3-qi-dong-ying-yong-cheng-xu-shou-xuan-xiang" class="header-anchor">#</a></h1><p>可以通过在控制台运行 gnome-session-properties</p>
+<h1><span id="4-shi-yong-systemd">4、使用Systemd</span><a href="#4-shi-yong-systemd" class="header-anchor">#</a></h1><p>Systemd 的使用有些复杂，未亲自尝试。有兴趣的小伙伴，可以来这里学习一下Systemd 入门教程：命令篇</p>
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>ubuntu</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LSART编译过程记录</title>
+    <url>/2019/08/06/2019-8-6-LSART%E7%AE%97%E6%B3%95%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<h1><span id="modified-caffe-de-bian-yi">modified caffe的编译</span><a href="#modified-caffe-de-bian-yi" class="header-anchor">#</a></h1><p>ubuntu 18.04</p>
+<p>cuda9.0</p>
+<p>cudnn V3.0.8 for cuda 7.0</p>
+<p>g++5.5 gcc5.5</p>
+<p>opencv 2.4.11 (opencv的编译用g++4.9 gcc4.9)</p>
+<p>不要修改原文件夹中的cudnn.hpp</p>
+<h1><span id="matcaffe-bian-yi">matcaffe编译</span><a href="#matcaffe-bian-yi" class="header-anchor">#</a></h1><p>matlab2015b</p>
+<p>g++4.9 gcc4.9</p>
+<h1><span id="ke-neng-de-wen-ti">可能的问题</span><a href="#ke-neng-de-wen-ti" class="header-anchor">#</a></h1><p>报错：</p>
+<pre><code>Invalid MEX-file
+&#39;/home/xw/caffeBuild/caffe-master/matlab/+caffe/private/caffe_.mexa64&#39;:
+/home/xw/caffeBuild/caffe-master/matlab/+caffe/private/caffe_.mexa64: undefined
+symbol:
+_ZN2cv8imencodeERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEERKNS_11_InputArrayERSt6vectorIhSaIhEERKSB_IiSaIiEE</code></pre><p>解决方法：</p>
+<p>The problem here seems to be that caffe is compiled against the system version of opencv, but linking to the matlab version when running matcaffe. I was able to fix the problem by replacing the symbolic links for libopencv_[imgproc,core,highgui].so.2.4 in MATLAB/R2015a/bin/glnxa64 with a link for the versions in /usr/lib, as those were the three used by caffe. This fix probably breaks all the other opencv library files that were not replaced, so you might want to be careful or just replace them all.</p>
+<pre><code>libopencv_core.so.2.4 -&gt; /usr/lib/x86_64-linux-gnu/libopencv_core.so.2.4.9
+libopencv_highgui.so.2.4 -&gt; /usr/lib/x86_64-linux-gnu/libopencv_highgui.so.2.4.9
+libopencv_imgproc.so.2.4 -&gt; /usr/lib/x86_64-linux-gnu/libopencv_imgproc.so.2.4.9</code></pre><p>PS:/usr/lib/x86_64-linux-gnu/ -&gt; /usr/local/lib/</p>
+]]></content>
+      <categories>
+        <category>目标跟踪</category>
+      </categories>
+      <tags>
+        <tag>LSART</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Opencv的卸载并安装2.4版本(无cuda+cuda9.0)</title>
+    <url>/2019/08/06/2019-8-6-Opencv%E7%9A%84%E5%8D%B8%E8%BD%BD%E5%B9%B6%E5%AE%89%E8%A3%852.4%E7%89%88%E6%9C%AC/</url>
+    <content><![CDATA[<h1><span id="cha-kan-an-zhuang-de-opencv-ban-ben">查看安装的opencv版本</span><a href="#cha-kan-an-zhuang-de-opencv-ban-ben" class="header-anchor">#</a></h1><pre><code>pkg-config --modversion opencv</code></pre><h1><span id="xie-zai-jiu-ban-ben-opencv">卸载旧版本opencv</span><a href="#xie-zai-jiu-ban-ben-opencv" class="header-anchor">#</a></h1><p>进入到原来安装opencv的build目录，执行卸载操作：</p>
+<pre><code>cd opencv-3.2.0/build
+sudo make uninstall
+cd ..
+sudo rm -r build
+
+sudo rm -r /usr/local/include/opencv2 /usr/local/include/opencv /usr/include/opencv /usr/include/opencv2 /usr/local/share/opencv /usr/local/share/OpenCV /usr/share/opencv /usr/share/OpenCV /usr/local/bin/opencv* /usr/local/lib/libopencv*
+
+cd /usr
+sudo find . -name &quot;*opencv*&quot; | xargs sudo rm -rf</code></pre><h1><span id="an-zhuang-opencv2-4">安装opencv2.4</span><a href="#an-zhuang-opencv2-4" class="header-anchor">#</a></h1><ol>
+<li>先从sourceforge上下载OpenCV的源码</li>
+</ol>
+<p><a href="http://jaist.dl.sourceforge.net/project/opencvlibrary/opencv-unix/2.4.9/opencv-2.4.9.zip" target="_blank" rel="noopener">http://jaist.dl.sourceforge.net/project/opencvlibrary/opencv-unix/2.4.9/opencv-2.4.9.zip</a></p>
+<ol start="2">
+<li>解压到任意目录</li>
+</ol>
+<p>unzip opencv-2.4.9.zip</p>
+<ol start="3">
+<li>进入源码目录，创建release目录</li>
+</ol>
+<p>cd opencv-2.4.9</p>
+<p>mkdir release  </p>
+<ol start="4">
+<li>可以看到在OpenCV目录下，有个CMakeLists.txt文件，需要事先安装一些软件</li>
+</ol>
+<p>sudo apt-get install build-essential cmake libgtk2.0-dev pkg-config python-dev python-numpy libavcodec-dev libavformat-dev libswscale-dev  </p>
+<ol start="5">
+<li>进入release目录，安装OpenCV是所有的文件都会被放到这个release目录下</li>
+</ol>
+<p>cd release  </p>
+<ol start="6">
+<li>cmake编译OpenCV源码，安装所有的lib文件都会被安装到/usr/local目录下</li>
+</ol>
+<p>不要cuda</p>
+<pre><code>
+cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D WITH_CUDA=OFF ..</code></pre><p>不要ffmpeg</p>
+<pre><code>cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D WITH_CUDA=OFF -D WITH_FFMPEG=OFF ..</code></pre><ol start="7">
+<li>安装</li>
+</ol>
+<p>sudo make install -j8</p>
+<h1><span id="qiang-xing-jiang-opencv2-4-gua-pei-cuda9-0-cuda9-0-bu-zhi-chi-2-0-jia-gou">强行将opencv2.4适配cuda9.0（cuda9.0不支持2.0架构）</span><a href="#qiang-xing-jiang-opencv2-4-gua-pei-cuda9-0-cuda9-0-bu-zhi-chi-2-0-jia-gou" class="header-anchor">#</a></h1><p>解决方案如下：</p>
+<p>1）.找到FindCUDA.cmake文件</p>
+<p>找到行</p>
+<p>find_cuda_helper_libs(nppi)</p>
+<p>改为</p>
+<pre><code>  find_cuda_helper_libs(nppial)
+  find_cuda_helper_libs(nppicc)
+  find_cuda_helper_libs(nppicom)
+  find_cuda_helper_libs(nppidei)
+  find_cuda_helper_libs(nppif)
+  find_cuda_helper_libs(nppig)
+  find_cuda_helper_libs(nppim)
+  find_cuda_helper_libs(nppist)
+  find_cuda_helper_libs(nppisu)
+  find_cuda_helper_libs(nppitc)</code></pre><p>2）.找到行</p>
+<p>set(CUDA_npp_LIBRARY “${CUDA_nppc_LIBRARY};${CUDA_nppi_LIBRARY};${CUDA_npps_LIBRARY}”)</p>
+<p>改为</p>
+<pre><code>set(CUDA_npp_LIBRARY &quot;${CUDA_nppc_LIBRARY};${CUDA_nppial_LIBRARY};${CUDA_nppicc_LIBRARY};${CUDA_nppicom_LIBRARY};${CUDA_nppidei_LIBRARY};${CUDA_nppif_LIBRARY};${CUDA_nppig_LIBRARY};${CUDA_nppim_LIBRARY};${CUDA_nppist_LIBRARY};${CUDA_nppisu_LIBRARY};${CUDA_nppitc_LIBRARY};${CUDA_npps_LIBRARY}&quot;)</code></pre><p>3）.找到行</p>
+<p>unset(CUDA_nppi_LIBRARY CACHE)</p>
+<p>改为</p>
+<pre><code>unset(CUDA_nppial_LIBRARY CACHE)
+unset(CUDA_nppicc_LIBRARY CACHE)
+unset(CUDA_nppicom_LIBRARY CACHE)
+unset(CUDA_nppidei_LIBRARY CACHE)
+unset(CUDA_nppif_LIBRARY CACHE)
+unset(CUDA_nppig_LIBRARY CACHE)
+unset(CUDA_nppim_LIBRARY CACHE)
+unset(CUDA_nppist_LIBRARY CACHE)
+unset(CUDA_nppisu_LIBRARY CACHE)
+unset(CUDA_nppitc_LIBRARY CACHE)</code></pre><p>4）.找到文件OpenCVDetectCUDA.cmake</p>
+<p>修改以下几行</p>
+<pre><code> ...
+  set(__cuda_arch_ptx &quot;&quot;)
+  if(CUDA_GENERATION STREQUAL &quot;Fermi&quot;)
+    set(__cuda_arch_bin &quot;2.0&quot;)
+  elseif(CUDA_GENERATION STREQUAL &quot;Kepler&quot;)
+    set(__cuda_arch_bin &quot;3.0 3.5 3.7&quot;)
+  ...</code></pre><p>改为</p>
+<pre><code>  ...
+  set(__cuda_arch_ptx &quot;&quot;)
+  if(CUDA_GENERATION STREQUAL &quot;Kepler&quot;)
+    set(__cuda_arch_bin &quot;3.0 3.5 3.7&quot;)
+  elseif(CUDA_GENERATION STREQUAL &quot;Maxwell&quot;)
+    set(__cuda_arch_bin &quot;5.0 5.2&quot;)
+  ...</code></pre><p>5）.cuda9中有一个单独的halffloat(cuda_fp16.h)头文件,也应该被包括在opencv的目录里</p>
+<p>将头文件cuda_fp16.h添加至 opencv\modules\cudev\include\opencv2\cudev\common.hpp</p>
+<p>即在common.hpp中添加</p>
+<pre><code>#include &lt;cuda_fp16.h&gt;</code></pre><p>重新生成即可</p>
+]]></content>
+      <categories>
+        <category>opencv</category>
+      </categories>
+      <tags>
+        <tag>常用</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Ubuntu16.04CUDA8.0+cudnn+opencv3.1+ Caffe 安装步骤记录</title>
+    <url>/2019/08/06/2019-8-6-Ubuntu16.04CUDA8.0+cudnn+opencv3.1+%20Caffe%20%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<p>1、安装依赖包 </p>
+<p>2、禁用 nouveau </p>
+<p>3、配置环境变量 </p>
+<p>4、下载 CUDA 8.0 </p>
+<p>5、安装 CUDA 8.0 </p>
+<p>6、验证 CUDA 8.0 是否安装成功 </p>
+<p>7、安装 cudnn </p>
+<p>8、安装 opencv3.1 </p>
+<p>9、安装 caffe </p>
+<p>10、安装 pycaffe notebook 接口环境</p>
+<h1><span id="di-1-bu-an-zhuang-yi-lai-bao">第1步 安装依赖包</span><a href="#di-1-bu-an-zhuang-yi-lai-bao" class="header-anchor">#</a></h1><p>安装后续步骤或环境必需的依赖包，依次输入以下命令:</p>
+<pre><code>sudo apt-get install libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libhdf5-serial-dev protobuf-compiler
+
+sudo apt-get install --no-install-recommends libboost-all-dev
+
+sudo apt-get install libopenblas-dev liblapack-dev libatlas-base-dev
+
+sudo apt-get install libgflags-dev libgoogle-glog-dev liblmdb-dev
+
+sudo apt-get install git cmake build-essential</code></pre><p>有一定几率安装失败而导致后续步骤出现问题，所以要确保以上依赖包都已安装成功，验证方法就是重新运行安装命令，如验证 git cmake build-essential是否安装成功共则再次运行以下命令：</p>
+<pre><code> sudo apt-get install git cmake build-essential </code></pre><p>界面提示如下则说明已成功安装依赖包，否则继续安装直到安装成功。</p>
+<pre><code>yhao@yhao-X550VB:~$ sudo apt-get install git cmake build-essential
+正在读取软件包列表... 完成
+正在分析软件包的依赖关系树       
+正在读取状态信息... 完成       
+build-essential 已经是最新版 (12.1ubuntu2)。
+cmake 已经是最新版 (3.5.1-1ubuntu3)。
+git 已经是最新版 (1:2.7.4-0ubuntu1.1)。
+下列软件包是自动安装的并且现在不需要了：
+  lib32gcc1 libc6-i386
+使用&#39;sudo apt autoremove&#39;来卸载它(它们)。
+升级了 0 个软件包，新安装了 0 个软件包，要卸载 0 个软件包，有 94 个软件包未被升级。</code></pre><h1><span id="di-2-bu-jin-yong-nouveau">第2步 禁用 nouveau</span><a href="#di-2-bu-jin-yong-nouveau" class="header-anchor">#</a></h1><p>安装好依赖包后需要禁用 nouveau，只有在禁用掉 nouveau 后才能顺利安装 NVIDIA 显卡驱动，禁用方法就是在 /etc/modprobe.d/blacklist-nouveau.conf 文件中添加一条禁用命令，首先需要打开该文件，通过以下命令打开：</p>
+<pre><code>sudo gedit /etc/modprobe.d/blacklist-nouveau.conf</code></pre><p>打开后发现该文件中没有任何内容，写入：</p>
+<pre><code>blacklist nouveau option nouveau modeset=0 </code></pre><p>保存时命令窗口可能会出现以下提示：</p>
+<pre><code>** (gedit:4243): WARNING **: Set document metadata failed: 不支持设置属性 metadata::gedit-position</code></pre><p>无视此提示～，保存后关闭文件，注意此时还需执行以下命令使禁用 nouveau 真正生效：</p>
+<pre><code>sudo update-initramfs -u</code></pre><h1><span id="di-3-bu-pei-zhi-huan-jing-bian-liang">第3步 配置环境变量</span><a href="#di-3-bu-pei-zhi-huan-jing-bian-liang" class="header-anchor">#</a></h1><p>同样使用 gedit 命令打开配置文件：</p>
+<pre><code>sudo gedit ~/.bashrc</code></pre><p>打开后在文件最后加入以下两行内容：</p>
+<pre><code>export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
+
+export LD_LIBRARY_PATH=/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH </code></pre><p>保存退出。</p>
+<h1><span id="di-4-bu-xia-zai-cuda-8-0">第4步 下载 CUDA 8.0</span><a href="#di-4-bu-xia-zai-cuda-8-0" class="header-anchor">#</a></h1><p>进入 <a href="https://developer.nvidia.com/cuda-downloads" target="_blank" rel="noopener">https://developer.nvidia.com/cuda-downloads</a> ，依次选择 CUDA 类型然后下载即可。 </p>
+<h1><span id="di-5-bu-an-zhuang-cuda-8-0-guan-bi-tu-xing-hua-mei-you-bi-yao">第5步 安装 CUDA 8.0（关闭图形化没有必要）</span><a href="#di-5-bu-an-zhuang-cuda-8-0-guan-bi-tu-xing-hua-mei-you-bi-yao" class="header-anchor">#</a></h1><p>第四步下载的1.4G的 CUDA中包含有 nvidia 显卡驱动，故此步骤 CUDA 的安装包括了 nvidia 显卡驱动的安装，此时注意你是否已经安装过 nvidia 显卡驱动，若无法保证已安装的 nvidia 显卡驱动一定正确，那就卸载掉之前安装的 nvidia 显卡驱动（卸载方法链接)，然后开始安装 CUDA 8.0；若可以保证已安装正确的 nvidia 显卡驱动，则直接开始安装 CUDA 8.0，在安装过程中选择不再安装 nvidia 显卡驱动。</p>
+<p>为了方便开始安装过程的路径查找，把下载的 CUDA 安装文件移动到 HOME 路径下，然后通过 Ctrl + Alt + F1 进入文本模式，输入帐号密码登录，通过 Ctrl + Alt + F7 可返回图形化模式，在文本模式登录后首先关闭桌面服务：</p>
+<pre><code>sudo service lightdm stop</code></pre><p>然后通过 Ctrl + Alt + F7 发现已无法成功返回图形化模式，说明桌面服务已成功关闭，注意此步对接下来的 nvidia 驱动安装尤为重要，必需确保桌面服务已关闭。</p>
+<p>Ctrl + Alt + F1 进入文本模式，然后运行 CUDA 安装文件进行安装，之前我们已经把 CUDA 安装文件移动至 HOME，直接通过 sh 命令运行安装文件即可：</p>
+<pre><code>sudo sh cuda_8.0.61_375.26_linux.run --no-opengl-libs</code></pre><p>其中 cuda_8.0.61_375.26_linux.run 是我的 CUDA 安装文件名，而你需替换为自己的 CUDA 安装文件名，若此时忘记可直接通过 ls 文件查看文件名，这也是我建议把 CUDA 安装文件移动到 HOME 下的另一个原因。</p>
+<p>执行此命令约1分钟后会出现 0%信息，此时长按回车键让此百分比增长，直到100%，然后按照提示操作即可，先输入 accept ，然后让选择是否安装 nvidia 驱动，这里的选择对应第5步开头，若未安装则输入 “y”，若确保已安装正确驱动则输入“n”。</p>
+<p>剩下的选择则都输入“y”确认安装或确认默认路径安装，开始安装，此时若出现安装失败提示则可能为未关闭桌面服务或在已安装 nvidia 驱动的情况下重复再次安装 nvidia 驱动，安装完成后输入重启命令重启：</p>
+<pre><code>reboot</code></pre><p>重启后登录进入系统，配置 CUDA 环境变量，与第3步相同，使用 gedit 命令打开配置文件：</p>
+<pre><code>sudo gedit ~/.bashrc</code></pre><p>在该文件最后加入以下两行并保存：</p>
+<pre><code>export PATH=/usr/local/cuda-8.0/bin:$PATH
+
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH</code></pre><p>使该配置生效：</p>
+<pre><code>source ~/.bashrc</code></pre><h1><span id="di-6-bu-yan-zheng-cuda-8-0-shi-fou-an-zhuang-cheng-gong">第6步 验证 CUDA 8.0 是否安装成功</span><a href="#di-6-bu-yan-zheng-cuda-8-0-shi-fou-an-zhuang-cheng-gong" class="header-anchor">#</a></h1><p>分别执行以下命令：</p>
+<pre><code>cd /usr/local/cuda-8.0/samples/1_Utilities/deviceQuery
+
+sudo make
+
+./deviceQuery</code></pre><p>若看到类似以下信息则说明 cuda 已安装成功：</p>
+<pre><code>./deviceQuery Starting...
+
+ CUDA Device Query (Runtime API) version (CUDART static linking)
+
+Detected 1 CUDA Capable device(s)
+
+Device 0: &quot;GeForce GT 740M&quot;
+  CUDA Driver Version / Runtime Version          8.0 / 8.0
+  CUDA Capability Major/Minor version number:    3.5
+  Total amount of global memory:                 2004 MBytes (2100953088 bytes)
+  ( 2) Multiprocessors, (192) CUDA Cores/MP:     384 CUDA Cores
+  GPU Max Clock rate:                            1032 MHz (1.03 GHz)
+  Memory Clock rate:                             800 Mhz
+  Memory Bus Width:                              64-bit
+  L2 Cache Size:                                 524288 bytes
+  Maximum Texture Dimension Size (x,y,z)         1D=(65536), 2D=(65536, 65536), 3D=(4096, 4096, 4096)
+  Maximum Layered 1D Texture Size, (num) layers  1D=(16384), 2048 layers
+  Maximum Layered 2D Texture Size, (num) layers  2D=(16384, 16384), 2048 layers
+  Total amount of constant memory:               65536 bytes
+  Total amount of shared memory per block:       49152 bytes
+  Total number of registers available per block: 65536
+  Warp size:                                     32
+  Maximum number of threads per multiprocessor:  2048
+  Maximum number of threads per block:           1024
+  Max dimension size of a thread block (x,y,z): (1024, 1024, 64)
+  Max dimension size of a grid size    (x,y,z): (2147483647, 65535, 65535)
+  Maximum memory pitch:                          2147483647 bytes
+  Texture alignment:                             512 bytes
+  Concurrent copy and kernel execution:          Yes with 1 copy engine(s)
+  Run time limit on kernels:                     No
+  Integrated GPU sharing Host Memory:            No
+  Support host page-locked memory mapping:       Yes
+  Alignment requirement for Surfaces:            Yes
+  Device has ECC support:                        Disabled
+  Device supports Unified Addressing (UVA):      Yes
+  Device PCI Domain ID / Bus ID / location ID:   0 / 1 / 0
+  Compute Mode:
+     &lt; Default (multiple host threads can use ::cudaSetDevice() with device simultaneously) &gt;
+
+deviceQuery, CUDA Driver = CUDART, CUDA Driver Version = 8.0, CUDA Runtime Version = 8.0, NumDevs = 1, Device0 = GeForce GT 740M
+Result = PASS</code></pre><h1><span id="di-7-bu-an-zhuang-cudnn">第7步 安装 cudnn</span><a href="#di-7-bu-an-zhuang-cudnn" class="header-anchor">#</a></h1><p>登录官网：<a href="https://developer.nvidia.com/rdp/cudnn-download" target="_blank" rel="noopener">https://developer.nvidia.com/rdp/cudnn-download</a> ，下载对应 cuda 版本且 linux 系统的 cudnn 压缩包，注意官网下载 cudnn 需要注册帐号并登录，不想注册的可从我的网盘下载：<a href="https://pan.baidu.com/s/1c2xPVzy" target="_blank" rel="noopener">https://pan.baidu.com/s/1c2xPVzy</a></p>
+<p>下载完成后解压，得到一个 cudn 文件夹，该文件夹下include 和 lib64 两个文件夹，命令行进入 cudn/include 路径下，然后进行以下操作：</p>
+<pre><code>sudo cp cudnn.h /usr/local/cuda/include/ #复制头文件</code></pre><p>然后命令行进入 cudn/lib64 路径下，运行以下命令：</p>
+<pre><code>sudo cp lib* /usr/local/cuda/lib64/ #复制动态链接库
+cd /usr/local/cuda/lib64/sudo rm -rf libcudnn.so libcudnn.so.5 #删除原有动态文件
+sudo ln -s libcudnn.so.5.1.10 libcudnn.so.5 #生成软衔接
+sudo ln -s libcudnn.so.5 libcudnn.so #生成软链接</code></pre><p>这里需要注意第三行命令，网上有人的第三行命令为：</p>
+<pre><code>sudo ln -s libcudnn.so.5.1.5 libcudnn.so.5 #生成软衔接</code></pre><p>起初我执行的也是上条链接 libcudnn.so.5.1.5 的命令，但是后面编译caffe时出错，报错内容为 /usr/bin/ld: 找不到 -lcudnn，所以这里需要先查看一下自己应该链接的是 libcudnn.so.5.1.10 还是 libcudnn.so.5.1.5 ，查看方法为下：</p>
+<pre><code>locate libcudnn.so</code></pre><p>我执行完后显示如下：</p>
+<pre><code>yhao@yhao-X550VB:~$ locate libcudnn.so
+/home/yhao/.local/share/Trash/files/libcudnn.so
+/home/yhao/.local/share/Trash/files/libcudnn.so.5
+/home/yhao/.local/share/Trash/files/libcudnn.so.5.1.10
+/home/yhao/.local/share/Trash/files/cuda/lib64/libcudnn.so
+/home/yhao/.local/share/Trash/files/cuda/lib64/libcudnn.so.5
+/home/yhao/.local/share/Trash/files/cuda/lib64/libcudnn.so.5.1.10
+/home/yhao/.local/share/Trash/info/libcudnn.so.5.1.10.trashinfo
+/home/yhao/.local/share/Trash/info/libcudnn.so.5.trashinfo
+/home/yhao/.local/share/Trash/info/libcudnn.so.trashinfo
+/home/yhao/cuda/lib64/libcudnn.so
+/home/yhao/cuda/lib64/libcudnn.so.5
+/home/yhao/cuda/lib64/libcudnn.so.5.1.10
+/usr/local/lib/libcudnn.so
+/usr/local/lib/libcudnn.so.5</code></pre><p>可以看到我的文件是 libcudnn.so.5.1.10 ，并没有 libcudnn.so.5.1.5，所以第三行命令我链接的是 libcudnn.so.5.1.10 ，这里第三行链接命令视你的查看结果而定。</p>
+<p>安装完成后可用 nvcc -V 命令验证是否安装成功，若出现以下信息则表示安装成功：</p>
+<pre><code>yhao@yhao-X550VB:~$ nvcc -V
+nvcc: NVIDIA (R) Cuda compiler driver
+Copyright (c) 2005-2016 NVIDIA Corporation
+Built on Tue_Jan_10_13:22:03_CST_2017
+Cuda compilation tools, release 8.0, V8.0.61</code></pre>]]></content>
+      <categories>
+        <category>cuda</category>
+      </categories>
+      <tags>
+        <tag>常用</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>cuda和cudnn各版本下载地址</title>
+    <url>/2019/08/05/2019-8-5-cuda%E5%92%8Ccudnn%E7%9A%84%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80/</url>
+    <content><![CDATA[<h1><span id="xia-zai">下载</span><a href="#xia-zai" class="header-anchor">#</a></h1><p>进入 <a href="https://developer.nvidia.com/cuda-downloads" target="_blank" rel="noopener">https://developer.nvidia.com/cuda-downloads</a> ，依次选择 CUDA 类型然后下载即可。</p>
+<h1><span id="an-zhuang-cudnn">安装 cudnn</span><a href="#an-zhuang-cudnn" class="header-anchor">#</a></h1><p>登录官网：<a href="https://developer.nvidia.com/rdp/cudnn-download" target="_blank" rel="noopener">https://developer.nvidia.com/rdp/cudnn-download</a> ，下载对应 cuda 版本且 linux 系统的 cudnn 压缩包</p>
+]]></content>
+      <categories>
+        <category>cuda</category>
+      </categories>
+      <tags>
+        <tag>下载地址</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>解决ubuntu18.04合盖休眠无法唤醒</title>
+    <url>/2019/08/05/2019-8-5-%E8%A7%A3%E5%86%B3ubuntu18.04%E5%90%88%E7%9B%96%E4%BC%91%E7%9C%A0%E6%97%A0%E6%B3%95%E5%94%A4%E9%86%92/</url>
+    <content><![CDATA[<h1><span id="zhu-yi-hei-ping-zuo-shang-jiao-shi-fou-you-ge-xiao-xia-hua-xian">注意黑屏左上角是否有个小下划线</span><a href="#zhu-yi-hei-ping-zuo-shang-jiao-shi-fou-you-ge-xiao-xia-hua-xian" class="header-anchor">#</a></h1><p>在黑屏下，直接按Ctrl+alt+F1或者Ctrl+alt+F7即可唤醒</p>
+<p>（失败）</p>
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>ubuntu</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ubuntu 13.04中g++-4.5和 gcc-4.5安装</title>
+    <url>/2019/08/04/2019-8-4-ubuntu%2013.04%E4%B8%ADg++-4.5%E5%92%8C%20gcc-4.5%E5%AE%89%E8%A3%85/</url>
+    <content><![CDATA[<p>1、安装包的下载与安装<br>1)gcc-4.5-base安装</p>
+<p>下载地址：<a href="https://launchpad.net/ubuntu/quantal/amd64/gcc-4.5-base/4.5.4-1ubuntu2" target="_blank" rel="noopener">https://launchpad.net/ubuntu/quantal/amd64/gcc-4.5-base/4.5.4-1ubuntu2</a></p>
+<p>在终端输入安装命令：$ sudo dpkg -igcc-4.5-base_4.5.4-1ubuntu2_amd64.deb</p>
+<p>2）cpp-4.5安装</p>
+<p>下载地址：<a href="https://launchpad.net/ubuntu/quantal/amd64/cpp-4.5/4.5.4-1ubuntu2" target="_blank" rel="noopener">https://launchpad.net/ubuntu/quantal/amd64/cpp-4.5/4.5.4-1ubuntu2</a></p>
+<p>在终端输入安装命令：$ sudo dpkg-icpp-4.5_4.5.4-1ubuntu2_amd64.deb</p>
+<p>3）gcc-4.5 安装</p>
+<p>下载地址：<a href="https://launchpad.net/ubuntu/raring/amd64/gcc-4.5/4.5.4-1ubuntu2" target="_blank" rel="noopener">https://launchpad.net/ubuntu/raring/amd64/gcc-4.5/4.5.4-1ubuntu2</a></p>
+<p>在终端输入安装命令：$ sudo dpkg -igcc-4.5_4.5.4-1ubuntu2_amd64.deb</p>
+<p>4）g++-4.5与libstdc++6-4.5-dev的安装</p>
+<p>g++下载地址： <a href="https://launchpad.net/ubuntu/raring/amd64/g++-4.5/4.5.4-1ubuntu2" target="_blank" rel="noopener">https://launchpad.net/ubuntu/raring/amd64/g++-4.5/4.5.4-1ubuntu2</a></p>
+<p>libstdc++6-4.5-dev下载地址：<a href="https://launchpad.net/ubuntu/quantal/amd64/libstdc++6-4.5-dev/4.5.4-1ubuntu2" target="_blank" rel="noopener">https://launchpad.net/ubuntu/quantal/amd64/libstdc++6-4.5-dev/4.5.4-1ubuntu2</a></p>
+<p>因为g++与libstdc++相互依赖，所以需要两个安装包一起安装</p>
+<p>在终端输入安装命令：$ sudo dpkg-ilibstdc++6-4.5-dev_4.5.4-1ubuntu2_amd64.deb g++-4.5_4.5.4-1ubuntu2_amd64.deb</p>
+<p>此时，gcc-4.5和g++-4.5已经全部安装完成，我们需要将gcc和g++-4.5设置为系统的默认版本。</p>
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>gcc</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>linux软件卸载方法及dpkg命令的使用</title>
+    <url>/2019/08/03/2019-8-3-linux%E8%BD%AF%E4%BB%B6%E5%8D%B8%E8%BD%BD%E6%96%B9%E6%B3%95%E5%8F%8Adpkg%E5%91%BD%E4%BB%A4%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<h1><span id="xie-zai-ruan-jian">卸载软件</span><a href="#xie-zai-ruan-jian" class="header-anchor">#</a></h1><p>如果知道软件的具体名称，可以使用</p>
+<p>sudo apt-get remove –purge 软件名称</p>
+<p>sudo apt-get autoremove –purge 软件名称</p>
+<p>不知道要删除软件的具体名称，可以使用</p>
+<p>dpkg –get-selections | grep “软件名称”</p>
+<p>对于一个带-core的package，可以这样</p>
+<p>sudo apt-get purge package-core(带-core的package)</p>
+<p>清理残余数据</p>
+<p>dpkg -l | grep ^rc | awk ‘{print $2}’ | sudo xargs dpkg -P</p>
+<h1><span id="dpkg-ming-ling-de-qi-ta-yong-fa">dpkg命令的其他用法</span><a href="#dpkg-ming-ling-de-qi-ta-yong-fa" class="header-anchor">#</a></h1><p>安装.deb包</p>
+<p>dpkg -i &lt;.deb 包名&gt;</p>
+<p>列出与该包相关联的文件</p>
+<p>dpkg -L packge</p>
+<p>显示该包的版本</p>
+<p>dpkg -l packge</p>
+<p>移除软件（保留配置）</p>
+<p>dpkg -r packge</p>
+<p>移除软件（不保留配置）</p>
+<p>dpkg -P packge</p>
+<p>查看包的详细信息</p>
+<p>dpkg -s packge</p>
+<p>列出.deb包的内容</p>
+<p>dpkg -c packge</p>
+<p>解开.deb包的内容</p>
+<p>dpkg -unpack packge.deb</p>
+<p>配置包</p>
+<p>dpkg -configure packge</p>
+<p>搜索所属包的内容</p>
+<p>dpkg -S keyword</p>
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>常用</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux cuda 10.1 run版 卸载方法</title>
+    <url>/2019/08/02/2019-8-2-Linux%20cuda%2010.1%20run%E7%89%88%20%E5%8D%B8%E8%BD%BD%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<p>Linux cuda 10.1 run版 卸载方法</p>
+<p>在cuda10.1目录下 bin文件夹找到sudo ./cuda-uninstaller 按照提示即可执行卸载</p>
+]]></content>
+      <categories>
+        <category>cuda</category>
+      </categories>
+      <tags>
+        <tag>cuda</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>g++多版本安装切换</title>
+    <url>/2019/08/01/2019-8-1-g++%E5%A4%9A%E7%89%88%E6%9C%AC%E5%AE%89%E8%A3%85%E5%88%87%E6%8D%A2/</url>
+    <content><![CDATA[<p>先看看我们系统用的gcc和g++是什么版本</p>
+<p>gcc -v</p>
+<p>sudo apt-get install gcc-4.5 gcc-4.5-multilib g++-4.5 g++-4.5-multilib</p>
+<p>安装好后输入以下指令：</p>
+<p>sudo update-alternatives –install /usr/bin/gcc gcc /usr/bin/gcc-4.4 50</p>
+<p>sudo update-alternatives –install /usr/bin/gcc gcc /usr/bin/gcc-4.5 40</p>
+<p>接着输入：</p>
+<p>sudo update-alternatives –config gcc</p>
+<p>会看到如下的选项</p>
+<p>有 3 个候选项可用于替换 gcc (提供 /usr/bin/gcc)。</p>
+<p>  选择      路径            优先级  状态</p>
+<hr>
+<ul>
+<li><p>0            /usr/bin/gcc-4.4  50        自动模式</p>
+<p>1            /usr/bin/gcc-4.4  50        手动模式</p>
+<p>2            /usr/bin/gcc-4.5  40        手动模式</p>
+<p>3            /usr/bin/gcc-4.6  30        手动模式</p>
+</li>
+</ul>
+<p>要维持当前值[*]请按回车键，或者键入选择的编号：</p>
+<p>要想用哪个gcc就输入编号吧。</p>
+<p>同样也要设置一下g++的</p>
+<p>sudo update-alternatives –install /usr/bin/g++ g++ /usr/bin/g++-4.4 50</p>
+<p>sudo update-alternatives –install /usr/bin/g++ g++ /usr/bin/g++-4.5 40</p>
+<p>如果想删除可选项的话可以键入以下指令：</p>
+<p>sudo update-alternatives –remove gcc /usr/bin/gcc-4.5</p>
+<p>再用gcc -v 来看一下版本是否改变了。</p>
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>常用</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>linux使用find命令和grep命令查找文件和文件内容</title>
+    <url>/2019/07/31/2019-7-31-find%E5%91%BD%E4%BB%A4%E5%92%8Cgrep%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<h1><span id="qu-bie">区别：</span><a href="#qu-bie" class="header-anchor">#</a></h1><p>在使用linux时，经常需要进行文件查找。其中查找的命令主要有find和grep。两个命令是有区的。</p>
+<p>find命令是根据文件的属性进行查找，如文件名，文件大小，所有者，所属组，是否为空，访问时间，修改时间等。</p>
+<p>grep是根据文件的内容进行查找，会对文件的每一行按照给定的模式(patter)进行匹配查找。</p>
+<h1><span id="yi-find-ming-ling">一.find命令</span><a href="#yi-find-ming-ling" class="header-anchor">#</a></h1><p>基本格式：find path expression</p>
+<ol>
+<li>按照文件名查找</li>
+</ol>
+<p>　　　　(1)find / -name httpd.conf　　#在根目录下查找文件httpd.conf，表示在整个硬盘查找</p>
+<p>　　　　(2)find /etc -name httpd.conf　　#在/etc目录下文件httpd.conf</p>
+<p>　　　　(3)find /etc -name ‘srm’　　#使用通配符(0或者任意多个)。表示在/etc目录下查找文件名中含有字符串‘srm’的文件</p>
+<p>　　　　(4)find . -name ‘srm’ 　　#表示当前目录下查找文件名开头是字符串‘srm’的文件</p>
+<p>2.按照文件特征查找 　　　　</p>
+<p>　　　　(1)find / -amin -10 　　# 查找在系统中最后10分钟访问的文件(access time)</p>
+<p>　　　　(2)find / -atime -2　　 # 查找在系统中最后48小时访问的文件</p>
+<p>　　　　(3)find / -empty 　　# 查找在系统中为空的文件或者文件夹</p>
+<p>　　　　(4)find / -group cat 　　# 查找在系统中属于 group为cat的文件</p>
+<p>　　　　(5)find / -mmin -5 　　# 查找在系统中最后5分钟里修改过的文件(modify time)</p>
+<p>　　　　(6)find / -mtime -1 　　#查找在系统中最后24小时里修改过的文件</p>
+<p>　　　　(7)find / -user fred 　　#查找在系统中属于fred这个用户的文件</p>
+<p>　　　　(8)find / -size +10000c　　#查找出大于10000000字节的文件(c:字节，w:双字，k:KB，M:MB，G:GB)</p>
+<p>　　　　(9)find / -size -1000k 　　#查找出小于1000KB的文件</p>
+<p>3.使用混合查找方式查找文件</p>
+<p>　　　　参数有： ！，-and(-a)，-or(-o)。</p>
+<p>　　　　(1)find /tmp -size +10000c -and -mtime +2 　　#在/tmp目录下查找大于10000字节并在最后2分钟内修改的文件</p>
+<p>　　 (2)find / -user fred -or -user george 　　#在/目录下查找用户是fred或者george的文件文件</p>
+<p>　　 (3)find /tmp ! -user panda　　#在/tmp目录中查找所有不属于panda用户的文件
+　　</p>
+<h1><span id="er-grep-ming-ling">二、grep命令</span><a href="#er-grep-ming-ling" class="header-anchor">#</a></h1><p>基本格式：find expression</p>
+<p>1.主要参数</p>
+<p>　　　　[options]主要参数：</p>
+<p>　　　　－c：只输出匹配行的计数。</p>
+<p>　　　　－i：不区分大小写</p>
+<p>　　　　－h：查询多文件时不显示文件名。</p>
+<p>　　　　－l：查询多文件时只输出包含匹配字符的文件名。</p>
+<p>　　　　－n：显示匹配行及行号。</p>
+<p>　　　　－s：不显示不存在或无匹配文本的错误信息。</p>
+<p>　　　　－v：显示不包含匹配文本的所有行。</p>
+<p>　　　　pattern正则表达式主要参数：</p>
+<p>　　　　\： 忽略正则表达式中特殊字符的原有含义。</p>
+<p>　　　　^：匹配正则表达式的开始行。</p>
+<p>　　　　$: 匹配正则表达式的结束行。</p>
+<p>　　　　&lt;：从匹配正则表达 式的行开始。</p>
+<p>　　　　&gt;：到匹配正则表达式的行结束。</p>
+<p>　　　　[ ]：单个字符，如[A]即A符合要求 。</p>
+<p>　　　　[ - ]：范围，如[A-Z]，即A、B、C一直到Z都符合要求 。</p>
+<p>　　　　.：所有的单个字符。</p>
+<p>　　　　* ：有字符，长度可以为0。</p>
+<p>2.实例　</p>
+<p>　　(1)grep ‘test’ d*　　#显示所有以d开头的文件中包含 test的行</p>
+<p>　　(2)grep ‘test’ aa bb cc 　　 #显示在aa，bb，cc文件中包含test的行</p>
+<p>　　(3)grep ‘[a-z]{5}’ aa 　　#显示所有包含每行字符串至少有5个连续小写字符的字符串的行</p>
+<p>　　(4)grep magic /usr/src　　#显示/usr/src目录下的文件(不含子目录)包含magic的行</p>
+<p>　　(5)grep -r magic /usr/src　　#显示/usr/src目录下的文件(包含子目录)包含magic的行</p>
+<p>　　(6)grep -w pattern files ：只匹配整个单词，而不是字符串的一部分(如匹配’magic’，而不是’magical’)</p>
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>常用</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>C++中virtual的三种用法</title>
+    <url>/2019/07/01/2019-7-1-C++%E4%B8%ADvirtual%E7%9A%84%E4%B8%89%E7%A7%8D%E7%94%A8%E6%B3%95/</url>
+    <content><![CDATA[<h1><span id="virtual-yong-fa-yi">virtual用法一：</span><a href="#virtual-yong-fa-yi" class="header-anchor">#</a></h1><pre><code>#include&lt;iostream&gt; 
+using namespace std;
+class A{
+public:
+     virtual  void  display(){  cout&lt;&lt;&quot;A&quot;&lt;&lt;endl; }
+     };
+class B :  public A{
+public:
+            void  display(){ cout&lt;&lt;&quot;B&quot;&lt;&lt;endl; }
+     };
+void doDisplay(A *p)
+{
+    p-&gt;display();
+    delete p;
+}
+
+int main(int argc,char* argv[])
+{
+    doDisplay(new B());
+    return 0;
+}</code></pre><p>这段代码打印出的结果为B，但是当把A类中的virtual去掉之后打印出的就为A。当基类中没有virtual的时候，编译器在编译的时候把p看做A类的对象，调用的自然就是A类的方法。但是加上virtual之后，将dispaly方法变成了虚方法，这样调用的时候编译器会看调用的究竟是谁的实例化对象，这样就实现了多态的效果。也就是说，当基类的派生类中有重写过基类的虚方法的时候，使用基类的指针指向派生类的对象，调用这个方法实际上调用的会是派生类最后实现的方法。</p>
+<h1><span id="virtual-yong-fa-er">virtual用法二:</span><a href="#virtual-yong-fa-er" class="header-anchor">#</a></h1><pre><code>#include&lt;iostream&gt; 
+using namespace std;
+class Person{
+   public:    Person(){ cout&lt;&lt;&quot;Person构造&quot;&lt;&lt;endl; }
+           ~Person(){ cout&lt;&lt;&quot;Person析构&quot;&lt;&lt;endl; }
+};
+class Teacher : virtual public Person{
+   public:    Teacher(){ cout&lt;&lt;&quot;Teacher构造&quot;&lt;&lt;endl; }
+            ~Teacher(){ out&lt;&lt;&quot;Teacher析构&quot;&lt;&lt;endl; }
+};
+class Student : virtual public Person{
+  public:      Student(){ cout&lt;&lt;&quot;Student构造&quot;&lt;&lt;endl; }
+             ~Student(){ cout&lt;&lt;&quot;Student析构&quot;&lt;&lt;endl; }
+};
+class TS : public Teacher,  public Student{
+public:   TS(){ cout&lt;&lt;&quot;TS构造&quot;&lt;&lt;endl; }
+          ~TS(){ cout&lt;&lt;&quot;TS析构&quot;&lt;&lt;endl; }
+};
+int main(int argc,char* argv[])
+{
+    TS ts;
+    return 0;
+}</code></pre><p>这段代码的终端输出结果为： </p>
+<pre><code>Person构造 
+Teacher构造 
+Student构造 
+TS构造 
+TS析构 
+Student析构 
+Teacher析构 
+Person析构 </code></pre><p>当Teacher类和Student类没有虚继承Person类的时候，也就是把virtual去掉时候终端输出的结果为： </p>
+<pre><code>Person构造
+Teacher构造
+Person构造
+Student构造
+TS构造
+TS析构
+Student析构
+Person析构
+Teacher析构
+Person析构</code></pre><p>大家可以很清楚的看到这个结果明显不是我们所期望的。我们在构造TS的时候需要先构造他的基类，也就是Teacher类和Student类。而Teacher类和Student类由都继承于Person类。这样就导致了构造TS的时候实例化了两个Person类。同样的道理，析构的时候也是析构了两次Person类，这是非常危险的，也就引发出了virtual的第三种用法，虚析构。</p>
+<h1><span id="virtual-yong-fa-san">virtual用法三:</span><a href="#virtual-yong-fa-san" class="header-anchor">#</a></h1><pre><code>#include&lt;iostream&gt;
+using namespace std;
+class Person{
+ public:        Person()  {name = new char[16];cout&lt;&lt;&quot;Person构造&quot;&lt;&lt;endl;}
+      virtual  ~Person()  {delete []name;cout&lt;&lt;&quot;Person析构&quot;&lt;&lt;endl;}
+ private:
+         char *name;
+         };
+class Teacher :virtual public Person{
+public:         Teacher(){ cout&lt;&lt;&quot;Teacher构造&quot;&lt;&lt;endl; }
+              ~Teacher(){ cout&lt;&lt;&quot;Teacher析构&quot;&lt;&lt;endl; }
+};
+class Student :virtual public Person{
+public:         Student(){ cout&lt;&lt;&quot;Student构造&quot;&lt;&lt;endl; }
+              ~Student(){ cout&lt;&lt;&quot;Student析构&quot;&lt;&lt;endl; }
+};
+class TS : public Teacher,public Student{
+public:             TS(){ cout&lt;&lt;&quot;TS构造&quot;&lt;&lt;endl; }
+                 ~TS(){ cout&lt;&lt;&quot;TS析构&quot;&lt;&lt;ENDL; }
+};
+int main(int argc,char* argv[])
+{
+Person *p = new TS();
+delete p;
+return 0;
+}</code></pre><p>这段代码的运行结果为：</p>
+<pre><code>Person构造
+Teacher构造
+Student构造
+TS构造
+TS析构
+Student析构
+Teacher析构
+Person析构</code></pre><p>但是当我们把Person类中析构前面的virtual去掉之后的运行结果为：</p>
+<pre><code>Person构造
+Teacher构造
+Student构造
+TS构造
+Person析构
+程序崩溃</code></pre><p>很明显这个结果不是我们想要的程序，崩溃造成的后果是不可预计的，所以我们一定要注意在基类的析构函数前面加上virtual，使其变成虚析构在C++程序中使用虚函数，虚继承和虚析构是很好的习惯 可以避免许多的问题。</p>
+]]></content>
+      <categories>
+        <category>C++</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Ubuntu创建桌面快捷方式</title>
+    <url>/2019/05/01/2019-5-1-Ubuntu%E5%88%9B%E5%BB%BA%E6%A1%8C%E9%9D%A2%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F/</url>
+    <content><![CDATA[<p>默认情况下，Ubuntu会将自动安装的软件快捷方式保存在/usr/share/applications目录下，如果我们要创建桌面快捷方式，只需要右键-复制-桌面 。</p>
+<p>上面的方法是通过系统自动安装软件后实现的，有时候我们自己会从网上下载一些软件手动安装，那么，又该怎样创建软件的桌面快捷方式呢？这里以Eclipse 为例，首先到官网下载Eclipse软件包，直接解压在某个目录下，双击其中的eclipse文件，就可以启动eclipse了，不过如果每次要打开eclipse，都要从安装目录启动，是不是有些麻烦？依照下面的操作，来创建一个桌面快捷方式吧。</p>
+<p>1、创建一个文件，将下面的代码拷贝进去</p>
+<p>这里我们只需要关注3个地方，分别为Exec=软件执行文件的路径，Icon=快捷方式图标（如果有的话），Name=快捷方式名称。根据自己软件按转的位置修改代码，保存之后关闭文件。</p>
+<pre><code>[Desktop Entry]
+
+Categories=Development;
+
+Comment[zh_CN]=
+
+Comment=
+
+Exec=/home/owen/Software/eclipse/eclipse
+
+GenericName[zh_CN]=IDE
+
+GenericName=IDE
+
+Icon=/home/owen/Software/eclipse/icon.xpm
+
+MimeType=
+
+Name[zh_CN]=eclipse
+
+Name=eclipse
+
+Path=
+
+StartupNotify=true
+
+Terminal=false
+
+Type=Application
+
+X-DBUS-ServiceName=
+
+X-DBUS-StartupType=
+
+X-KDE-SubstituteUID=false
+
+X-KDE-Username=owen</code></pre><p>2、将文件名修改为eclipse.desktop</p>
+<p>3、给文件添加可执行权限</p>
+<p>可以通过chmod +x desktop文件 或者 直接右键权限里面修改</p>
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>ubuntu</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux下matlab打开出现启动桌面时错误</title>
+    <url>/2019/04/01/2019-4-1-Linux%E4%B8%8Bmatlab%E6%89%93%E5%BC%80%E5%87%BA%E7%8E%B0%E5%90%AF%E5%8A%A8%E6%A1%8C%E9%9D%A2%E6%97%B6%E9%94%99%E8%AF%AF/</url>
+    <content><![CDATA[<p>Ubuntu下matlab程序无法直接打开，出现一个“启动桌面时错误”的弹窗，以及提示一堆java似的错误</p>
+<h1><span id="jie-jue-fang-fa">解决方法</span><a href="#jie-jue-fang-fa" class="header-anchor">#</a></h1><p>sudo chown [username] -R ~/.matlab/</p>
+]]></content>
+      <categories>
+        <category>matlab</category>
+      </categories>
+      <tags>
+        <tag>matlab</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hungarian二分图匹配</title>
+    <url>/2019/03/08/2019-3-8-Hungarian%E4%BA%8C%E5%88%86%E5%9B%BE%E5%8C%B9%E9%85%8D/</url>
+    <content><![CDATA[<h1><span id="ji-ben-gai-nian">基本概念</span><a href="#ji-ben-gai-nian" class="header-anchor">#</a></h1><h2><span id="er-fen-tu">二分图</span><a href="#er-fen-tu" class="header-anchor">#</a></h2><p>是图论中的一种特殊模型。若能将无向图G=(V,E)的顶点V划分为两个交集为空的顶点集，并且任意边的两个端点都分属于两个集合，则称图G为一个为二分图。</p>
+<img src="/2019/03/08/2019-3-8-Hungarian二分图匹配/1.png">
+
+<h2><span id="pi-pei">匹配</span><a href="#pi-pei" class="header-anchor">#</a></h2><p>一个匹配即一个包含若干条边的集合，且其中任意两条边没有公共端点。如下图，图3的红边即为图2的一个匹配。</p>
+<img src="/2019/03/08/2019-3-8-Hungarian二分图匹配/2.png">
+
+<img src="/2019/03/08/2019-3-8-Hungarian二分图匹配/3.png">
+
+<h2><span id="zui-da-pi-pei">最大匹配</span><a href="#zui-da-pi-pei" class="header-anchor">#</a></h2><p>在G的一个子图M中，M的边集中的任意两条边都不依附于同一个顶点，则称M是一个匹配。选择这样的边数最大的子集称为图的最大匹配问题,最大匹配的边数称为最大匹配数.如果一个匹配中，图中的每个顶点都和图中某条边相关联，则称此匹配为完全匹配，也称作完备匹配。如果在左右两边加上源汇点后，图G等价于一个网络流，最大匹配问题可以转为最大流的问题。解决此问的匈牙利算法的本质就是寻找最大流的增广路径。上图中的最大匹配如下图红边所示：</p>
+<h2><span id="zui-you-pi-pei">最优匹配</span><a href="#zui-you-pi-pei" class="header-anchor">#</a></h2><p>最优匹配又称为带权最大匹配，是指在带有权值边的二分图中，求一个匹配使得匹配边上的权值和最大。一般X和Y集合顶点个数相同，最优匹配也是一个完备匹配，即每个顶点都被匹配。如果个数不相等，可以通过补点加0边实现转化。一般使用KM算法解决该问题。</p>
+<h2><span id="zui-xiao-fu-gai">最小覆盖</span><a href="#zui-xiao-fu-gai" class="header-anchor">#</a></h2><p>二分图的最小覆盖分为最小顶点覆盖和最小路径覆盖：</p>
+<p>①最小顶点覆盖是指最少的顶点数使得二分图G中的每条边都至少与其中一个点相关联，二分图的最小顶点覆盖数=二分图的最大匹配数；</p>
+<p>②最小路径覆盖也称为最小边覆盖，是指用尽量少的不相交简单路径覆盖二分图中的所有顶点。二分图的最小路径覆盖数=||V||-二分图的最大匹配数；</p>
+<h2><span id="zui-da-du-li-ji">最大独立集</span><a href="#zui-da-du-li-ji" class="header-anchor">#</a></h2><p>最大独立集是指寻找一个点集，使得其中任意两点在图中无对应边。对于一般图来说，最大独立集是一个NP完全问题，对于二分图来说最大独立集=||V||-二分图的最大匹配数。如下图中黑色点即为一个最大独立集：</p>
+<h2><span id="ji-ben-gai-nian-xiong-ya-li-suan-fa">基本概念—匈牙利算法</span><a href="#ji-ben-gai-nian-xiong-ya-li-suan-fa" class="header-anchor">#</a></h2><p>交替路：从一个未匹配点出发，依次经过非匹配边、匹配边、非匹配边…形成的路径叫交替路。*</p>
+<p>增广路：从一个未匹配点出发，走交替路，如果途径另一个未匹配点（出发的点不算），则这条交替路称为增广路（agumenting path）。</p>
+<h1><span id="zui-da-pi-pei-yu-zui-xiao-dian-fu-gai">最大匹配与最小点覆盖</span><a href="#zui-da-pi-pei-yu-zui-xiao-dian-fu-gai" class="header-anchor">#</a></h1><h2><span id="zui-xiao-dian-fu-gai">最小点覆盖</span><a href="#zui-xiao-dian-fu-gai" class="header-anchor">#</a></h2><p>假如选了一个点就相当于覆盖了以它为端点的所有边，你需要选择最少的点来覆盖所有的边</p>
+<h2><span id="zui-xiao-ge-ding-li">最小割定理</span><a href="#zui-xiao-ge-ding-li" class="header-anchor">#</a></h2><p>是一个二分图中很重要的定理：一个二分图中的最大匹配数等于这个图中的最小点覆盖数。</p>
+<h2><span id="zui-xiao-dian-ji-fu-gai-zui-da-pi-pei">最小点集覆盖==最大匹配</span><a href="#zui-xiao-dian-ji-fu-gai-zui-da-pi-pei" class="header-anchor">#</a></h2><p>在这里解释一下原因，首先，最小点集覆盖一定&gt;=最大匹配，因为假设最大匹配为n，那么我们就得到了n条互不相邻的边，光覆盖这些边就要用到n个点。现在我们来思考为什么最小点击覆盖一定&lt;=最大匹配。任何一种n个点的最小点击覆盖，一定可以转化成一个n的最大匹配。因为最小点集覆盖中的每个点都能找到至少一条只有一个端点在点集中的边（如果找不到则说明该点所有的边的另外一个端点都被覆盖，所以该点则没必要被覆盖，和它在最小点集覆盖中相矛盾），只要每个端点都选择一个这样的边，就必然能转化为一个匹配数与点集覆盖的点数相等的匹配方案。所以最大匹配至少为最小点集覆盖数，即最小点击覆盖一定&lt;=最大匹配。综上，二者相等。</p>
+<h1><span id="xiong-ya-li-suan-fa">匈牙利算法</span><a href="#xiong-ya-li-suan-fa" class="header-anchor">#</a></h1><p>由增广路的性质，增广路中的匹配边总是比未匹配边多一条，所以如果我们放弃一条增广路中的匹配边，选取未匹配边作为匹配边，则匹配的数量就会增加。匈牙利算法就是在不断寻找增广路，如果找不到增广路，就说明达到了最大匹配。</p>
+<p>先给一个例子<br>1、起始没有匹配 </p>
+<img src="/2019/03/08/2019-3-8-Hungarian二分图匹配/4.png">
+
+<p>2、选中第一个x点找第一跟连线 </p>
+<img src="/2019/03/08/2019-3-8-Hungarian二分图匹配/5.png">
+
+
+<p>3、选中第二个点找第二跟连线 </p>
+<img src="/2019/03/08/2019-3-8-Hungarian二分图匹配/6.png">
+
+
+<p>4、发现x3的第一条边x3y1已经被人占了，找出x3出发的的交错路径x3-y1-x1-y4，把交错路中已在匹配上的边x1y1从匹配中去掉，剩余的边x3y1 x1y4加到匹配中去 </p>
+<img src="/2019/03/08/2019-3-8-Hungarian二分图匹配/7.png">
+
+<img src="/2019/03/08/2019-3-8-Hungarian二分图匹配/8.png">
+
+<img src="/2019/03/08/2019-3-8-Hungarian二分图匹配/9.png">
+
+
+<p>5、同理加入x4,x5。 </p>
+<p>匈牙利算法可以深度有限或者广度优先，刚才的示例是深度优先，即x3找y1,y1已经有匹配，则找交错路。若是广度优先，应为：x3找y1,y1有匹配，x3找y2。</p>
+<h1><span id="suan-fa-mo-ban-lin-jie-biao-amp-c">算法模板(邻接表 &amp; C++)</span><a href="#suan-fa-mo-ban-lin-jie-biao-amp-c" class="header-anchor">#</a></h1><p>深度优先匈牙利算法代码：</p>
+<pre><code>#define maxn 10//表示x集合和y集合中顶点的最大个数！
+ int nx,ny;//x集合和y集合中顶点的个数
+ int edge[maxn][maxn];//edge[i][j]为1表示ij可以匹配
+ int cx[maxn],cy[maxn];//用来记录x集合中匹配的y元素是哪个！
+ int visited[maxn];//用来记录该顶点是否被访问过！
+ int path(int u)
+ {
+     int v;
+     for(v=0;v&lt;ny;v++)
+     {
+         if(edge[u][v]&amp;&amp;!visited[v])
+         {
+             visited[v]=1;
+            if(cy[v]==-1||path(cy[v]))//如果y集合中的v元素没有匹配或者是v已经匹配，但是从cy[v]中能够找到一条增广路
+             {
+                 cx[u]=v;
+                 cy[v]=u;
+                 return 1;
+             }
+         }
+     }
+     return 0;
+ }
+ int maxmatch()
+ {
+     int res=0;
+     memset(cx,0xff,sizeof(cx));//初始值为-1表示两个集合中都没有匹配的元素！
+     memset(cy,0xff,sizeof(cy));
+     for(int i=0;i&lt;=nx;i++)
+     {
+         if(cx[i]==-1)
+         {
+             memset(visited,0,sizeof(visitited));
+             res+=path(i);
+         }
+     }
+     return res;
+ }</code></pre>]]></content>
+      <categories>
+        <category>Algorithm</category>
+      </categories>
+      <tags>
+        <tag>二分图</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>综述_tracklet</title>
+    <url>/2019/03/01/2019-3-1-%E7%BB%BC%E8%BF%B0_tracklet/</url>
+    <content><![CDATA[<p>近年来,由于计算机视觉技术的发展和计算机硬件性能的提高,基于视觉的目标跟踪方法得到了飞速的发展.其中,基于踪片(Tracklet)关联的目标跟踪方法因为具有对目标遮挡的强鲁棒性、算法运行的快速性等优点得到了广泛关注,本文对这类方法的最新研究进展进行了综述.首先,简明地介绍了视觉目标跟踪的基本知识、研究意义和研究现状.然后,通过感兴趣目标检测、跟踪特征提取、踪片生成、踪片关联与补全四个步骤,系统详尽地介绍了基于踪片关联的目标跟踪方法,分析了近年来提出的一些踪片关联方法的优缺点.最后,本文指出了该研究问题的发展方向,一方面要提出更先进的目标跟踪模型,另一方面要采用平行视觉方法进行虚实互动的模型学习与评估.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+]]></content>
+      <categories>
+        <category>综述</category>
+      </categories>
+      <tags>
+        <tag>tracklet</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>概率图模型：HMM、MEMM、CRF</title>
+    <url>/2019/02/28/2019-2-28-%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B/</url>
+    <content><![CDATA[<p>概率图模型学习笔记：HMM、MEMM、CRF</p>
+<h1><span id="preface">Preface</span><a href="#preface" class="header-anchor">#</a></h1><blockquote>
+<p>统计机器学习所有的模型（个别instant model和优化算法以及其他的特种工程知识点除外）的工作流程都是如此：</p>
+</blockquote>
+<blockquote>
+<p>a.训练模型参数，得到模型（由参数唯一确定），</p>
+</blockquote>
+<blockquote>
+<p>b.预测给定的测试数据。</p>
+</blockquote>
+<blockquote>
+<p>拿这个流程去挨个学习模型，思路上会非常顺畅。</p>
+</blockquote>
+<h1><span id="prerequisite">Prerequisite</span><a href="#prerequisite" class="header-anchor">#</a></h1><h2><span id="gai-lu-tu">概率图</span><a href="#gai-lu-tu" class="header-anchor">#</a></h2><p>之前刚接触CRF时，一上来试图越过一堆繁琐的概率图相关概念，不过sad to say, 这是后面的前驱知识，后面还得反过来补这个点。所以若想整体把握，系统地拿下这一块，应该还是要越过这块门槛的。 当然了，一开始只需略略快速看一篇，后面可再返过来补查。</p>
+<h3><span id="gai-lan">概览</span><a href="#gai-lan" class="header-anchor">#</a></h3><p>在统计概率图（probability graph models）中，参考宗成庆老师的书，是这样的体系结构（个人非常喜欢这种类型的图）：</p>
+
+
+<p>在概率图模型中，数据(样本)由公式G=(V,E)建模表示：  V表示节点，即随机变量（放在此处的，可以是一个token或者一个label），具体地，用Y=(y1,y2,……,yn)  为随机变量建模，注意  现在是代表了一批随机变量（想象对应一条sequence，包含了很多的token），  P(Y)为这些随机变量的分布； E表示边，即概率依赖关系。具体咋理解，还是要在后面结合HMM或CRF的graph具体解释。</p>
+<h3><span id="you-xiang-tu-vs-wu-xiang-tu">有向图 vs. 无向图</span><a href="#you-xiang-tu-vs-wu-xiang-tu" class="header-anchor">#</a></h3><p>上图可以看到，贝叶斯网络（信念网络）都是有向的，马尔科夫网络无向。所以，贝叶斯网络适合为有单向依赖的数据建模，马尔科夫网络适合实体之间互相依赖的建模。具体地，他们的核心差异表现在如何求 P=(Y) ，即怎么表示 Y=(y1,y2,……,yn) 这个的联合概率。</p>
+<h4><span id="you-xiang-tu">有向图</span><a href="#you-xiang-tu" class="header-anchor">#</a></h4><p>对于有向图模型，这么求联合概率： </p>
+
+
+
+<p>举个例子，对于下面的这个有向图的随机变量(注意，这个图我画的还是比较广义的)：</p>
+
+
+<p>应该这样表示他们的联合概率:</p>
+
+
+<h4><span id="wu-xiang-tu">无向图</span><a href="#wu-xiang-tu" class="header-anchor">#</a></h4><p>对于无向图，我看资料一般就指马尔科夫网络(注意，这个图我画的也是比较广义的)。</p>
+
+
+<p>如果一个graph太大，可以用因子分解将 P=(Y) 写为若干个联合概率的乘积。咋分解呢，将一个图分为若干个“小团”，注意每个团必须是“最大团”（就是里面任何两个点连在了一块，具体……算了不解释，有点“最大连通子图”的感觉），则有：</p>
+
+
+<p>, 其中  ，公式应该不难理解吧，归一化是为了让结果算作概率。</p>
+<p>所以像上面的无向图：</p>
+
+
+<p>其中，  是一个最大团 C 上随机变量们的联合概率，一般取指数函数的：</p>
+
+
+<p>好了，管这个东西叫做势函数。注意 <img src="/2019/02/28/2019-2-28-概率图模型/f8.png"> 是否有看到CRF的影子。</p>
+<p>那么概率无向图的联合概率分布可以在因子分解下表示为：</p>
+<img src="/2019/02/28/2019-2-28-概率图模型/f9.png">
+
+<p>注意，这里的理解还蛮重要的，注意递推过程，敲黑板，这是CRF的开端！<br>这个由Hammersly-Clifford law保证，具体不展开。</p>
+<h3><span id="ma-er-ke-fu-jia-she-amp-ma-er-ke-fu-xing">马尔科夫假设&amp;马尔科夫性</span><a href="#ma-er-ke-fu-jia-she-amp-ma-er-ke-fu-xing" class="header-anchor">#</a></h3><p>这个也属于前馈知识。</p>
+<h4><span id="ma-er-ke-fu-jia-she">马尔科夫假设</span><a href="#ma-er-ke-fu-jia-she" class="header-anchor">#</a></h4><p>额应该是齐次马尔科夫假设，这样假设：马尔科夫链(X1,……,Xn)里的Xi  总是只受Xi-1  一个人的影响。马尔科夫假设这里相当于就是个1-gram。马尔科夫过程呢？即，在一个过程中，每个状态的转移只依赖于前n个状态，并且只是个n阶的模型。最简单的马尔科夫过程是一阶的，即只依赖于器哪一个状态。</p>
+<h4><span id="ma-er-ke-fu-xing">马尔科夫性</span><a href="#ma-er-ke-fu-xing" class="header-anchor">#</a></h4><p>马尔科夫性是是保证或者判断概率图是否为概率无向图的条件。三点内容：a. 成对，b. 局部，c. 全局。我觉得这个不用展开。</p>
+<h2><span id="pan-bie-shi-discriminative-mo-xing-vs-sheng-cheng-shi-generative-mo-xing">判别式（discriminative）模型 vs. 生成式(generative)模型</span><a href="#pan-bie-shi-discriminative-mo-xing-vs-sheng-cheng-shi-generative-mo-xing" class="header-anchor">#</a></h2><p>在监督学习下，模型可以分为判别式模型与生成式模型。重点来了。上面有提到，我理解了HMM、CRF模型的区别是从理解了判别式模型与生成式模型的那刻，并且瞬间对其他的模型有一个恍然大悟。我记得是一年前就开始纠结这两者的区别，但我只能说，栽在了一些烂博客上，大部分都没有自己的insightful理解，也就是一顿官话，也真是难以理解。后来在知乎上一直琢磨别人的答案，然后某日早晨终于豁然开朗，就是这种感觉。好了，我要用自己的理解来转述两者的区别了below。先问个问题，根据经验，A批模型（神经网络模型、SVM、perceptron、LR、DT……）与B批模型（NB、LDA……），有啥区别不？（这个问题需要一些模型使用经验）应该是这样的：</p>
+<blockquote>
+<ol>
+<li>A批模型是这么工作的，他们直接将数据的Y（或者label），根据所提供的features，学习，最后画出了一个明显或者比较明显的边界（具体怎么做到的？通过复杂的函数映射，或者决策叠加等等mechanism），这一点线性LR、线性SVM应该很明显吧。 </li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="2">
+<li>B批模型是这么工作的，他们先从训练样本数据中，将所有的数据的分布情况摸透，然后最终确定一个分布，来作为我的所有的输入数据的分布，并且他是一个联合分布P(X,Y)  (注意 X 包含所有的特征xi  ，  Y包含所有的label)。然后我来了新的样本数据（inference），好，通过学习来的模型的联合分布P(X,Y)  ，再结合新样本给的X  ，通过条件概率就能出来Y  ：<br>P(Y|X)=P(X,Y)/P(X)</li>
+</ol>
+</blockquote>
+<p>好了，应该说清楚了。</p>
+]]></content>
+      <categories>
+        <category>Algorithm</category>
+      </categories>
+      <tags>
+        <tag>概率图</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SVM支持向量机</title>
+    <url>/2019/02/27/2019-2-27-SVM%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/</url>
+    <content><![CDATA[<h1><span id="ji-ben-gai-nian">基本概念</span><a href="#ji-ben-gai-nian" class="header-anchor">#</a></h1><p>支持向量机（Support Vector Machine, SVM）的基本模型是在特征空间上找到最佳的分离超平面使得训练集上正负样本间隔最大。SVM是用来解决二分类问题的有监督学习算法，在引入了核方法之后SVM也可以用来解决非线性问题。<br>一般SVM有下面三种：</p>
+<h2><span id="ying-jian-ge-zhi-chi-xiang-liang-ji-xian-xing-ke-fen-zhi-chi-xiang-liang-ji">硬间隔支持向量机（线性可分支持向量机）</span><a href="#ying-jian-ge-zhi-chi-xiang-liang-ji-xian-xing-ke-fen-zhi-chi-xiang-liang-ji" class="header-anchor">#</a></h2><p>当训练数据线性可分时，可通过硬间隔最大化学得一个线性可分支持向量机。</p>
+<h2><span id="ruan-jian-ge-zhi-chi-xiang-liang-ji">软间隔支持向量机</span><a href="#ruan-jian-ge-zhi-chi-xiang-liang-ji" class="header-anchor">#</a></h2><p>当训练数据近似线性可分时，可通过软间隔最大化学得一个线性支持向量机。</p>
+<h2><span id="fei-xian-xing-zhi-chi-xiang-liang-ji">非线性支持向量机</span><a href="#fei-xian-xing-zhi-chi-xiang-liang-ji" class="header-anchor">#</a></h2><p>当训练数据线性不可分时，可通过核方法以及软间隔最大化学得一个非线性支持向量机。</p>
+]]></content>
+      <categories>
+        <category>Algorithm</category>
+      </categories>
+      <tags>
+        <tag>machine learning</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MOSSE</title>
+    <url>/2019/02/20/2019-2-20-MOSSE/</url>
+    <content><![CDATA[<p>Visual Object Tracking using Adaptive Correlation Filters 一文发表于2010的CVPR上，是笔者所知的第一篇将correlation filter引入tracking领域内的文章，文中所提的Minimum Output Sum of Squared Error(MOSSE)，可以说是后来CSK、STC、Color Attributes等tracker的鼻祖。Correlation Filter（以下简称CF）源于信号处理领域，后被运用于图像分类等方面。Correlation包含Cross-correlation和Auto-correlation，在这里我们一般指的就是Cross-correlation。首先看看维基百科上Cross-correlation的定义，假设有f和g两个函数（信号），其cross-correlation f★g 定义为</p>
+<img src="/2019/02/20/2019-2-20-MOSSE/f1.png">
+
+
+<p>其中f∗表示f的复共轭，correlation的直观解释就是衡量两个函数在某个时刻τ的相似程度，如下图所示。考虑一个最简单的例子，假设f和g的形状一样，但是相差了若干个时刻，那么f★g取得最大值的时候一定是f和g对齐的时候（没谁比自己和自己更像了吧…），但因为两者有时间差，所以要取得最大值，就要把其中一个在时间轴上进行平移，所以g(t+τ)就代表把g平移τ个时刻。其实Convolution和Cross-correlation在图像处理的书里一般都会提到，这里就不多叙述了。</p>
+<img src="/2019/02/20/2019-2-20-MOSSE/1.png">
+
+<p>而Correlation Filter应用于tracking方面最朴素的想法就是：相关是衡量两个信号相似值的度量，如果两个信号越相似，那么其相关值就越高，而在tracking的应用里，就是需要设计一个滤波模板，使得当它作用在跟踪目标上时，得到的响应最大，如下图所示:</p>
+<img src="/2019/02/20/2019-2-20-MOSSE/2.png">
+
+<p>CF方法最大的优势在于其速度之快，是任何其他跟踪方法都无法比拟的，如本篇所写的MOSSE，其速度可以到669帧每秒，把跟踪算法从real time 级别提升到了high speed级别；而且其跟踪准确率高，在wuyi他们的online benchmark上，带核函数的CSK方法可以得到73%左右的准确率。有着如此明显的优点，相信此类方法将会成为跟踪领域内继sparse方法的又一重要分支。</p>
+<p>　　 好，言归正传，我们先来介绍CF中的元老，MOSSE。按照我们刚刚的思路，我们需要寻找一个滤波模板，使得它在目标上的响应最大，那么写成公式就是如(2)所示</p>
+<p>g=h ★f(2)  </p>
+<p>其中g表示响应输出，f表示输入图像，h表示我们的滤波模板。 g可以为任意形状的响应输出，在上图的示意图里我们就假设它为gaussian形状。那么显然，我们只要求出h就可以了。这样做看起来很简单，但为何CF类方法的速度如此之快呢？就是因为在求解等一系列操作中，都利用了快速傅里叶变换FFT。由卷积定理的correlation版本可知，函数互相关的傅里叶变换等于函数傅里叶变换的乘积，即如(2)式所示：</p>
+<img src="/2019/02/20/2019-2-20-MOSSE/f3.png">
+
+
+<p>其中F表示傅里叶变换，⊙表示点乘。那么假设f所含的像素个数为n，而已知FFT的时间开销为O(nlogn)，因此式(3)的计算开销也为O(nlogn)！远比其他跟踪算法要快！明白这一点后，本篇论文的精华你已经掌握了。剩下的就是如何计算h了，为了表达的方便起见，我们设Ff=F，(Fh)∗=H∗，Fg=G，那么我们就有</p>
+<img src="/2019/02/20/2019-2-20-MOSSE/f4.png">
+
+<p>但是在实际应用中，因为目标的外观变换等因素影响，我们需要同时考虑目标的m个图像作为参考，以提高模型的鲁棒性，那么就有如(5)的目标函数了：</p>
+<img src="/2019/02/20/2019-2-20-MOSSE/f5.png">
+
+<p>求解式(5)并不困难，而且根据卷积定理，在频率域的操作都是元素级别的，因此我们可以分别求解H∗中的每一个元素H∗w,v，那么(5)就可以变为：</p>
+<img src="/2019/02/20/2019-2-20-MOSSE/f6.png">
+
+<p>然后对(6)式求导并使其为0即可求解，但要注意的是，论文中特别指出在复数域的求导与在实数域的有一点区别：</p>
+<img src="/2019/02/20/2019-2-20-MOSSE/f7.png">
+
+<p>按以上方式处理所有H中的所有元素，得到：</p>
+<img src="/2019/02/20/2019-2-20-MOSSE/f8.png">
+
+
+
+<p>就可以开始跟踪了。在跟踪的过程中，我们只需要把以上模板与当前帧的图像作相关操作，将得到的响应结果中最大的那点对应坐标作为目标在当前帧位置就可以了（相当于在2维上平移我们的模板）。然后，模板的更新方式可以按照如下的方式进行：</p>
+<img src="/2019/02/20/2019-2-20-MOSSE/f9.png">
+
+<p>H(t) 表示在第t帧求得的滤波模板，η为一经验常数。</p>
+<p>　　本文的内容大体就这样了，剩下的就是在(8)上面进行一些修改，比如在分母里引进一个ε作为正则化的参数，或者分别求Hi然后作平均等，都是一些小的技巧。总得来说，MOSSE方法开创了CF在tracking方面的先河，而在后面的一系列文章里，我们将介绍一系列用概率论、岭回归等理论对其作进一步提升的文章。</p>
+]]></content>
+      <categories>
+        <category>Algorithm</category>
+      </categories>
+      <tags>
+        <tag>correlation filter</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(装机)ubuntu必要软件及库安装+美化 from 小灰灰</title>
+    <url>/2018/12/15/2018-12-15-ubuntu%E5%BF%85%E8%A6%81%E8%BD%AF%E4%BB%B6%E5%8F%8A%E5%BA%93%E5%AE%89%E8%A3%85+%E7%BE%8E%E5%8C%96%20from%20%E5%B0%8F%E7%81%B0%E7%81%B0/</url>
+    <content><![CDATA[<h1><span id="change-source">change source</span><a href="#change-source" class="header-anchor">#</a></h1><p>aliyun service</p>
+<h1><span id="apt">apt</span><a href="#apt" class="header-anchor">#</a></h1><pre><code>apt install fish tmux guake git build-essential baobab gparted vim gconf2 cmake aria2 uget bleachbit pinta speedtest-cli puddletag xdot dconf-editor iotop trash-cli fish gnome-todo backintime-qt4</code></pre><h1><span id="dpkg">dpkg</span><a href="#dpkg" class="header-anchor">#</a></h1><pre><code>dpkg -i wps,chrome,electron-ssr,xmind-zero,virtualbox,sogou-pinyin,nautilus_nutstore,teamviewer,vnciewer,netease</code></pre><h1><span id="install-gz">install gz…</span><a href="#install-gz" class="header-anchor">#</a></h1><p>veractype,foxitreader</p>
+<h1><span id="configure-ssr">configure ssr</span><a href="#configure-ssr" class="header-anchor">#</a></h1><h1><span id="configure-guake">configure guake</span><a href="#configure-guake" class="header-anchor">#</a></h1><h1><span id="sign-in-to-google">sign in to google</span><a href="#sign-in-to-google" class="header-anchor">#</a></h1><h1><span id="install-albert">install albert</span><a href="#install-albert" class="header-anchor">#</a></h1><pre><code>wget -nv https://download.opensuse.org/repositories/home:manuelschneid3r/xUbuntu_18.04/Release.key -O Release.key
+sudo apt-key add - &lt; Release.key
+sudo sh -c &quot;echo &#39;deb http://download.opensuse.org/repositories/home:/manuelschneid3r/xUbuntu_18.04/ /&#39; &gt; /etc/apt/sources.list.d/home:manuelschneid3r.list&quot;
+sudo apt-get update
+sudo apt-get install albert</code></pre><h1><span id="uninstall-firefox">uninstall firefox</span><a href="#uninstall-firefox" class="header-anchor">#</a></h1><h1><span id="install-markdown-editor">install markdown editor</span><a href="#install-markdown-editor" class="header-anchor">#</a></h1><h2><span id="typora">typora</span><a href="#typora" class="header-anchor">#</a></h2><p>sudo apt-key adv –keyserver keyserver.ubuntu.com –recv-keys BA300B7755AFCFAE<br>sudo add-apt-repository ‘deb <a href="http://typora.io" target="_blank" rel="noopener">http://typora.io</a> linux/‘<br>sudo apt install typora</p>
+<h1><span id="auto-mount">auto mount</span><a href="#auto-mount" class="header-anchor">#</a></h1><p>C D E dataset</p>
+<pre><code>/dev/sda3 /media/C ntfs defaults,uid=1000 0 0
+/dev/sda5 /media/D ntfs defaults,uid=1000 0 0
+/dev/sdb1 /media/E ntfs defaults,uid=1000 0 0
+/dev/sdb4 /media/Dataset ext4 defaults 0 0
+/dev/sda4 /media/Ubuntu_Software ext4 defaults 0 0</code></pre><h1><span id="build-soft-link">build soft link</span><a href="#build-soft-link" class="header-anchor">#</a></h1><pre><code>ln -s /media/C c
+ln -s /media/D d
+ln -s /media/Dataset/ dataset
+ln -s /media/E e
+ln -s d/research/
+ln -s research/workspace/
+ln -s workspace/Github/ github
+ln -s e/backup/
+ln -s e/Software/LinuxSoftware/ software</code></pre><h1><span id="install-python">install python</span><a href="#install-python" class="header-anchor">#</a></h1><ol>
+<li>install miniconda</li>
+<li>change pip source</li>
+<li>install from envirnment</li>
+</ol>
+<h1><span id="install-program-tool">install program tool</span><a href="#install-program-tool" class="header-anchor">#</a></h1><p>tar pycharm,clion<br>// tar -xf pycharm-community-2018.2.2.tar.gz -C ~<br>add desktop shortcut</p>
+<p>K71U8DBPNE-eyJsaWNlbnNlSWQiOiJLNzFVOERCUE5FIiwibGljZW5zZWVOYW1lIjoibGFuIHl1IiwiYXNzaWduZWVOYW1lIjoiIiwiYXNzaWduZWVFbWFpbCI6IiIsImxpY2Vuc2VSZXN0cmljdGlvbiI6IkZvciBlZHVjYXRpb25hbCB1c2Ugb25seSIsImNoZWNrQ29uY3VycmVudFVzZSI6ZmFsc2UsInByb2R1Y3RzIjpbeyJjb2RlIjoiSUkiLCJwYWlkVXBUbyI6IjIwMTktMDUtMDQifSx7ImNvZGUiOiJSUzAiLCJwYWlkVXBUbyI6IjIwMTktMDUtMDQifSx7ImNvZGUiOiJXUyIsInBhaWRVcFRvIjoiMjAxOS0wNS0wNCJ9LHsiY29kZSI6IlJEIiwicGFpZFVwVG8iOiIyMDE5LTA1LTA0In0seyJjb2RlIjoiUkMiLCJwYWlkVXBUbyI6IjIwMTktMDUtMDQifSx7ImNvZGUiOiJEQyIsInBhaWRVcFRvIjoiMjAxOS0wNS0wNCJ9LHsiY29kZSI6IkRCIiwicGFpZFVwVG8iOiIyMDE5LTA1LTA0In0seyJjb2RlIjoiUk0iLCJwYWlkVXBUbyI6IjIwMTktMDUtMDQifSx7ImNvZGUiOiJETSIsInBhaWRVcFRvIjoiMjAxOS0wNS0wNCJ9LHsiY29kZSI6IkFDIiwicGFpZFVwVG8iOiIyMDE5LTA1LTA0In0seyJjb2RlIjoiRFBOIiwicGFpZFVwVG8iOiIyMDE5LTA1LTA0In0seyJjb2RlIjoiR08iLCJwYWlkVXBUbyI6IjIwMTktMDUtMDQifSx7ImNvZGUiOiJQUyIsInBhaWRVcFRvIjoiMjAxOS0wNS0wNCJ9LHsiY29kZSI6IkNMIiwicGFpZFVwVG8iOiIyMDE5LTA1LTA0In0seyJjb2RlIjoiUEMiLCJwYWlkVXBUbyI6IjIwMTktMDUtMDQifSx7ImNvZGUiOiJSU1UiLCJwYWlkVXBUbyI6IjIwMTktMDUtMDQifV0sImhhc2giOiI4OTA4Mjg5LzAiLCJncmFjZVBlcmlvZERheXMiOjAsImF1dG9Qcm9sb25nYXRlZCI6ZmFsc2UsImlzQXV0b1Byb2xvbmdhdGVkIjpmYWxzZX0=-Owt3/+LdCpedvF0eQ8635yYt0+ZLtCfIHOKzSrx5hBtbKGYRPFDrdgQAK6lJjexl2emLBcUq729K1+ukY9Js0nx1NH09l9Rw4c7k9wUksLl6RWx7Hcdcma1AHolfSp79NynSMZzQQLFohNyjD+dXfXM5GYd2OTHya0zYjTNMmAJuuRsapJMP9F1z7UTpMpLMxS/JaCWdyX6qIs+funJdPF7bjzYAQBvtbz+6SANBgN36gG1B2xHhccTn6WE8vagwwSNuM70egpahcTktoHxI7uS1JGN9gKAr6nbp+8DbFz3a2wd+XoF3nSJb/d2f/6zJR8yJF8AOyb30kwg3zf5cWw==-MIIEPjCCAiagAwIBAgIBBTANBgkqhkiG9w0BAQsFADAYMRYwFAYDVQQDDA1KZXRQcm9maWxlIENBMB4XDTE1MTEwMjA4MjE0OFoXDTE4MTEwMTA4MjE0OFowETEPMA0GA1UEAwwGcHJvZDN5MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxcQkq+zdxlR2mmRYBPzGbUNdMN6OaXiXzxIWtMEkrJMO/5oUfQJbLLuMSMK0QHFmaI37WShyxZcfRCidwXjot4zmNBKnlyHodDij/78TmVqFl8nOeD5+07B8VEaIu7c3E1N+e1doC6wht4I4+IEmtsPAdoaj5WCQVQbrI8KeT8M9VcBIWX7fD0fhexfg3ZRt0xqwMcXGNp3DdJHiO0rCdU+Itv7EmtnSVq9jBG1usMSFvMowR25mju2JcPFp1+I4ZI+FqgR8gyG8oiNDyNEoAbsR3lOpI7grUYSvkB/xVy/VoklPCK2h0f0GJxFjnye8NT1PAywoyl7RmiAVRE/EKwIDAQABo4GZMIGWMAkGA1UdEwQCMAAwHQYDVR0OBBYEFGEpG9oZGcfLMGNBkY7SgHiMGgTcMEgGA1UdIwRBMD+AFKOetkhnQhI2Qb1t4Lm0oFKLl/GzoRykGjAYMRYwFAYDVQQDDA1KZXRQcm9maWxlIENBggkA0myxg7KDeeEwEwYDVR0lBAwwCgYIKwYBBQUHAwEwCwYDVR0PBAQDAgWgMA0GCSqGSIb3DQEBCwUAA4ICAQC9WZuYgQedSuOc5TOUSrRigMw4/+wuC5EtZBfvdl4HT/8vzMW/oUlIP4YCvA0XKyBaCJ2iX+ZCDKoPfiYXiaSiH+HxAPV6J79vvouxKrWg2XV6ShFtPLP+0gPdGq3x9R3+kJbmAm8w+FOdlWqAfJrLvpzMGNeDU14YGXiZ9bVzmIQbwrBA+c/F4tlK/DV07dsNExihqFoibnqDiVNTGombaU2dDup2gwKdL81ua8EIcGNExHe82kjF4zwfadHk3bQVvbfdAwxcDy4xBjs3L4raPLU3yenSzr/OEur1+jfOxnQSmEcMXKXgrAQ9U55gwjcOFKrgOxEdek/Sk1VfOjvS+nuM4eyEruFMfaZHzoQiuw4IqgGc45ohFH0UUyjYcuFxxDSU9lMCv8qdHKm+wnPRb0l9l5vXsCBDuhAGYD6ss+Ga+aDY6f/qXZuUCEUOH3QUNbbCUlviSz6+GiRnt1kA9N2Qachl+2yBfaqUqr8h7Z2gsx5LcIf5kYNsqJ0GavXTVyWh7PYiKX4bs354ZQLUwwa/cG++2+wNWP+HtBhVxMRNTdVhSm38AknZlD+PTAsWGu9GyLmhti2EnVwGybSD2Dxmhxk3IPCkhKAK+pl0eWYGZWG3tJ9mZ7SowcXLWDFAk0lRJnKGFMTggrWjV8GYpw5bq23VmIqqDLgkNzuoog==</p>
+<h1><span id="yin-cang-kai-ji-xuan-ze-jie-mian">隐藏开机选择界面</span><a href="#yin-cang-kai-ji-xuan-ze-jie-mian" class="header-anchor">#</a></h1><ul>
+<li>sudo gedit /etc/default/grub</li>
+</ul>
+<pre><code>GRUB_HIDDEN_TIMEOUT=0
+GRUB_HIDDEN_TIMEOUT_QUIET=true //隐藏开机选择界面
+GRUB_TIMEOUT=0 // 设置开机选择界面等待时间，0 不显示
+GRUB_DISABLE_OS_PROBER=true</code></pre><ul>
+<li>sudo update-grub // update grub</li>
+</ul>
+<h1><span id="theme-beauty">theme beauty</span><a href="#theme-beauty" class="header-anchor">#</a></h1><pre><code>sudo apt install gnome gnome-shell</code></pre><pre><code>sudo apt install gnome-tweak-tool chrome-gnome-shell gnome-shell-extensions</code></pre><h2><span id="papirus-tu-biao">papirus图标</span><a href="#papirus-tu-biao" class="header-anchor">#</a></h2><pre><code>sudo add-apt-repository ppa:papirus/papirus
+sudo apt update 
+sudo apt-get install papirus-icon-theme</code></pre><h2><span id="arc-zhu-ti">Arc主题</span><a href="#arc-zhu-ti" class="header-anchor">#</a></h2><pre><code>sudo sh -c &quot;echo &#39;deb http://download.opensuse.org/repositories/home:/Horst3180/xUbuntu_16.04/ /&#39; &gt;&gt; /etc/apt/sources.list.d/arc-theme.list&quot;
+sudo apt-get update
+sudo apt-get install arc-theme</code></pre><h2><span id="install-extensions">install extensions</span><a href="#install-extensions" class="header-anchor">#</a></h2><p>the website is <a href="https://extensions.gnome.org/local/" target="_blank" rel="noopener">here</a>.</p>
+<p>should install:</p>
+<ol>
+<li>Hide Top Bar</li>
+<li>Dash to Dock</li>
+<li>TopIcons Plus</li>
+</ol>
+<h1><span id="install-nvidia-driver">install NVIDIA-driver</span><a href="#install-nvidia-driver" class="header-anchor">#</a></h1><pre><code>sudo add-apt-repository ppa:graphics-drivers/ppa
+sudo apt update
+ubuntu-drivers devices
+sudo ubuntu-drivers autoinstall</code></pre><p>more detail <a href="https://www.jianshu.com/p/4366ed27add9" target="_blank" rel="noopener">here</a></p>
+<h1><span id="install-vlc">install vlc</span><a href="#install-vlc" class="header-anchor">#</a></h1><p>sudo snap install vlc</p>
+<h1><span id="install-wine-app">install wine app</span><a href="#install-wine-app" class="header-anchor">#</a></h1><ol>
+<li>qq</li>
+<li>wechat</li>
+<li>thurder</li>
+</ol>
+<p>more detail <a href="https://blog.csdn.net/qq_25987491/article/details/81364461" target="_blank" rel="noopener">here</a> and <a href="https://github.com/wszqkzqk/deepin-wine-ubuntu" target="_blank" rel="noopener">here(github)</a> and <a href="http://mirrors.aliyun.com/deepin/pool/non-free/d/" target="_blank" rel="noopener">here(resouce)</a></p>
+<h1><span id="install-fusuma">install </span><a href="#install-fusuma" class="header-anchor">#</a></h1><p>a touchpad tool.</p>
+<pre><code>sudo gpasswd -a $USER input
+sudo apt install libinput-tools
+sudo apt install ruby
+sudo gem install fusuma
+sudo apt install xdotool
+# Touchpad not working in GNOME
+gsettings set org.gnome.desktop.peripherals.touchpad send-events enabled</code></pre><h1><span id="setting-shortcut">setting shortcut</span><a href="#setting-shortcut" class="header-anchor">#</a></h1><h2><span id="customize-gesture-mapping">Customize Gesture Mapping</span><a href="#customize-gesture-mapping" class="header-anchor">#</a></h2><pre><code>mkdir -p ~/.config/w        # create config directory
+nano ~/.config/fusuma/config.yml # edit config file.</code></pre><p>Example</p>
+<pre><code>swipe:
+  3: 
+    left: 
+      command: &#39;xdotool key ctrl+Prior&#39;
+    right: 
+      command: &#39;xdotool key ctrl+Next&#39;
+    up: 
+      command: &#39;xdotool key super+w&#39;
+#      threshold: 1.5
+    down: 
+      command: &#39;xdotool key super+s&#39;
+#      threshold: 1.5
+  4:
+    left: 
+      command: &#39;xdotool key alt+Left&#39;
+    right: 
+      command: &#39;xdotool key alt+Right&#39;
+    up: 
+      command: &#39;xdotool key super+e&#39;
+    down: 
+      command: &#39;xdotool key super+a&#39;
+pinch:
+  2:
+    in:
+      command: &#39;xdotool key ctrl+plus&#39;
+      threshold: 0.1
+    out:
+      command: &#39;xdotool key ctrl+minus&#39;
+      threshold: 0.1
+
+threshold:
+  swipe: 1
+  pinch: 1
+
+interval:
+  swipe: 1
+  pinch: 1</code></pre><h1><span id="nvidia-zhuan-huan-wen-ti">nvidia转换问题</span><a href="#nvidia-zhuan-huan-wen-ti" class="header-anchor">#</a></h1><p>NVIDIA转换为intel可以在NVIDIA setting中设置<br>intel转换为NVIDIA，先命令行sudo prime-select nvidia，然后重启就好</p>
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>ubuntu</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>算法设计小结</title>
+    <url>/2018/06/28/2018-6-28-%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<p>每个算法会给出思想和伪代码，对于复杂的算法会做出详尽的解释。</p>
+<h1><span id="introduction">Introduction</span><a href="#introduction" class="header-anchor">#</a></h1><h2><span id="she-ji-suan-fa-de-5-ge-yao-qiu">设计算法的5个要求</span><a href="#she-ji-suan-fa-de-5-ge-yao-qiu" class="header-anchor">#</a></h2><ol>
+<li>Finiteness。terminates after a finite number of steps</li>
+<li>Definiteness。rigorously and unambiguously specified</li>
+<li>Input。valid inputs are clearly specified</li>
+<li>Output。can be proved to produce the correct output given a valid input</li>
+<li>Effectiveness。steps are sufficiently simple and basic</li>
+</ol>
+<h2><span id="gcd-problem">GCD problem</span><a href="#gcd-problem" class="header-anchor">#</a></h2><p>GCD是greatest common divisor的简写，也就是找到两个数的最大公约数。</p>
+<h3><span id="euclid-s-algorithm">Euclid’s algorithm</span><a href="#euclid-s-algorithm" class="header-anchor">#</a></h3><p>欧几里得算法基于以下的公式实现：<code>gcd(m,n) = gcd(n, m mod n)</code></p>
+<pre><code>//Input:int m,int n
+//Output:int
+while(n!=0){
+    r=m mod n;
+    m=n;
+    n=r;
+}
+return m;</code></pre><p>欧几里得算法其实用到了后面学的<strong>Decrease-and-Conquer</strong>思想，要求gcd(m,n)的值，将其减少规模，变成求gcd(n,m mod n)的值。</p>
+<h2><span id="zhi-shu-wen-ti">质数问题</span><a href="#zhi-shu-wen-ti" class="header-anchor">#</a></h2><p>想要判断一个数n是否为质数，很容易想到的是我们只需遍历所有比n小的大于1的数i，判断<code>n mod i==0</code>，复杂度是O(n),其中一个优化是只需判断<code>[2,n^(1/2)]</code>内的数即可,复杂度是O(n^1/2)。<br>但是如果输入是n，我们要输出一个包含所有小于n的质数的集合呢？</p>
+<p>一种简单的解决思路是，对每个小于n的质数运用一次质数检验算法：</p>
+<pre><code>//Input:Integer n ≥ 2
+//Output:List of primes less than or equal to n
+for i=2 to n do
+    if(prime(i)) add i to list;</code></pre><p>这个算法的复杂度是多少呢？prime(i)的复杂度是O(n^1/2),外面还有一层循环，于是这个算法的复杂度是O(n^3/2)。</p>
+<p>其实有另外的解决办法。</p>
+<h3><span id="sieve-of-eratosthenes">Sieve of Eratosthenes</span><a href="#sieve-of-eratosthenes" class="header-anchor">#</a></h3><pre><code>Input: Integer n ≥ 2
+Output: List of primes less than or equal to n
+for p ← 2 to n do  A[p] ← p
+for p ← 2 to n do  
+      if A[p] ！= 0  //p hasn’t been previously eliminated from the list
+          j ← p* p
+          while j ≤ n  do
+                 A[j] ← 0  //mark element as eliminated     
+                 j ← j + p
+//copy the remaining elements of A to array L of the primes</code></pre><p>   i ← 0<br>   for p ← 2 to n do<br>        if A[p] ！=  0<br>                L[i] ← A[p]<br>                i ← i+1<br>   return L</p>
+<p>这个算法在做一件什么事情呢？从2开始，将每个质数的倍数标记，剩下的就全都是质数了。<br>此算法的复杂度分析在这里就不做了。</p>
+<h2><span id="algorithm-design-and-analysis-process">Algorithm design and analysis process</span><a href="#algorithm-design-and-analysis-process" class="header-anchor">#</a></h2><img src="/2018/06/28/2018-6-28-算法总结/0.png">
+
+<h1><span id="fundamentals-of-the-analysis-of-algorithm-efficiency">Fundamentals of the Analysis of Algorithm Efficiency</span><a href="#fundamentals-of-the-analysis-of-algorithm-efficiency" class="header-anchor">#</a></h1><p>A problem or algorithm with at most polynomial time complexity is considered tractable (or feasible).  P is the set of all tractable problems.<br>A problem or algorithm that has complexity greater than exponential is considered intractable (or infeasible).<br>Note that n^1,000,000 is technically tractable, but really very hard.  n^(log log log n) is technically intractable, but easy.  Such cases are rare though.</p>
+<h1><span id="brute-force">Brute Force</span><a href="#brute-force" class="header-anchor">#</a></h1><h2><span id="brute-force-sorting">Brute-force Sorting</span><a href="#brute-force-sorting" class="header-anchor">#</a></h2><p>selection sort:</p>
+<img src="/2018/06/28/2018-6-28-算法总结/1.png">
+
+<p>time complexity:Θ(n^2)</p>
+<p>bubble sort:</p>
+<img src="/2018/06/28/2018-6-28-算法总结/2.png">
+
+<p>time complexity:Θ(n^2)</p>
+<h1><span id="divide-and-conquer">Divide-and-Conquer</span><a href="#divide-and-conquer" class="header-anchor">#</a></h1><h2><span id="zhu-ding-li">主定理</span><a href="#zhu-ding-li" class="header-anchor">#</a></h2><p>主定理的使用请看这篇博文：<a href="http://logos23333.top/algorithm/2018/02/26/%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA%E7%AC%94%E8%AE%B0dacpart3/" target="_blank" rel="noopener">《Introduction to Algorithm》notes:Three methods for solving recurrences</a>。</p>
+<h2><span id="mergesort">MergeSort</span><a href="#mergesort" class="header-anchor">#</a></h2><img src="/2018/06/28/2018-6-28-算法总结/3.png">
+
+<img src="/2018/06/28/2018-6-28-算法总结/4.png">
+
+<p>Mergesort无论在最差平均还是最好情况下，time complexity都是Θ(nlogn)。</p>
+<h2><span id="quicksort">Quicksort</span><a href="#quicksort" class="header-anchor">#</a></h2><img src="/2018/06/28/2018-6-28-算法总结/5.png">
+
+<p>Best case: split in the middle — Θ(n log n)<br>Worst case: sorted array! — Θ(n2)<br>Average case: random arrays — Θ(n log n)  </p>
+<h1><span id="decrease-and-conquer">Decrease-and-Conquer</span><a href="#decrease-and-conquer" class="header-anchor">#</a></h1><h2><span id="types-of-decrease-and-conquer">Types of Decrease and Conquer</span><a href="#types-of-decrease-and-conquer" class="header-anchor">#</a></h2><ol>
+<li>Decrease by a constant (usually by 1): insertion sort/graph traversal algorithms (DFS and BFS)/topological sorting/algorithms for generating permutations, subsets    </li>
+<li>Decrease by a constant factor (usually by half):binary search and bisection method/exponentiation by squaring/multiplication à la russe</li>
+<li>Variable-size decrease:Euclid’s algorithm/selection by partition/Nim-like games</li>
+</ol>
+<h2><span id="insertionsort">InsertionSort</span><a href="#insertionsort" class="header-anchor">#</a></h2><img src="/2018/06/28/2018-6-28-算法总结/6.png">
+
+<p>Time efficiency<br>    Cworst(n) = n(n-1)/2∈Θ(n2)<br>    Cavg(n) ≈ n2/4∈Θ(n2)<br>    Cbest(n) = n - 1∈Θ(n)  (also fast on almost sorted arrays)<br>Space efficiency: in-place<br>Stability: yes<br>Best elementary sorting algorithm overall<br>Binary insertion sort  </p>
+<h1><span id="transform-and-conquer">Transform-and-Conquer</span><a href="#transform-and-conquer" class="header-anchor">#</a></h1><h2><span id="avl-shu">AVL树</span><a href="#avl-shu" class="header-anchor">#</a></h2><p>熟悉好rotation操作就Ok了。<br>Search and insertion are O(log n)<br>Deletion is more complicated but is also O(log n)</p>
+<h2><span id="heapsort">HeapSort</span><a href="#heapsort" class="header-anchor">#</a></h2><p>Both worst-case and average-case efficiency: (nlogn)<br>In-place: yes<br>Stability: no (e.g., 1  1)</p>
+]]></content>
+      <categories>
+        <category>Algorithm</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+</search>
