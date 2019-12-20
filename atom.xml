@@ -127,33 +127,6 @@
   </entry>
   
   <entry>
-    <title>Ubuntu设置系统环境变量和开机自启动</title>
-    <link href="https://qaqu.net/2019/08/07/2019-8-7-Ubuntu18.04%E8%AE%BE%E7%BD%AE%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8%E6%9C%8D%E5%8A%A1/"/>
-    <id>https://qaqu.net/2019/08/07/2019-8-7-Ubuntu18.04%E8%AE%BE%E7%BD%AE%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8%E6%9C%8D%E5%8A%A1/</id>
-    <published>2019-08-07T00:00:00.000Z</published>
-    <updated>2019-12-20T05:57:40.687Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1&gt;&lt;span id=&quot;yi-ubuntu-xi-tong-huan-jing-bian-liang-xiang-jie&quot;&gt;一、Ubuntu系统环境变量详解&lt;/span&gt;&lt;a
-        
-      
-    
-    </summary>
-    
-    
-      <category term="linux" scheme="https://qaqu.net/categories/linux/"/>
-    
-    
-      <category term="ubuntu" scheme="https://qaqu.net/tags/ubuntu/"/>
-    
-  </entry>
-  
-  <entry>
     <title>提速 git push速度</title>
     <link href="https://qaqu.net/2019/08/07/2019-8-7-%E6%8F%90%E9%80%9F%20git%20push%E9%80%9F%E5%BA%A6/"/>
     <id>https://qaqu.net/2019/08/07/2019-8-7-%E6%8F%90%E9%80%9F%20git%20push%E9%80%9F%E5%BA%A6/</id>
@@ -177,6 +150,33 @@
     
     
       <category term="git" scheme="https://qaqu.net/tags/git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Ubuntu设置系统环境变量和开机自启动</title>
+    <link href="https://qaqu.net/2019/08/07/2019-8-7-Ubuntu18.04%E8%AE%BE%E7%BD%AE%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8%E6%9C%8D%E5%8A%A1/"/>
+    <id>https://qaqu.net/2019/08/07/2019-8-7-Ubuntu18.04%E8%AE%BE%E7%BD%AE%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8%E6%9C%8D%E5%8A%A1/</id>
+    <published>2019-08-07T00:00:00.000Z</published>
+    <updated>2019-12-20T05:57:40.687Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1&gt;&lt;span id=&quot;yi-ubuntu-xi-tong-huan-jing-bian-liang-xiang-jie&quot;&gt;一、Ubuntu系统环境变量详解&lt;/span&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="linux" scheme="https://qaqu.net/categories/linux/"/>
+    
+    
+      <category term="ubuntu" scheme="https://qaqu.net/tags/ubuntu/"/>
     
   </entry>
   
