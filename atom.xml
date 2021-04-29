@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://qaqu.net/"/>
-  <updated>2021-02-26T02:33:50.589Z</updated>
+  <updated>2021-04-29T10:47:19.934Z</updated>
   <id>https://qaqu.net/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>本地仓库上传github</title>
+    <link href="https://qaqu.net/2021-4-29-%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E4%B8%8A%E4%BC%A0github/"/>
+    <id>https://qaqu.net/2021-4-29-%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E4%B8%8A%E4%BC%A0github/</id>
+    <published>2021-04-28T16:00:00.000Z</published>
+    <updated>2021-04-29T10:47:19.934Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="远程库与本地库之间的操作"><a href="#远程库与本地库之间的操作" class="headerlink" title="远程库与本地库之间的操作"></a>远程库与本地库之间的操作</h1><p>1.从远程克隆一份到本地可以通过git clone</p><p>Git支持HTTPS和SSH协议，SSH速度更快</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git clone git@github.com:username&#x2F;repositoriesname.git</span><br><span class="line">&#96;&#96;&#96; </span><br><span class="line"></span><br><span class="line">2.本地库关联远程库，在本地仓库目录运行命令：</span><br></pre></td></tr></table></figure><p>$ git remote add origin <a href="mailto:git@github.com">git@github.com</a>:username/repositoriesname.git</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line"></span><br><span class="line">3.推送master分支的所有内容</span><br></pre></td></tr></table></figure><p>$ git push -u origin master</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">第一次使用加上了-u参数，是推送内容并关联分支。</span><br><span class="line"></span><br><span class="line">推送成功后就可以看到远程和本地的内容一模一样，下次只要本地作了提交，就可以通过命令：</span><br></pre></td></tr></table></figure><p>$ git push origin master</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">把最新内容推送到Github</span><br><span class="line"></span><br><span class="line">不检查强行推送到github</span><br></pre></td></tr></table></figure><p>$ git push -f origin master</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># 添加SSH Key 到GitHub</span><br></pre></td></tr></table></figure><p>ssh-keygen -t rsa -C “邮件地址@youremail.com” #生成新的key文件,邮箱地址填你的Github地址<br>#Enter file in which to save the key (/Users/your_user_directory/.ssh/id_rsa):&lt;回车就好&gt;<br>#接下来会让你输入密码</p><pre><code>在github上Setting中选择SSH and GPG keys点击New SSHKey然后找到当前用户目录下C:\Users\用户名\ .ssh id_rsa.pub文件以文本方式打开。打开之后全部复制到key中</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;远程库与本地库之间的操作&quot;&gt;&lt;a href=&quot;#远程库与本地库之间的操作&quot; class=&quot;headerlink&quot; title=&quot;远程库与本地库之间的操作&quot;&gt;&lt;/a&gt;远程库与本地库之间的操作&lt;/h1&gt;&lt;p&gt;1.从远程克隆一份到本地可以通过git clone&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+    
+      <category term="git" scheme="https://qaqu.net/categories/git/"/>
+    
+    
+      <category term="常用" scheme="https://qaqu.net/tags/%E5%B8%B8%E7%94%A8/"/>
+    
+  </entry>
   
   <entry>
     <title>bashrc中更新cuda指向</title>
@@ -523,32 +550,6 @@
     
     
       <category term="ubuntu" scheme="https://qaqu.net/tags/ubuntu/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ubuntu 13.04中g++-4.5和 gcc-4.5安装</title>
-    <link href="https://qaqu.net/2019-8-4-ubuntu%2013.04%E4%B8%ADgcc-4.5%E5%AE%89%E8%A3%85/"/>
-    <id>https://qaqu.net/2019-8-4-ubuntu%2013.04%E4%B8%ADgcc-4.5%E5%AE%89%E8%A3%85/</id>
-    <published>2019-08-03T16:00:00.000Z</published>
-    <updated>2020-01-13T14:36:49.203Z</updated>
-    
-    <content type="html"><![CDATA[<p>1、安装包的下载与安装</p><p>1)gcc-4.5-base安装</p><p>下载地址：<a href="https://launchpad.net/ubuntu/quantal/amd64/gcc-4.5-base/4.5.4-1ubuntu2" target="_blank" rel="noopener">https://launchpad.net/ubuntu/quantal/amd64/gcc-4.5-base/4.5.4-1ubuntu2</a></p><p>在终端输入安装命令：$ sudo dpkg -igcc-4.5-base_4.5.4-1ubuntu2_amd64.deb</p><a id="more"></a><p>2）cpp-4.5安装</p><p>下载地址：<a href="https://launchpad.net/ubuntu/quantal/amd64/cpp-4.5/4.5.4-1ubuntu2" target="_blank" rel="noopener">https://launchpad.net/ubuntu/quantal/amd64/cpp-4.5/4.5.4-1ubuntu2</a></p><p>在终端输入安装命令：$ sudo dpkg-icpp-4.5_4.5.4-1ubuntu2_amd64.deb</p><p>3）gcc-4.5 安装</p><p>下载地址：<a href="https://launchpad.net/ubuntu/raring/amd64/gcc-4.5/4.5.4-1ubuntu2" target="_blank" rel="noopener">https://launchpad.net/ubuntu/raring/amd64/gcc-4.5/4.5.4-1ubuntu2</a></p><p>在终端输入安装命令：$ sudo dpkg -igcc-4.5_4.5.4-1ubuntu2_amd64.deb</p><p>4）g++-4.5与libstdc++6-4.5-dev的安装</p><p>g++下载地址： <a href="https://launchpad.net/ubuntu/raring/amd64/g++-4.5/4.5.4-1ubuntu2" target="_blank" rel="noopener">https://launchpad.net/ubuntu/raring/amd64/g++-4.5/4.5.4-1ubuntu2</a></p><p>libstdc++6-4.5-dev下载地址：<a href="https://launchpad.net/ubuntu/quantal/amd64/libstdc++6-4.5-dev/4.5.4-1ubuntu2" target="_blank" rel="noopener">https://launchpad.net/ubuntu/quantal/amd64/libstdc++6-4.5-dev/4.5.4-1ubuntu2</a></p><p>因为g++与libstdc++相互依赖，所以需要两个安装包一起安装</p><p>在终端输入安装命令：$ sudo dpkg-ilibstdc++6-4.5-dev_4.5.4-1ubuntu2_amd64.deb g++-4.5_4.5.4-1ubuntu2_amd64.deb</p><p>此时，gcc-4.5和g++-4.5已经全部安装完成，我们需要将gcc和g++-4.5设置为系统的默认版本。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;1、安装包的下载与安装&lt;/p&gt;
-&lt;p&gt;1)gcc-4.5-base安装&lt;/p&gt;
-&lt;p&gt;下载地址：&lt;a href=&quot;https://launchpad.net/ubuntu/quantal/amd64/gcc-4.5-base/4.5.4-1ubuntu2&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://launchpad.net/ubuntu/quantal/amd64/gcc-4.5-base/4.5.4-1ubuntu2&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;在终端输入安装命令：$ sudo dpkg -igcc-4.5-base_4.5.4-1ubuntu2_amd64.deb&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="linux" scheme="https://qaqu.net/categories/linux/"/>
-    
-    
-      <category term="gcc" scheme="https://qaqu.net/tags/gcc/"/>
     
   </entry>
   
