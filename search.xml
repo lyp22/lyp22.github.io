@@ -5,20 +5,29 @@
     <url>/2021-4-29-%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E4%B8%8A%E4%BC%A0github/</url>
     <content><![CDATA[<h1 id="远程库与本地库之间的操作"><a href="#远程库与本地库之间的操作" class="headerlink" title="远程库与本地库之间的操作"></a>远程库与本地库之间的操作</h1><p>1.从远程克隆一份到本地可以通过git clone</p>
 <p>Git支持HTTPS和SSH协议，SSH速度更快</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git clone git@github.com:username&#x2F;repositoriesname.git</span><br><span class="line">&#96;&#96;&#96; </span><br><span class="line"></span><br><span class="line">2.本地库关联远程库，在本地仓库目录运行命令：</span><br></pre></td></tr></table></figure>
-<p>$ git remote add origin <a href="mailto:git@github.com">git@github.com</a>:username/repositoriesname.git</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> </span><br><span class="line"></span><br><span class="line">3.推送master分支的所有内容</span><br></pre></td></tr></table></figure>
-<p>$ git push -u origin master</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">第一次使用加上了-u参数，是推送内容并关联分支。</span><br><span class="line"></span><br><span class="line">推送成功后就可以看到远程和本地的内容一模一样，下次只要本地作了提交，就可以通过命令：</span><br></pre></td></tr></table></figure>
-<p>$ git push origin master</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">把最新内容推送到Github</span><br><span class="line"></span><br><span class="line">不检查强行推送到github</span><br></pre></td></tr></table></figure>
-<p>$ git push -f origin master</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"># 添加SSH Key 到GitHub</span><br></pre></td></tr></table></figure>
-<p>ssh-keygen -t rsa -C “邮件地址@youremail.com” #生成新的key文件,邮箱地址填你的Github地址<br>#Enter file in which to save the key (/Users/your_user_directory/.ssh/id_rsa):&lt;回车就好&gt;<br>#接下来会让你输入密码</p>
-<pre><code>
-在github上Setting中选择SSH and GPG keys点击New SSHKey
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git clone git@github.com:username&#x2F;repositoriesname.git</span><br></pre></td></tr></table></figure>
 
-然后找到当前用户目录下C:\Users\用户名\ .ssh id_rsa.pub文件以文本方式打开。打开之后全部复制到key中</code></pre>]]></content>
+<p>2.本地库关联远程库，在本地仓库目录运行命令：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git remote add origin git@github.com:username&#x2F;repositoriesname.git</span><br></pre></td></tr></table></figure>
+
+<p>3.推送master分支的所有内容</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
+
+<p>第一次使用加上了-u参数，是推送内容并关联分支。</p>
+<p>推送成功后就可以看到远程和本地的内容一模一样，下次只要本地作了提交，就可以通过命令：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git push origin master</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<h1 id="把最新内容推送到Github"><a href="#把最新内容推送到Github" class="headerlink" title="把最新内容推送到Github"></a>把最新内容推送到Github</h1><p>不检查强行推送到github</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git push -f origin master</span><br></pre></td></tr></table></figure>
+
+<p>添加SSH Key 到GitHub</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;邮件地址@youremail.com&quot; #生成新的key文件,邮箱地址填你的Github地址</span><br><span class="line">#Enter file in which to save the key (&#x2F;Users&#x2F;your_user_directory&#x2F;.ssh&#x2F;id_rsa):&lt;回车就好&gt;</span><br><span class="line">#接下来会让你输入密码</span><br></pre></td></tr></table></figure>
+
+<p>在github上Setting中选择SSH and GPG keys点击New SSHKey</p>
+<p>然后找到当前用户目录下C:\Users\用户名\ .ssh id_rsa.pub文件以文本方式打开。打开之后全部复制到key中</p>
+]]></content>
       <categories>
         <category>git</category>
       </categories>
