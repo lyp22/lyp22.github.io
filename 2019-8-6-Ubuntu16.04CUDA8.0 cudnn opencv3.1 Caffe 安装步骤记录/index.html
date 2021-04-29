@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#fff">
+
+<link rel="preload" href="/fonts/sigmarone3.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+
+
+
+
+
+
+
+  
+
+<link href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+
+
+  
+
+<link href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=" rel="stylesheet" type="text/css" />
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=">
+
+
+  <link rel="mask-icon" href="/safari-pinned-tab.svg?v=" color="#fff">
+
+
+
+
+
+
+  <meta name="keywords" content="常用," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="QAQu’s Blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="1、安装依赖包  2、禁用 nouveau  3、配置环境变量  4、下载 CUDA 8.0  5、安装 CUDA 8.0  6、验证 CUDA 8.0 是否安装成功  7、安装 cudnn  8、安装 opencv3.1  9、安装 caffe  10、安装 pycaffe notebook 接口环境">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ubuntu16.04CUDA8.0+cudnn+opencv3.1+ Caffe 安装步骤记录">
+<meta property="og:url" content="https://qaqu.net/2019-8-6-Ubuntu16.04CUDA8.0%20cudnn%20opencv3.1%20Caffe%20%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:site_name" content="QAQu’s Blog">
+<meta property="og:description" content="1、安装依赖包  2、禁用 nouveau  3、配置环境变量  4、下载 CUDA 8.0  5、安装 CUDA 8.0  6、验证 CUDA 8.0 是否安装成功  7、安装 cudnn  8、安装 opencv3.1  9、安装 caffe  10、安装 pycaffe notebook 接口环境">
+<meta property="article:published_time" content="2019-08-05T16:00:00.000Z">
+<meta property="article:modified_time" content="2019-12-20T08:44:46.548Z">
+<meta property="article:author" content="QAQu">
+<meta property="article:tag" content="常用">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '',
+    sidebar: {"position":"right","display":"always","offset":52,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    since: '12/10/2018 11:30:00',
+    onlineAPI: 'wss://onlinecount.herokuapp.com/online',
+    site: {
+      title: 'QAQu’s Blog',
+      subtitle: '',
+      author: 'QAQu'
+    },
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    leancloud: {
+      enable: false,
+      appID: 'h3Y827lG7R3s3eFGdBDMka2u-MdYXbMMI',
+      appKey: '7AyfA498Cr1eGenSgpHgLfxO'
+    },
+    favicon: {
+      visibilitychange: false,
+      narmal: '/favicon.ico',
+      hidden: '/failure.ico',
+      show_text: '(/≧▽≦/)欢迎回来!',
+      hide_text: '(●—●)QAQu’s Blog'
+    }
+  };
+</script>
+
+
+
+
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/disqusjs@1.2.2/dist/disqus.js"></script>
+
+
+
+
+  <link rel="canonical" href="https://qaqu.net/2019-8-6-Ubuntu16.04CUDA8.0 cudnn opencv3.1 Caffe 安装步骤记录/"/>
+
+
+
+
+
+  <title>Ubuntu16.04CUDA8.0+cudnn+opencv3.1+ Caffe 安装步骤记录 | QAQu’s Blog</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans" class="theme-darling">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-首页">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+          
+        </li>
+      
+        
+        <li class="menu-item menu-item-归档">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+          
+        </li>
+      
+        
+        <li class="menu-item menu-item-标签">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tag"></i> <br />
+            
+            标签
+          </a>
+          
+        </li>
+      
+        
+        <li class="menu-item menu-item-分类">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tag"></i> <br />
+            
+            分类
+          </a>
+          
+        </li>
+      
+        
+        <li class="menu-item menu-item-友链">
+          <a href="/friends/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-mars"></i> <br />
+            
+            友链
+          </a>
+          
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+      <li class="menu-item search">
+          <form class="search-form">
+            <input name="keyword" type="text" class="search-input" placeholder="站内搜索">
+            <button type="submit" class="search-submit"><i class="fa fa-search"></i></button>
+          </form>
+      </li>
+      <li class="menu-item online"><span id="online-count">?</span>人在线</li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+<div class="site-brand-wrapper" style="background-image: url(/images/header-leg.jpg)">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <div class="brand">
+        <span class="logo-line-before"><i></i></span>
+        <div class="site-title">
+          <div id="animate" class="animate">
+            <span>Q</span><span>A</span><span>Q</span><span>u</span><span>’</span><span>s</span><span> </span><span>B</span><span>l</span><span>o</span><span>g</span>
+          </div>
+          <div id="guide" class="guide">
+            <span>Q</span><span>A</span><span>Q</span><span>u</span><span>’</span><span>s</span><span> </span><span>B</span><span>l</span><span>o</span><span>g</span>
+          </div>
+        </div>
+        <span class="logo-line-after"><i></i></span>
+      </div>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+<div class="site-master" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-master-avatar" itemprop="image" src="/images/qaqu.jpg" alt="QAQu" />
+    <h2 class="site-master-description" itemprop="description">
+        <span>深度学习</span><span>技术笔记</span>
+    </h2>
+</div>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-date">
+			<div class="post-month">08月</div>
+			<div class="post-day">06</div>
+	</div>
+  
+  <div class="post-badge">
+    
+      <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+        <a href="/categories/cuda/" itemprop="url" rel="index">
+          <span itemprop="name">cuda</span>
+        </a>
+      </span>
+    
+  </div>
+  
+
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://qaqu.net/2019-8-6-Ubuntu16.04CUDA8.0%20cudnn%20opencv3.1%20Caffe%20%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4%E8%AE%B0%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QAQu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/qaqu.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QAQu’s Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Ubuntu16.04CUDA8.0+cudnn+opencv3.1+ Caffe 安装步骤记录</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-06T00:00:00+08:00">2019-08-06</time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">•</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">2411</span>
+              
+
+              
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>1、安装依赖包 </p>
+<p>2、禁用 nouveau </p>
+<p>3、配置环境变量 </p>
+<p>4、下载 CUDA 8.0 </p>
+<p>5、安装 CUDA 8.0 </p>
+<p>6、验证 CUDA 8.0 是否安装成功 </p>
+<p>7、安装 cudnn </p>
+<p>8、安装 opencv3.1 </p>
+<p>9、安装 caffe </p>
+<p>10、安装 pycaffe notebook 接口环境</p>
+<a id="more"></a>
+
+<h1 id="第1步-安装依赖包"><a href="#第1步-安装依赖包" class="headerlink" title="第1步 安装依赖包"></a>第1步 安装依赖包</h1><p>安装后续步骤或环境必需的依赖包，依次输入以下命令:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libhdf5-serial-dev protobuf-compiler</span><br><span class="line"></span><br><span class="line">sudo apt-get install --no-install-recommends libboost-all-dev</span><br><span class="line"></span><br><span class="line">sudo apt-get install libopenblas-dev liblapack-dev libatlas-base-dev</span><br><span class="line"></span><br><span class="line">sudo apt-get install libgflags-dev libgoogle-glog-dev liblmdb-dev</span><br><span class="line"></span><br><span class="line">sudo apt-get install git cmake build-essential</span><br></pre></td></tr></table></figure>
+
+
+<p>有一定几率安装失败而导致后续步骤出现问题，所以要确保以上依赖包都已安装成功，验证方法就是重新运行安装命令，如验证 git cmake build-essential是否安装成功共则再次运行以下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install git cmake build-essential</span><br></pre></td></tr></table></figure>
+
+<p>界面提示如下则说明已成功安装依赖包，否则继续安装直到安装成功。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">yhao@yhao-X550VB:~$ sudo apt-get install git cmake build-essential</span><br><span class="line">正在读取软件包列表... 完成</span><br><span class="line">正在分析软件包的依赖关系树       </span><br><span class="line">正在读取状态信息... 完成       </span><br><span class="line">build-essential 已经是最新版 (12.1ubuntu2)。</span><br><span class="line">cmake 已经是最新版 (3.5.1-1ubuntu3)。</span><br><span class="line">git 已经是最新版 (1:2.7.4-0ubuntu1.1)。</span><br><span class="line">下列软件包是自动安装的并且现在不需要了：</span><br><span class="line">  lib32gcc1 libc6-i386</span><br><span class="line">使用&#39;sudo apt autoremove&#39;来卸载它(它们)。</span><br><span class="line">升级了 0 个软件包，新安装了 0 个软件包，要卸载 0 个软件包，有 94 个软件包未被升级。</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="第2步-禁用-nouveau"><a href="#第2步-禁用-nouveau" class="headerlink" title="第2步 禁用 nouveau"></a>第2步 禁用 nouveau</h1><p>安装好依赖包后需要禁用 nouveau，只有在禁用掉 nouveau 后才能顺利安装 NVIDIA 显卡驱动，禁用方法就是在 /etc/modprobe.d/blacklist-nouveau.conf 文件中添加一条禁用命令，首先需要打开该文件，通过以下命令打开：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gedit &#x2F;etc&#x2F;modprobe.d&#x2F;blacklist-nouveau.conf</span><br></pre></td></tr></table></figure>
+
+<p>打开后发现该文件中没有任何内容，写入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">blacklist nouveau option nouveau modeset&#x3D;0</span><br></pre></td></tr></table></figure>
+
+<p>保存时命令窗口可能会出现以下提示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">** (gedit:4243): WARNING **: Set document metadata failed: 不支持设置属性 metadata::gedit-position</span><br></pre></td></tr></table></figure>
+
+<p>无视此提示～，保存后关闭文件，注意此时还需执行以下命令使禁用 nouveau 真正生效：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo update-initramfs -u</span><br></pre></td></tr></table></figure>
+
+<h1 id="第3步-配置环境变量"><a href="#第3步-配置环境变量" class="headerlink" title="第3步 配置环境变量"></a>第3步 配置环境变量</h1><p>同样使用 gedit 命令打开配置文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gedit ~&#x2F;.bashrc</span><br></pre></td></tr></table></figure>
+
+<p>打开后在文件最后加入以下两行内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export LD_LIBRARY_PATH&#x3D;&#x2F;usr&#x2F;lib&#x2F;x86_64-linux-gnu:$LD_LIBRARY_PATH</span><br><span class="line"></span><br><span class="line">export LD_LIBRARY_PATH&#x3D;&#x2F;lib&#x2F;x86_64-linux-gnu:$LD_LIBRARY_PATH</span><br></pre></td></tr></table></figure>
+
+<p>保存退出。</p>
+<h1 id="第4步-下载-CUDA-8-0"><a href="#第4步-下载-CUDA-8-0" class="headerlink" title="第4步 下载 CUDA 8.0"></a>第4步 下载 CUDA 8.0</h1><p>进入 <a href="https://developer.nvidia.com/cuda-downloads" target="_blank" rel="noopener">https://developer.nvidia.com/cuda-downloads</a> ，依次选择 CUDA 类型然后下载即可。 </p>
+<h1 id="第5步-安装-CUDA-8-0（关闭图形化没有必要）"><a href="#第5步-安装-CUDA-8-0（关闭图形化没有必要）" class="headerlink" title="第5步 安装 CUDA 8.0（关闭图形化没有必要）"></a>第5步 安装 CUDA 8.0（关闭图形化没有必要）</h1><p>第四步下载的1.4G的 CUDA中包含有 nvidia 显卡驱动，故此步骤 CUDA 的安装包括了 nvidia 显卡驱动的安装，此时注意你是否已经安装过 nvidia 显卡驱动，若无法保证已安装的 nvidia 显卡驱动一定正确，那就卸载掉之前安装的 nvidia 显卡驱动（卸载方法链接)，然后开始安装 CUDA 8.0；若可以保证已安装正确的 nvidia 显卡驱动，则直接开始安装 CUDA 8.0，在安装过程中选择不再安装 nvidia 显卡驱动。</p>
+<p>为了方便开始安装过程的路径查找，把下载的 CUDA 安装文件移动到 HOME 路径下，然后通过 Ctrl + Alt + F1 进入文本模式，输入帐号密码登录，通过 Ctrl + Alt + F7 可返回图形化模式，在文本模式登录后首先关闭桌面服务：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service lightdm stop</span><br></pre></td></tr></table></figure>
+
+
+<p>然后通过 Ctrl + Alt + F7 发现已无法成功返回图形化模式，说明桌面服务已成功关闭，注意此步对接下来的 nvidia 驱动安装尤为重要，必需确保桌面服务已关闭。</p>
+<p>Ctrl + Alt + F1 进入文本模式，然后运行 CUDA 安装文件进行安装，之前我们已经把 CUDA 安装文件移动至 HOME，直接通过 sh 命令运行安装文件即可：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo sh cuda_8.0.61_375.26_linux.run --no-opengl-libs</span><br></pre></td></tr></table></figure>
+
+<p>其中 cuda_8.0.61_375.26_linux.run 是我的 CUDA 安装文件名，而你需替换为自己的 CUDA 安装文件名，若此时忘记可直接通过 ls 文件查看文件名，这也是我建议把 CUDA 安装文件移动到 HOME 下的另一个原因。</p>
+<p>执行此命令约1分钟后会出现 0%信息，此时长按回车键让此百分比增长，直到100%，然后按照提示操作即可，先输入 accept ，然后让选择是否安装 nvidia 驱动，这里的选择对应第5步开头，若未安装则输入 “y”，若确保已安装正确驱动则输入“n”。</p>
+<p>剩下的选择则都输入“y”确认安装或确认默认路径安装，开始安装，此时若出现安装失败提示则可能为未关闭桌面服务或在已安装 nvidia 驱动的情况下重复再次安装 nvidia 驱动，安装完成后输入重启命令重启：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reboot</span><br></pre></td></tr></table></figure>
+
+<p>重启后登录进入系统，配置 CUDA 环境变量，与第3步相同，使用 gedit 命令打开配置文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gedit ~&#x2F;.bashrc</span><br></pre></td></tr></table></figure>
+
+<p>在该文件最后加入以下两行并保存：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export PATH&#x3D;&#x2F;usr&#x2F;local&#x2F;cuda-8.0&#x2F;bin:$PATH</span><br><span class="line"></span><br><span class="line">export LD_LIBRARY_PATH&#x3D;&#x2F;usr&#x2F;local&#x2F;cuda&#x2F;lib64:$LD_LIBRARY_PATH</span><br></pre></td></tr></table></figure>
+
+<p>使该配置生效：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~&#x2F;.bashrc</span><br></pre></td></tr></table></figure>
+
+<h1 id="第6步-验证-CUDA-8-0-是否安装成功"><a href="#第6步-验证-CUDA-8-0-是否安装成功" class="headerlink" title="第6步 验证 CUDA 8.0 是否安装成功"></a>第6步 验证 CUDA 8.0 是否安装成功</h1><p>分别执行以下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd &#x2F;usr&#x2F;local&#x2F;cuda-8.0&#x2F;samples&#x2F;1_Utilities&#x2F;deviceQuery</span><br><span class="line"></span><br><span class="line">sudo make</span><br><span class="line"></span><br><span class="line">.&#x2F;deviceQuery</span><br></pre></td></tr></table></figure>
+
+<p>若看到类似以下信息则说明 cuda 已安装成功：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;deviceQuery Starting...</span><br><span class="line"></span><br><span class="line"> CUDA Device Query (Runtime API) version (CUDART static linking)</span><br><span class="line"></span><br><span class="line">Detected 1 CUDA Capable device(s)</span><br><span class="line"></span><br><span class="line">Device 0: &quot;GeForce GT 740M&quot;</span><br><span class="line">  CUDA Driver Version &#x2F; Runtime Version          8.0 &#x2F; 8.0</span><br><span class="line">  CUDA Capability Major&#x2F;Minor version number:    3.5</span><br><span class="line">  Total amount of global memory:                 2004 MBytes (2100953088 bytes)</span><br><span class="line">  ( 2) Multiprocessors, (192) CUDA Cores&#x2F;MP:     384 CUDA Cores</span><br><span class="line">  GPU Max Clock rate:                            1032 MHz (1.03 GHz)</span><br><span class="line">  Memory Clock rate:                             800 Mhz</span><br><span class="line">  Memory Bus Width:                              64-bit</span><br><span class="line">  L2 Cache Size:                                 524288 bytes</span><br><span class="line">  Maximum Texture Dimension Size (x,y,z)         1D&#x3D;(65536), 2D&#x3D;(65536, 65536), 3D&#x3D;(4096, 4096, 4096)</span><br><span class="line">  Maximum Layered 1D Texture Size, (num) layers  1D&#x3D;(16384), 2048 layers</span><br><span class="line">  Maximum Layered 2D Texture Size, (num) layers  2D&#x3D;(16384, 16384), 2048 layers</span><br><span class="line">  Total amount of constant memory:               65536 bytes</span><br><span class="line">  Total amount of shared memory per block:       49152 bytes</span><br><span class="line">  Total number of registers available per block: 65536</span><br><span class="line">  Warp size:                                     32</span><br><span class="line">  Maximum number of threads per multiprocessor:  2048</span><br><span class="line">  Maximum number of threads per block:           1024</span><br><span class="line">  Max dimension size of a thread block (x,y,z): (1024, 1024, 64)</span><br><span class="line">  Max dimension size of a grid size    (x,y,z): (2147483647, 65535, 65535)</span><br><span class="line">  Maximum memory pitch:                          2147483647 bytes</span><br><span class="line">  Texture alignment:                             512 bytes</span><br><span class="line">  Concurrent copy and kernel execution:          Yes with 1 copy engine(s)</span><br><span class="line">  Run time limit on kernels:                     No</span><br><span class="line">  Integrated GPU sharing Host Memory:            No</span><br><span class="line">  Support host page-locked memory mapping:       Yes</span><br><span class="line">  Alignment requirement for Surfaces:            Yes</span><br><span class="line">  Device has ECC support:                        Disabled</span><br><span class="line">  Device supports Unified Addressing (UVA):      Yes</span><br><span class="line">  Device PCI Domain ID &#x2F; Bus ID &#x2F; location ID:   0 &#x2F; 1 &#x2F; 0</span><br><span class="line">  Compute Mode:</span><br><span class="line">     &lt; Default (multiple host threads can use ::cudaSetDevice() with device simultaneously) &gt;</span><br><span class="line"></span><br><span class="line">deviceQuery, CUDA Driver &#x3D; CUDART, CUDA Driver Version &#x3D; 8.0, CUDA Runtime Version &#x3D; 8.0, NumDevs &#x3D; 1, Device0 &#x3D; GeForce GT 740M</span><br><span class="line">Result &#x3D; PASS</span><br></pre></td></tr></table></figure>
+
+<h1 id="第7步-安装-cudnn"><a href="#第7步-安装-cudnn" class="headerlink" title="第7步 安装 cudnn"></a>第7步 安装 cudnn</h1><p>登录官网：<a href="https://developer.nvidia.com/rdp/cudnn-download" target="_blank" rel="noopener">https://developer.nvidia.com/rdp/cudnn-download</a> ，下载对应 cuda 版本且 linux 系统的 cudnn 压缩包，注意官网下载 cudnn 需要注册帐号并登录，不想注册的可从我的网盘下载：<a href="https://pan.baidu.com/s/1c2xPVzy" target="_blank" rel="noopener">https://pan.baidu.com/s/1c2xPVzy</a></p>
+<p>下载完成后解压，得到一个 cudn 文件夹，该文件夹下include 和 lib64 两个文件夹，命令行进入 cudn/include 路径下，然后进行以下操作：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo cp cudnn.h &#x2F;usr&#x2F;local&#x2F;cuda&#x2F;include&#x2F; #复制头文件</span><br></pre></td></tr></table></figure>
+
+<p>然后命令行进入 cudn/lib64 路径下，运行以下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo cp lib* &#x2F;usr&#x2F;local&#x2F;cuda&#x2F;lib64&#x2F; #复制动态链接库</span><br><span class="line">cd &#x2F;usr&#x2F;local&#x2F;cuda&#x2F;lib64&#x2F;sudo rm -rf libcudnn.so libcudnn.so.5 #删除原有动态文件</span><br><span class="line">sudo ln -s libcudnn.so.5.1.10 libcudnn.so.5 #生成软衔接</span><br><span class="line">sudo ln -s libcudnn.so.5 libcudnn.so #生成软链接</span><br></pre></td></tr></table></figure>
+
+<p>这里需要注意第三行命令，网上有人的第三行命令为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ln -s libcudnn.so.5.1.5 libcudnn.so.5 #生成软衔接</span><br></pre></td></tr></table></figure>
+
+<p>起初我执行的也是上条链接 libcudnn.so.5.1.5 的命令，但是后面编译caffe时出错，报错内容为 /usr/bin/ld: 找不到 -lcudnn，所以这里需要先查看一下自己应该链接的是 libcudnn.so.5.1.10 还是 libcudnn.so.5.1.5 ，查看方法为下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">locate libcudnn.so</span><br></pre></td></tr></table></figure>
+
+<p>我执行完后显示如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">yhao@yhao-X550VB:~$ locate libcudnn.so</span><br><span class="line">&#x2F;home&#x2F;yhao&#x2F;.local&#x2F;share&#x2F;Trash&#x2F;files&#x2F;libcudnn.so</span><br><span class="line">&#x2F;home&#x2F;yhao&#x2F;.local&#x2F;share&#x2F;Trash&#x2F;files&#x2F;libcudnn.so.5</span><br><span class="line">&#x2F;home&#x2F;yhao&#x2F;.local&#x2F;share&#x2F;Trash&#x2F;files&#x2F;libcudnn.so.5.1.10</span><br><span class="line">&#x2F;home&#x2F;yhao&#x2F;.local&#x2F;share&#x2F;Trash&#x2F;files&#x2F;cuda&#x2F;lib64&#x2F;libcudnn.so</span><br><span class="line">&#x2F;home&#x2F;yhao&#x2F;.local&#x2F;share&#x2F;Trash&#x2F;files&#x2F;cuda&#x2F;lib64&#x2F;libcudnn.so.5</span><br><span class="line">&#x2F;home&#x2F;yhao&#x2F;.local&#x2F;share&#x2F;Trash&#x2F;files&#x2F;cuda&#x2F;lib64&#x2F;libcudnn.so.5.1.10</span><br><span class="line">&#x2F;home&#x2F;yhao&#x2F;.local&#x2F;share&#x2F;Trash&#x2F;info&#x2F;libcudnn.so.5.1.10.trashinfo</span><br><span class="line">&#x2F;home&#x2F;yhao&#x2F;.local&#x2F;share&#x2F;Trash&#x2F;info&#x2F;libcudnn.so.5.trashinfo</span><br><span class="line">&#x2F;home&#x2F;yhao&#x2F;.local&#x2F;share&#x2F;Trash&#x2F;info&#x2F;libcudnn.so.trashinfo</span><br><span class="line">&#x2F;home&#x2F;yhao&#x2F;cuda&#x2F;lib64&#x2F;libcudnn.so</span><br><span class="line">&#x2F;home&#x2F;yhao&#x2F;cuda&#x2F;lib64&#x2F;libcudnn.so.5</span><br><span class="line">&#x2F;home&#x2F;yhao&#x2F;cuda&#x2F;lib64&#x2F;libcudnn.so.5.1.10</span><br><span class="line">&#x2F;usr&#x2F;local&#x2F;lib&#x2F;libcudnn.so</span><br><span class="line">&#x2F;usr&#x2F;local&#x2F;lib&#x2F;libcudnn.so.5</span><br></pre></td></tr></table></figure>
+
+<p>可以看到我的文件是 libcudnn.so.5.1.10 ，并没有 libcudnn.so.5.1.5，所以第三行命令我链接的是 libcudnn.so.5.1.10 ，这里第三行链接命令视你的查看结果而定。</p>
+<p>安装完成后可用 nvcc -V 命令验证是否安装成功，若出现以下信息则表示安装成功：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">yhao@yhao-X550VB:~$ nvcc -V</span><br><span class="line">nvcc: NVIDIA (R) Cuda compiler driver</span><br><span class="line">Copyright (c) 2005-2016 NVIDIA Corporation</span><br><span class="line">Built on Tue_Jan_10_13:22:03_CST_2017</span><br><span class="line">Cuda compilation tools, release 8.0, V8.0.61</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div class="post-share">分享到：</div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>赞赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="QAQu 微信扫一扫，向我赞赏"/>
+        <p>微信扫一扫，向我赞赏</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E5%B8%B8%E7%94%A8/" rel="tag"># 常用</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019-8-5-cuda%E5%92%8Ccudnn%E7%9A%84%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80/" rel="next" title="cuda和cudnn各版本下载地址">
+                <i class="fa fa-chevron-left"></i> cuda和cudnn各版本下载地址
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019-8-6-LSART%E7%AE%97%E6%B3%95%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/" rel="prev" title="LSART编译过程记录">
+                LSART编译过程记录 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="vcomments"></div>
+    </div>
+  
+
+
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/card.jpg"
+                alt="QAQu" />
+            
+              <p class="site-author-name" itemprop="name"><span style="opacity:.2;">什么鬼</span>QAQu</p>
+              <p class="site-description motion-element" itemprop="description">深度学习技术笔记</p>
+          </div>
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/lyp22" target="_blank" title="GitHub" data-balloon="GitHub" data-balloon-pos="up">
+                    
+                       <i class="fa fa-fw fa-github"></i></a>
+                </span>
+              
+            
+          </div>
+
+          
+		  
+		  
+		  
+		  
+
+          
+            <div class="feed-link motion-element">
+              
+              <a class="feed-rss" href="/atom.xml" rel="alternate" target="_blank">
+                <i class="fa fa-rss"></i>
+                <span>RSS 订阅</span>
+              </a>
+            </div>
+          
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+            
+
+          </nav>
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.png" alt="Creative Commons" />
+              </a>
+            </div>
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第1步-安装依赖包"><span class="nav-number">1.</span> <span class="nav-text">第1步 安装依赖包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第2步-禁用-nouveau"><span class="nav-number">2.</span> <span class="nav-text">第2步 禁用 nouveau</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第3步-配置环境变量"><span class="nav-number">3.</span> <span class="nav-text">第3步 配置环境变量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第4步-下载-CUDA-8-0"><span class="nav-number">4.</span> <span class="nav-text">第4步 下载 CUDA 8.0</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第5步-安装-CUDA-8-0（关闭图形化没有必要）"><span class="nav-number">5.</span> <span class="nav-text">第5步 安装 CUDA 8.0（关闭图形化没有必要）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第6步-验证-CUDA-8-0-是否安装成功"><span class="nav-number">6.</span> <span class="nav-text">第6步 验证 CUDA 8.0 是否安装成功</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第7步-安装-cudnn"><span class="nav-number">7.</span> <span class="nav-text">第7步 安装 cudnn</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-image"></div>
+      <div class="footer-inner">
+        <p>博客已萌萌哒运行<span id="since"></span><span class="my-face">(●'◡'●)ﾉ♥</span></p>
+<p>托管于<a href="https://www.aliyun.com/" target="_blank" rel="nofollow"> 阿里云服务器</a>.  <a href="http://www.google.com/analytics/" target="_blank" rel="nofollow">Google Analytics </a>提供网站统计服务.</p>
+
+<p>© <span itemprop="copyrightYear">2021</span> QAQu’s Blog.
+    由 <a href="https://hexo.io/" target="_blank" class="external" rel="nofollow">Hexo</a> 强力驱动.
+    Theme By <a href="https://github.com/DIYgod/hexo-theme-sagiri" target="_blank" class="external" rel="nofollow">Sagiri</a> .
+    <a href="/sitemap.xml" target="_blank">站点地图</a>.
+    .
+</p>
+<p>Made with <i class="fa fa-heart throb" style="color: #d43f57;"></i> by <span class="author" itemprop="copyrightHolder">QAQu</span>. </p>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    <canvas id="evanyou"></canvas>
+    
+
+    
+
+  </div>
+
+  <script type="text/javascript" src="/js/sagiri.min.js?v="></script>
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+  <!--<script>
+    // remove service worker cache
+    // from https://stackoverflow.com/questions/33704791/how-do-i-uninstall-a-service-worker
+    "use strict";
+    if(navigator.serviceWorker)
+    {
+        navigator.serviceWorker.getRegistrations().then(function(registrations) {
+            for(let registration of registrations) {
+                registration.unregister()
+            }
+        })
+    }
+  </script>-->
+
+  <script>
+    
+  </script>
+</body>
+</html>

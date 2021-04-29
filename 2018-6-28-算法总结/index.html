@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#fff">
+
+<link rel="preload" href="/fonts/sigmarone3.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+
+
+
+
+
+
+
+  
+
+<link href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+
+
+  
+
+<link href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=" rel="stylesheet" type="text/css" />
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=">
+
+
+  <link rel="mask-icon" href="/safari-pinned-tab.svg?v=" color="#fff">
+
+
+
+
+
+
+  <meta name="keywords" content="算法," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="QAQu’s Blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="每个算法会给出思想和伪代码，对于复杂的算法会做出详尽的解释。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="算法设计小结">
+<meta property="og:url" content="https://qaqu.net/2018-6-28-%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="QAQu’s Blog">
+<meta property="og:description" content="每个算法会给出思想和伪代码，对于复杂的算法会做出详尽的解释。">
+<meta property="og:image" content="https://qaqu.net/2018-6-28-%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%930.png">
+<meta property="og:image" content="https://qaqu.net/2018-6-28-%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%931.png">
+<meta property="og:image" content="https://qaqu.net/2018-6-28-%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%932.png">
+<meta property="og:image" content="https://qaqu.net/2018-6-28-%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%933.png">
+<meta property="og:image" content="https://qaqu.net/2018-6-28-%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%934.png">
+<meta property="og:image" content="https://qaqu.net/2018-6-28-%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%935.png">
+<meta property="og:image" content="https://qaqu.net/2018-6-28-%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%936.png">
+<meta property="article:published_time" content="2018-06-27T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-01-12T06:53:40.170Z">
+<meta property="article:author" content="QAQu">
+<meta property="article:tag" content="算法">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://qaqu.net/2018-6-28-%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%930.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '',
+    sidebar: {"position":"right","display":"always","offset":52,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    since: '12/10/2018 11:30:00',
+    onlineAPI: 'wss://onlinecount.herokuapp.com/online',
+    site: {
+      title: 'QAQu’s Blog',
+      subtitle: '',
+      author: 'QAQu'
+    },
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    leancloud: {
+      enable: false,
+      appID: 'h3Y827lG7R3s3eFGdBDMka2u-MdYXbMMI',
+      appKey: '7AyfA498Cr1eGenSgpHgLfxO'
+    },
+    favicon: {
+      visibilitychange: false,
+      narmal: '/favicon.ico',
+      hidden: '/failure.ico',
+      show_text: '(/≧▽≦/)欢迎回来!',
+      hide_text: '(●—●)QAQu’s Blog'
+    }
+  };
+</script>
+
+
+
+
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/disqusjs@1.2.2/dist/disqus.js"></script>
+
+
+
+
+  <link rel="canonical" href="https://qaqu.net/2018-6-28-算法总结/"/>
+
+
+
+
+
+  <title>算法设计小结 | QAQu’s Blog</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans" class="theme-darling">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-首页">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+          
+        </li>
+      
+        
+        <li class="menu-item menu-item-归档">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+          
+        </li>
+      
+        
+        <li class="menu-item menu-item-标签">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tag"></i> <br />
+            
+            标签
+          </a>
+          
+        </li>
+      
+        
+        <li class="menu-item menu-item-分类">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tag"></i> <br />
+            
+            分类
+          </a>
+          
+        </li>
+      
+        
+        <li class="menu-item menu-item-友链">
+          <a href="/friends/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-mars"></i> <br />
+            
+            友链
+          </a>
+          
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+      <li class="menu-item search">
+          <form class="search-form">
+            <input name="keyword" type="text" class="search-input" placeholder="站内搜索">
+            <button type="submit" class="search-submit"><i class="fa fa-search"></i></button>
+          </form>
+      </li>
+      <li class="menu-item online"><span id="online-count">?</span>人在线</li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+<div class="site-brand-wrapper" style="background-image: url(/images/header-leg.jpg)">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <div class="brand">
+        <span class="logo-line-before"><i></i></span>
+        <div class="site-title">
+          <div id="animate" class="animate">
+            <span>Q</span><span>A</span><span>Q</span><span>u</span><span>’</span><span>s</span><span> </span><span>B</span><span>l</span><span>o</span><span>g</span>
+          </div>
+          <div id="guide" class="guide">
+            <span>Q</span><span>A</span><span>Q</span><span>u</span><span>’</span><span>s</span><span> </span><span>B</span><span>l</span><span>o</span><span>g</span>
+          </div>
+        </div>
+        <span class="logo-line-after"><i></i></span>
+      </div>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+<div class="site-master" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-master-avatar" itemprop="image" src="/images/qaqu.jpg" alt="QAQu" />
+    <h2 class="site-master-description" itemprop="description">
+        <span>深度学习</span><span>技术笔记</span>
+    </h2>
+</div>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-date">
+			<div class="post-month">06月</div>
+			<div class="post-day">28</div>
+	</div>
+  
+  <div class="post-badge">
+    
+      <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+        <a href="/categories/Algorithm/" itemprop="url" rel="index">
+          <span itemprop="name">Algorithm</span>
+        </a>
+      </span>
+    
+  </div>
+  
+
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://qaqu.net/2018-6-28-%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QAQu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/qaqu.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QAQu’s Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">算法设计小结</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-28T00:00:00+08:00">2018-06-28</time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">•</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">888</span>
+              
+
+              
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>每个算法会给出思想和伪代码，对于复杂的算法会做出详尽的解释。</p>
+<a id="more"></a>
+
+<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><h2 id="设计算法的5个要求"><a href="#设计算法的5个要求" class="headerlink" title="设计算法的5个要求"></a>设计算法的5个要求</h2><ol>
+<li>Finiteness。terminates after a finite number of steps</li>
+<li>Definiteness。rigorously and unambiguously specified</li>
+<li>Input。valid inputs are clearly specified</li>
+<li>Output。can be proved to produce the correct output given a valid input</li>
+<li>Effectiveness。steps are sufficiently simple and basic</li>
+</ol>
+<h2 id="GCD-problem"><a href="#GCD-problem" class="headerlink" title="GCD problem"></a>GCD problem</h2><p>GCD是greatest common divisor的简写，也就是找到两个数的最大公约数。</p>
+<h3 id="Euclid’s-algorithm"><a href="#Euclid’s-algorithm" class="headerlink" title="Euclid’s algorithm"></a>Euclid’s algorithm</h3><p>欧几里得算法基于以下的公式实现：<code>gcd(m,n) = gcd(n, m mod n)</code></p>
+<pre><code>//Input:int m,int n
+//Output:int
+while(n!=0){
+    r=m mod n;
+    m=n;
+    n=r;
+}
+return m;</code></pre><p>欧几里得算法其实用到了后面学的<strong>Decrease-and-Conquer</strong>思想，要求gcd(m,n)的值，将其减少规模，变成求gcd(n,m mod n)的值。</p>
+<h2 id="质数问题"><a href="#质数问题" class="headerlink" title="质数问题"></a>质数问题</h2><p>想要判断一个数n是否为质数，很容易想到的是我们只需遍历所有比n小的大于1的数i，判断<code>n mod i==0</code>，复杂度是O(n),其中一个优化是只需判断<code>[2,n^(1/2)]</code>内的数即可,复杂度是O(n^1/2)。<br>但是如果输入是n，我们要输出一个包含所有小于n的质数的集合呢？</p>
+<p>一种简单的解决思路是，对每个小于n的质数运用一次质数检验算法：</p>
+<pre><code>//Input:Integer n ≥ 2
+//Output:List of primes less than or equal to n
+for i=2 to n do
+    if(prime(i)) add i to list;</code></pre><p>这个算法的复杂度是多少呢？prime(i)的复杂度是O(n^1/2),外面还有一层循环，于是这个算法的复杂度是O(n^3/2)。</p>
+<p>其实有另外的解决办法。</p>
+<h3 id="Sieve-of-Eratosthenes"><a href="#Sieve-of-Eratosthenes" class="headerlink" title="Sieve of Eratosthenes"></a>Sieve of Eratosthenes</h3><pre><code>Input: Integer n ≥ 2
+Output: List of primes less than or equal to n
+for p ← 2 to n do  A[p] ← p
+for p ← 2 to n do  
+      if A[p] ！= 0  //p hasn’t been previously eliminated from the list
+          j ← p* p
+          while j ≤ n  do
+                 A[j] ← 0  //mark element as eliminated     
+                 j ← j + p
+//copy the remaining elements of A to array L of the primes</code></pre><p>   i ← 0<br>   for p ← 2 to n do<br>        if A[p] ！=  0<br>                L[i] ← A[p]<br>                i ← i+1<br>   return L</p>
+<p>这个算法在做一件什么事情呢？从2开始，将每个质数的倍数标记，剩下的就全都是质数了。<br>此算法的复杂度分析在这里就不做了。</p>
+<h2 id="Algorithm-design-and-analysis-process"><a href="#Algorithm-design-and-analysis-process" class="headerlink" title="Algorithm design and analysis process"></a>Algorithm design and analysis process</h2><img src="/2018-6-28-%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%930.png" class>
+
+<h1 id="Fundamentals-of-the-Analysis-of-Algorithm-Efficiency"><a href="#Fundamentals-of-the-Analysis-of-Algorithm-Efficiency" class="headerlink" title="Fundamentals of the Analysis of Algorithm Efficiency"></a>Fundamentals of the Analysis of Algorithm Efficiency</h1><p>A problem or algorithm with at most polynomial time complexity is considered tractable (or feasible).  P is the set of all tractable problems.<br>A problem or algorithm that has complexity greater than exponential is considered intractable (or infeasible).<br>Note that n^1,000,000 is technically tractable, but really very hard.  n^(log log log n) is technically intractable, but easy.  Such cases are rare though.</p>
+<h1 id="Brute-Force"><a href="#Brute-Force" class="headerlink" title="Brute Force"></a>Brute Force</h1><h2 id="Brute-force-Sorting"><a href="#Brute-force-Sorting" class="headerlink" title="Brute-force Sorting"></a>Brute-force Sorting</h2><p>selection sort:</p>
+<img src="/2018-6-28-%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%931.png" class>
+
+<p>time complexity:Θ(n^2)</p>
+<p>bubble sort:</p>
+<img src="/2018-6-28-%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%932.png" class>
+
+<p>time complexity:Θ(n^2)</p>
+<h1 id="Divide-and-Conquer"><a href="#Divide-and-Conquer" class="headerlink" title="Divide-and-Conquer"></a>Divide-and-Conquer</h1><h2 id="主定理"><a href="#主定理" class="headerlink" title="主定理"></a>主定理</h2><p>主定理的使用请看这篇博文：<a href="http://logos23333.top/algorithm/2018/02/26/%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA%E7%AC%94%E8%AE%B0dacpart3/" target="_blank" rel="noopener">《Introduction to Algorithm》notes:Three methods for solving recurrences</a>。</p>
+<h2 id="MergeSort"><a href="#MergeSort" class="headerlink" title="MergeSort"></a>MergeSort</h2><img src="/2018-6-28-%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%933.png" class>
+
+<img src="/2018-6-28-%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%934.png" class>
+
+<p>Mergesort无论在最差平均还是最好情况下，time complexity都是Θ(nlogn)。</p>
+<h2 id="Quicksort"><a href="#Quicksort" class="headerlink" title="Quicksort"></a>Quicksort</h2><img src="/2018-6-28-%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%935.png" class>
+
+<p>Best case: split in the middle — Θ(n log n)<br>Worst case: sorted array! — Θ(n2)<br>Average case: random arrays — Θ(n log n)  </p>
+<h1 id="Decrease-and-Conquer"><a href="#Decrease-and-Conquer" class="headerlink" title="Decrease-and-Conquer"></a>Decrease-and-Conquer</h1><h2 id="Types-of-Decrease-and-Conquer"><a href="#Types-of-Decrease-and-Conquer" class="headerlink" title="Types of Decrease and Conquer"></a>Types of Decrease and Conquer</h2><ol>
+<li>Decrease by a constant (usually by 1): insertion sort/graph traversal algorithms (DFS and BFS)/topological sorting/algorithms for generating permutations, subsets    </li>
+<li>Decrease by a constant factor (usually by half):binary search and bisection method/exponentiation by squaring/multiplication à la russe</li>
+<li>Variable-size decrease:Euclid’s algorithm/selection by partition/Nim-like games</li>
+</ol>
+<h2 id="InsertionSort"><a href="#InsertionSort" class="headerlink" title="InsertionSort"></a>InsertionSort</h2><img src="/2018-6-28-%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%936.png" class>
+
+<p>Time efficiency<br>    Cworst(n) = n(n-1)/2∈Θ(n2)<br>    Cavg(n) ≈ n2/4∈Θ(n2)<br>    Cbest(n) = n - 1∈Θ(n)  (also fast on almost sorted arrays)<br>Space efficiency: in-place<br>Stability: yes<br>Best elementary sorting algorithm overall<br>Binary insertion sort  </p>
+<h1 id="Transform-and-Conquer"><a href="#Transform-and-Conquer" class="headerlink" title="Transform-and-Conquer"></a>Transform-and-Conquer</h1><h2 id="AVL树"><a href="#AVL树" class="headerlink" title="AVL树"></a>AVL树</h2><p>熟悉好rotation操作就Ok了。<br>Search and insertion are O(log n)<br>Deletion is more complicated but is also O(log n)</p>
+<h2 id="HeapSort"><a href="#HeapSort" class="headerlink" title="HeapSort"></a>HeapSort</h2><p>Both worst-case and average-case efficiency: (nlogn)<br>In-place: yes<br>Stability: no (e.g., 1  1)     </p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div class="post-share">分享到：</div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>赞赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="QAQu 微信扫一扫，向我赞赏"/>
+        <p>微信扫一扫，向我赞赏</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018-12-15-ubuntu%E5%BF%85%E8%A6%81%E8%BD%AF%E4%BB%B6%E5%8F%8A%E5%BA%93%E5%AE%89%E8%A3%85%20%E7%BE%8E%E5%8C%96%20from%20%E5%B0%8F%E7%81%B0%E7%81%B0/" rel="prev" title="(装机)ubuntu必要软件及库安装+美化 from 小灰灰">
+                (装机)ubuntu必要软件及库安装+美化 from 小灰灰 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="vcomments"></div>
+    </div>
+  
+
+
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/card.jpg"
+                alt="QAQu" />
+            
+              <p class="site-author-name" itemprop="name"><span style="opacity:.2;">什么鬼</span>QAQu</p>
+              <p class="site-description motion-element" itemprop="description">深度学习技术笔记</p>
+          </div>
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/lyp22" target="_blank" title="GitHub" data-balloon="GitHub" data-balloon-pos="up">
+                    
+                       <i class="fa fa-fw fa-github"></i></a>
+                </span>
+              
+            
+          </div>
+
+          
+		  
+		  
+		  
+		  
+
+          
+            <div class="feed-link motion-element">
+              
+              <a class="feed-rss" href="/atom.xml" rel="alternate" target="_blank">
+                <i class="fa fa-rss"></i>
+                <span>RSS 订阅</span>
+              </a>
+            </div>
+          
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+            
+
+          </nav>
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.png" alt="Creative Commons" />
+              </a>
+            </div>
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#设计算法的5个要求"><span class="nav-number">1.1.</span> <span class="nav-text">设计算法的5个要求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GCD-problem"><span class="nav-number">1.2.</span> <span class="nav-text">GCD problem</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Euclid’s-algorithm"><span class="nav-number">1.2.1.</span> <span class="nav-text">Euclid’s algorithm</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#质数问题"><span class="nav-number">1.3.</span> <span class="nav-text">质数问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Sieve-of-Eratosthenes"><span class="nav-number">1.3.1.</span> <span class="nav-text">Sieve of Eratosthenes</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Algorithm-design-and-analysis-process"><span class="nav-number">1.4.</span> <span class="nav-text">Algorithm design and analysis process</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Fundamentals-of-the-Analysis-of-Algorithm-Efficiency"><span class="nav-number">2.</span> <span class="nav-text">Fundamentals of the Analysis of Algorithm Efficiency</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Brute-Force"><span class="nav-number">3.</span> <span class="nav-text">Brute Force</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Brute-force-Sorting"><span class="nav-number">3.1.</span> <span class="nav-text">Brute-force Sorting</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Divide-and-Conquer"><span class="nav-number">4.</span> <span class="nav-text">Divide-and-Conquer</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#主定理"><span class="nav-number">4.1.</span> <span class="nav-text">主定理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MergeSort"><span class="nav-number">4.2.</span> <span class="nav-text">MergeSort</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Quicksort"><span class="nav-number">4.3.</span> <span class="nav-text">Quicksort</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Decrease-and-Conquer"><span class="nav-number">5.</span> <span class="nav-text">Decrease-and-Conquer</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Types-of-Decrease-and-Conquer"><span class="nav-number">5.1.</span> <span class="nav-text">Types of Decrease and Conquer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#InsertionSort"><span class="nav-number">5.2.</span> <span class="nav-text">InsertionSort</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Transform-and-Conquer"><span class="nav-number">6.</span> <span class="nav-text">Transform-and-Conquer</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#AVL树"><span class="nav-number">6.1.</span> <span class="nav-text">AVL树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HeapSort"><span class="nav-number">6.2.</span> <span class="nav-text">HeapSort</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-image"></div>
+      <div class="footer-inner">
+        <p>博客已萌萌哒运行<span id="since"></span><span class="my-face">(●'◡'●)ﾉ♥</span></p>
+<p>托管于<a href="https://www.aliyun.com/" target="_blank" rel="nofollow"> 阿里云服务器</a>.  <a href="http://www.google.com/analytics/" target="_blank" rel="nofollow">Google Analytics </a>提供网站统计服务.</p>
+
+<p>© <span itemprop="copyrightYear">2021</span> QAQu’s Blog.
+    由 <a href="https://hexo.io/" target="_blank" class="external" rel="nofollow">Hexo</a> 强力驱动.
+    Theme By <a href="https://github.com/DIYgod/hexo-theme-sagiri" target="_blank" class="external" rel="nofollow">Sagiri</a> .
+    <a href="/sitemap.xml" target="_blank">站点地图</a>.
+    .
+</p>
+<p>Made with <i class="fa fa-heart throb" style="color: #d43f57;"></i> by <span class="author" itemprop="copyrightHolder">QAQu</span>. </p>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    <canvas id="evanyou"></canvas>
+    
+
+    
+
+  </div>
+
+  <script type="text/javascript" src="/js/sagiri.min.js?v="></script>
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+  <!--<script>
+    // remove service worker cache
+    // from https://stackoverflow.com/questions/33704791/how-do-i-uninstall-a-service-worker
+    "use strict";
+    if(navigator.serviceWorker)
+    {
+        navigator.serviceWorker.getRegistrations().then(function(registrations) {
+            for(let registration of registrations) {
+                registration.unregister()
+            }
+        })
+    }
+  </script>-->
+
+  <script>
+    
+  </script>
+</body>
+</html>

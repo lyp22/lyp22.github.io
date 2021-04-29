@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#fff">
+
+<link rel="preload" href="/fonts/sigmarone3.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+
+
+
+
+
+
+
+  
+
+<link href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+
+
+  
+
+<link href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=" rel="stylesheet" type="text/css" />
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=">
+
+
+  <link rel="mask-icon" href="/safari-pinned-tab.svg?v=" color="#fff">
+
+
+
+
+
+
+  <meta name="keywords" content="常用," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="QAQu’s Blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="查看安装的opencv版本1pkg-config --modversion opencv  卸载旧版本opencv进入到原来安装opencv的build目录，执行卸载操作： 123456789cd opencv-3.2.0&#x2F;buildsudo make uninstallcd ..sudo rm -r build sudo rm -r &#x2F;usr&#x2F;local&#x2F;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Opencv的卸载并安装2.4版本(无cuda+cuda9.0)">
+<meta property="og:url" content="https://qaqu.net/2019-8-6-Opencv%E7%9A%84%E5%8D%B8%E8%BD%BD%E5%B9%B6%E5%AE%89%E8%A3%852.4%E7%89%88%E6%9C%AC/index.html">
+<meta property="og:site_name" content="QAQu’s Blog">
+<meta property="og:description" content="查看安装的opencv版本1pkg-config --modversion opencv  卸载旧版本opencv进入到原来安装opencv的build目录，执行卸载操作： 123456789cd opencv-3.2.0&#x2F;buildsudo make uninstallcd ..sudo rm -r build sudo rm -r &#x2F;usr&#x2F;local&#x2F;">
+<meta property="article:published_time" content="2019-08-05T16:00:00.000Z">
+<meta property="article:modified_time" content="2019-12-20T08:44:57.845Z">
+<meta property="article:author" content="QAQu">
+<meta property="article:tag" content="常用">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '',
+    sidebar: {"position":"right","display":"always","offset":52,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    since: '12/10/2018 11:30:00',
+    onlineAPI: 'wss://onlinecount.herokuapp.com/online',
+    site: {
+      title: 'QAQu’s Blog',
+      subtitle: '',
+      author: 'QAQu'
+    },
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    leancloud: {
+      enable: false,
+      appID: 'h3Y827lG7R3s3eFGdBDMka2u-MdYXbMMI',
+      appKey: '7AyfA498Cr1eGenSgpHgLfxO'
+    },
+    favicon: {
+      visibilitychange: false,
+      narmal: '/favicon.ico',
+      hidden: '/failure.ico',
+      show_text: '(/≧▽≦/)欢迎回来!',
+      hide_text: '(●—●)QAQu’s Blog'
+    }
+  };
+</script>
+
+
+
+
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/disqusjs@1.2.2/dist/disqus.js"></script>
+
+
+
+
+  <link rel="canonical" href="https://qaqu.net/2019-8-6-Opencv的卸载并安装2.4版本/"/>
+
+
+
+
+
+  <title>Opencv的卸载并安装2.4版本(无cuda+cuda9.0) | QAQu’s Blog</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans" class="theme-darling">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-首页">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+          
+        </li>
+      
+        
+        <li class="menu-item menu-item-归档">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+          
+        </li>
+      
+        
+        <li class="menu-item menu-item-标签">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tag"></i> <br />
+            
+            标签
+          </a>
+          
+        </li>
+      
+        
+        <li class="menu-item menu-item-分类">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tag"></i> <br />
+            
+            分类
+          </a>
+          
+        </li>
+      
+        
+        <li class="menu-item menu-item-友链">
+          <a href="/friends/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-mars"></i> <br />
+            
+            友链
+          </a>
+          
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+      <li class="menu-item search">
+          <form class="search-form">
+            <input name="keyword" type="text" class="search-input" placeholder="站内搜索">
+            <button type="submit" class="search-submit"><i class="fa fa-search"></i></button>
+          </form>
+      </li>
+      <li class="menu-item online"><span id="online-count">?</span>人在线</li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+<div class="site-brand-wrapper" style="background-image: url(/images/header-leg.jpg)">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <div class="brand">
+        <span class="logo-line-before"><i></i></span>
+        <div class="site-title">
+          <div id="animate" class="animate">
+            <span>Q</span><span>A</span><span>Q</span><span>u</span><span>’</span><span>s</span><span> </span><span>B</span><span>l</span><span>o</span><span>g</span>
+          </div>
+          <div id="guide" class="guide">
+            <span>Q</span><span>A</span><span>Q</span><span>u</span><span>’</span><span>s</span><span> </span><span>B</span><span>l</span><span>o</span><span>g</span>
+          </div>
+        </div>
+        <span class="logo-line-after"><i></i></span>
+      </div>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+<div class="site-master" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-master-avatar" itemprop="image" src="/images/qaqu.jpg" alt="QAQu" />
+    <h2 class="site-master-description" itemprop="description">
+        <span>深度学习</span><span>技术笔记</span>
+    </h2>
+</div>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-date">
+			<div class="post-month">08月</div>
+			<div class="post-day">06</div>
+	</div>
+  
+  <div class="post-badge">
+    
+      <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+        <a href="/categories/opencv/" itemprop="url" rel="index">
+          <span itemprop="name">opencv</span>
+        </a>
+      </span>
+    
+  </div>
+  
+
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://qaqu.net/2019-8-6-Opencv%E7%9A%84%E5%8D%B8%E8%BD%BD%E5%B9%B6%E5%AE%89%E8%A3%852.4%E7%89%88%E6%9C%AC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QAQu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/qaqu.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QAQu’s Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Opencv的卸载并安装2.4版本(无cuda+cuda9.0)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-06T00:00:00+08:00">2019-08-06</time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">•</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">589</span>
+              
+
+              
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="查看安装的opencv版本"><a href="#查看安装的opencv版本" class="headerlink" title="查看安装的opencv版本"></a>查看安装的opencv版本</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pkg-config --modversion opencv</span><br></pre></td></tr></table></figure>
+
+<h1 id="卸载旧版本opencv"><a href="#卸载旧版本opencv" class="headerlink" title="卸载旧版本opencv"></a>卸载旧版本opencv</h1><p>进入到原来安装opencv的build目录，执行卸载操作：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">cd opencv-3.2.0&#x2F;build</span><br><span class="line">sudo make uninstall</span><br><span class="line">cd ..</span><br><span class="line">sudo rm -r build</span><br><span class="line"> </span><br><span class="line">sudo rm -r &#x2F;usr&#x2F;local&#x2F;include&#x2F;opencv2 &#x2F;usr&#x2F;local&#x2F;include&#x2F;opencv &#x2F;usr&#x2F;include&#x2F;opencv &#x2F;usr&#x2F;include&#x2F;opencv2 &#x2F;usr&#x2F;local&#x2F;share&#x2F;opencv &#x2F;usr&#x2F;local&#x2F;share&#x2F;OpenCV &#x2F;usr&#x2F;share&#x2F;opencv &#x2F;usr&#x2F;share&#x2F;OpenCV &#x2F;usr&#x2F;local&#x2F;bin&#x2F;opencv* &#x2F;usr&#x2F;local&#x2F;lib&#x2F;libopencv*</span><br><span class="line"> </span><br><span class="line">cd &#x2F;usr</span><br><span class="line">sudo find . -name &quot;*opencv*&quot; | xargs sudo rm -rf</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<h1 id="安装opencv2-4"><a href="#安装opencv2-4" class="headerlink" title="安装opencv2.4"></a>安装opencv2.4</h1><ol>
+<li>先从sourceforge上下载OpenCV的源码</li>
+</ol>
+<p><a href="http://jaist.dl.sourceforge.net/project/opencvlibrary/opencv-unix/2.4.9/opencv-2.4.9.zip" target="_blank" rel="noopener">http://jaist.dl.sourceforge.net/project/opencvlibrary/opencv-unix/2.4.9/opencv-2.4.9.zip</a></p>
+<ol start="2">
+<li>解压到任意目录</li>
+</ol>
+<p>unzip opencv-2.4.9.zip</p>
+<ol start="3">
+<li>进入源码目录，创建release目录</li>
+</ol>
+<p>cd opencv-2.4.9</p>
+<p>mkdir release  </p>
+<ol start="4">
+<li>可以看到在OpenCV目录下，有个CMakeLists.txt文件，需要事先安装一些软件</li>
+</ol>
+<p>sudo apt-get install build-essential cmake libgtk2.0-dev pkg-config python-dev python-numpy libavcodec-dev libavformat-dev libswscale-dev  </p>
+<ol start="5">
+<li>进入release目录，安装OpenCV是所有的文件都会被放到这个release目录下</li>
+</ol>
+<p>cd release  </p>
+<ol start="6">
+<li>cmake编译OpenCV源码，安装所有的lib文件都会被安装到/usr/local目录下</li>
+</ol>
+<p>不要cuda</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">cmake -D CMAKE_BUILD_TYPE&#x3D;RELEASE -D CMAKE_INSTALL_PREFIX&#x3D;&#x2F;usr&#x2F;local -D WITH_CUDA&#x3D;OFF ..</span><br></pre></td></tr></table></figure>
+
+<p>不要ffmpeg</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmake -D CMAKE_BUILD_TYPE&#x3D;RELEASE -D CMAKE_INSTALL_PREFIX&#x3D;&#x2F;usr&#x2F;local -D WITH_CUDA&#x3D;OFF -D WITH_FFMPEG&#x3D;OFF ..</span><br></pre></td></tr></table></figure>
+
+<ol start="7">
+<li>安装</li>
+</ol>
+<p>sudo make install -j8</p>
+<h1 id="强行将opencv2-4适配cuda9-0（cuda9-0不支持2-0架构）"><a href="#强行将opencv2-4适配cuda9-0（cuda9-0不支持2-0架构）" class="headerlink" title="强行将opencv2.4适配cuda9.0（cuda9.0不支持2.0架构）"></a>强行将opencv2.4适配cuda9.0（cuda9.0不支持2.0架构）</h1><p>解决方案如下：</p>
+<p>1）.找到FindCUDA.cmake文件</p>
+<p>找到行</p>
+<p>find_cuda_helper_libs(nppi)</p>
+<p>改为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">find_cuda_helper_libs(nppial)</span><br><span class="line">find_cuda_helper_libs(nppicc)</span><br><span class="line">find_cuda_helper_libs(nppicom)</span><br><span class="line">find_cuda_helper_libs(nppidei)</span><br><span class="line">find_cuda_helper_libs(nppif)</span><br><span class="line">find_cuda_helper_libs(nppig)</span><br><span class="line">find_cuda_helper_libs(nppim)</span><br><span class="line">find_cuda_helper_libs(nppist)</span><br><span class="line">find_cuda_helper_libs(nppisu)</span><br><span class="line">find_cuda_helper_libs(nppitc)</span><br></pre></td></tr></table></figure>
+
+<p>2）.找到行</p>
+<p>set(CUDA_npp_LIBRARY “${CUDA_nppc_LIBRARY};${CUDA_nppi_LIBRARY};${CUDA_npps_LIBRARY}”)</p>
+<p>改为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set(CUDA_npp_LIBRARY &quot;$&#123;CUDA_nppc_LIBRARY&#125;;$&#123;CUDA_nppial_LIBRARY&#125;;$&#123;CUDA_nppicc_LIBRARY&#125;;$&#123;CUDA_nppicom_LIBRARY&#125;;$&#123;CUDA_nppidei_LIBRARY&#125;;$&#123;CUDA_nppif_LIBRARY&#125;;$&#123;CUDA_nppig_LIBRARY&#125;;$&#123;CUDA_nppim_LIBRARY&#125;;$&#123;CUDA_nppist_LIBRARY&#125;;$&#123;CUDA_nppisu_LIBRARY&#125;;$&#123;CUDA_nppitc_LIBRARY&#125;;$&#123;CUDA_npps_LIBRARY&#125;&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>3）.找到行</p>
+<p>unset(CUDA_nppi_LIBRARY CACHE)</p>
+<p>改为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">unset(CUDA_nppial_LIBRARY CACHE)</span><br><span class="line">unset(CUDA_nppicc_LIBRARY CACHE)</span><br><span class="line">unset(CUDA_nppicom_LIBRARY CACHE)</span><br><span class="line">unset(CUDA_nppidei_LIBRARY CACHE)</span><br><span class="line">unset(CUDA_nppif_LIBRARY CACHE)</span><br><span class="line">unset(CUDA_nppig_LIBRARY CACHE)</span><br><span class="line">unset(CUDA_nppim_LIBRARY CACHE)</span><br><span class="line">unset(CUDA_nppist_LIBRARY CACHE)</span><br><span class="line">unset(CUDA_nppisu_LIBRARY CACHE)</span><br><span class="line">unset(CUDA_nppitc_LIBRARY CACHE)</span><br></pre></td></tr></table></figure>
+
+<p>4）.找到文件OpenCVDetectCUDA.cmake</p>
+<p>修改以下几行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"> set(__cuda_arch_ptx &quot;&quot;)</span><br><span class="line"> if(CUDA_GENERATION STREQUAL &quot;Fermi&quot;)</span><br><span class="line">   set(__cuda_arch_bin &quot;2.0&quot;)</span><br><span class="line"> elseif(CUDA_GENERATION STREQUAL &quot;Kepler&quot;)</span><br><span class="line">   set(__cuda_arch_bin &quot;3.0 3.5 3.7&quot;)</span><br><span class="line"> ...</span><br></pre></td></tr></table></figure>
+
+<p>改为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">set(__cuda_arch_ptx &quot;&quot;)</span><br><span class="line">if(CUDA_GENERATION STREQUAL &quot;Kepler&quot;)</span><br><span class="line">  set(__cuda_arch_bin &quot;3.0 3.5 3.7&quot;)</span><br><span class="line">elseif(CUDA_GENERATION STREQUAL &quot;Maxwell&quot;)</span><br><span class="line">  set(__cuda_arch_bin &quot;5.0 5.2&quot;)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+
+<p>5）.cuda9中有一个单独的halffloat(cuda_fp16.h)头文件,也应该被包括在opencv的目录里</p>
+<p>将头文件cuda_fp16.h添加至 opencv\modules\cudev\include\opencv2\cudev\common.hpp</p>
+<p>即在common.hpp中添加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;cuda_fp16.h&gt;</span><br></pre></td></tr></table></figure>
+
+<p>重新生成即可</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div class="post-share">分享到：</div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>赞赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="QAQu 微信扫一扫，向我赞赏"/>
+        <p>微信扫一扫，向我赞赏</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E5%B8%B8%E7%94%A8/" rel="tag"># 常用</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019-8-6-LSART%E7%AE%97%E6%B3%95%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/" rel="next" title="LSART编译过程记录">
+                <i class="fa fa-chevron-left"></i> LSART编译过程记录
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019-8-7-Ubuntu18.04%E8%AE%BE%E7%BD%AE%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8%E6%9C%8D%E5%8A%A1/" rel="prev" title="Ubuntu设置系统环境变量和开机自启动">
+                Ubuntu设置系统环境变量和开机自启动 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="vcomments"></div>
+    </div>
+  
+
+
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/card.jpg"
+                alt="QAQu" />
+            
+              <p class="site-author-name" itemprop="name"><span style="opacity:.2;">什么鬼</span>QAQu</p>
+              <p class="site-description motion-element" itemprop="description">深度学习技术笔记</p>
+          </div>
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/lyp22" target="_blank" title="GitHub" data-balloon="GitHub" data-balloon-pos="up">
+                    
+                       <i class="fa fa-fw fa-github"></i></a>
+                </span>
+              
+            
+          </div>
+
+          
+		  
+		  
+		  
+		  
+
+          
+            <div class="feed-link motion-element">
+              
+              <a class="feed-rss" href="/atom.xml" rel="alternate" target="_blank">
+                <i class="fa fa-rss"></i>
+                <span>RSS 订阅</span>
+              </a>
+            </div>
+          
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+            
+
+          </nav>
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.png" alt="Creative Commons" />
+              </a>
+            </div>
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#查看安装的opencv版本"><span class="nav-number">1.</span> <span class="nav-text">查看安装的opencv版本</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#卸载旧版本opencv"><span class="nav-number">2.</span> <span class="nav-text">卸载旧版本opencv</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装opencv2-4"><span class="nav-number">3.</span> <span class="nav-text">安装opencv2.4</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#强行将opencv2-4适配cuda9-0（cuda9-0不支持2-0架构）"><span class="nav-number">4.</span> <span class="nav-text">强行将opencv2.4适配cuda9.0（cuda9.0不支持2.0架构）</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-image"></div>
+      <div class="footer-inner">
+        <p>博客已萌萌哒运行<span id="since"></span><span class="my-face">(●'◡'●)ﾉ♥</span></p>
+<p>托管于<a href="https://www.aliyun.com/" target="_blank" rel="nofollow"> 阿里云服务器</a>.  <a href="http://www.google.com/analytics/" target="_blank" rel="nofollow">Google Analytics </a>提供网站统计服务.</p>
+
+<p>© <span itemprop="copyrightYear">2021</span> QAQu’s Blog.
+    由 <a href="https://hexo.io/" target="_blank" class="external" rel="nofollow">Hexo</a> 强力驱动.
+    Theme By <a href="https://github.com/DIYgod/hexo-theme-sagiri" target="_blank" class="external" rel="nofollow">Sagiri</a> .
+    <a href="/sitemap.xml" target="_blank">站点地图</a>.
+    .
+</p>
+<p>Made with <i class="fa fa-heart throb" style="color: #d43f57;"></i> by <span class="author" itemprop="copyrightHolder">QAQu</span>. </p>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    <canvas id="evanyou"></canvas>
+    
+
+    
+
+  </div>
+
+  <script type="text/javascript" src="/js/sagiri.min.js?v="></script>
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+  <!--<script>
+    // remove service worker cache
+    // from https://stackoverflow.com/questions/33704791/how-do-i-uninstall-a-service-worker
+    "use strict";
+    if(navigator.serviceWorker)
+    {
+        navigator.serviceWorker.getRegistrations().then(function(registrations) {
+            for(let registration of registrations) {
+                registration.unregister()
+            }
+        })
+    }
+  </script>-->
+
+  <script>
+    
+  </script>
+</body>
+</html>

@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#fff">
+
+<link rel="preload" href="/fonts/sigmarone3.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+
+
+
+
+
+
+
+  
+
+<link href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+
+
+  
+
+<link href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=" rel="stylesheet" type="text/css" />
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=">
+
+
+  <link rel="mask-icon" href="/safari-pinned-tab.svg?v=" color="#fff">
+
+
+
+
+
+
+  <meta name="keywords" content="ubuntu," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="QAQu’s Blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="change sourcealiyun service apt1apt install fish tmux guake git build-essential baobab gparted vim gconf2 cmake aria2 uget bleachbit pinta speedtest-cli puddletag xdot dconf-editor iotop trash-cli fis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="(装机)ubuntu必要软件及库安装+美化 from 小灰灰">
+<meta property="og:url" content="https://qaqu.net/2018-12-15-ubuntu%E5%BF%85%E8%A6%81%E8%BD%AF%E4%BB%B6%E5%8F%8A%E5%BA%93%E5%AE%89%E8%A3%85%20%E7%BE%8E%E5%8C%96%20from%20%E5%B0%8F%E7%81%B0%E7%81%B0/index.html">
+<meta property="og:site_name" content="QAQu’s Blog">
+<meta property="og:description" content="change sourcealiyun service apt1apt install fish tmux guake git build-essential baobab gparted vim gconf2 cmake aria2 uget bleachbit pinta speedtest-cli puddletag xdot dconf-editor iotop trash-cli fis">
+<meta property="article:published_time" content="2018-12-14T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-01-13T14:37:55.532Z">
+<meta property="article:author" content="QAQu">
+<meta property="article:tag" content="ubuntu">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '',
+    sidebar: {"position":"right","display":"always","offset":52,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    since: '12/10/2018 11:30:00',
+    onlineAPI: 'wss://onlinecount.herokuapp.com/online',
+    site: {
+      title: 'QAQu’s Blog',
+      subtitle: '',
+      author: 'QAQu'
+    },
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    leancloud: {
+      enable: false,
+      appID: 'h3Y827lG7R3s3eFGdBDMka2u-MdYXbMMI',
+      appKey: '7AyfA498Cr1eGenSgpHgLfxO'
+    },
+    favicon: {
+      visibilitychange: false,
+      narmal: '/favicon.ico',
+      hidden: '/failure.ico',
+      show_text: '(/≧▽≦/)欢迎回来!',
+      hide_text: '(●—●)QAQu’s Blog'
+    }
+  };
+</script>
+
+
+
+
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/disqusjs@1.2.2/dist/disqus.js"></script>
+
+
+
+
+  <link rel="canonical" href="https://qaqu.net/2018-12-15-ubuntu必要软件及库安装 美化 from 小灰灰/"/>
+
+
+
+
+
+  <title>(装机)ubuntu必要软件及库安装+美化 from 小灰灰 | QAQu’s Blog</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans" class="theme-darling">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-首页">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+          
+        </li>
+      
+        
+        <li class="menu-item menu-item-归档">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+          
+        </li>
+      
+        
+        <li class="menu-item menu-item-标签">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tag"></i> <br />
+            
+            标签
+          </a>
+          
+        </li>
+      
+        
+        <li class="menu-item menu-item-分类">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tag"></i> <br />
+            
+            分类
+          </a>
+          
+        </li>
+      
+        
+        <li class="menu-item menu-item-友链">
+          <a href="/friends/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-mars"></i> <br />
+            
+            友链
+          </a>
+          
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+      <li class="menu-item search">
+          <form class="search-form">
+            <input name="keyword" type="text" class="search-input" placeholder="站内搜索">
+            <button type="submit" class="search-submit"><i class="fa fa-search"></i></button>
+          </form>
+      </li>
+      <li class="menu-item online"><span id="online-count">?</span>人在线</li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+<div class="site-brand-wrapper" style="background-image: url(/images/header-leg.jpg)">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <div class="brand">
+        <span class="logo-line-before"><i></i></span>
+        <div class="site-title">
+          <div id="animate" class="animate">
+            <span>Q</span><span>A</span><span>Q</span><span>u</span><span>’</span><span>s</span><span> </span><span>B</span><span>l</span><span>o</span><span>g</span>
+          </div>
+          <div id="guide" class="guide">
+            <span>Q</span><span>A</span><span>Q</span><span>u</span><span>’</span><span>s</span><span> </span><span>B</span><span>l</span><span>o</span><span>g</span>
+          </div>
+        </div>
+        <span class="logo-line-after"><i></i></span>
+      </div>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+<div class="site-master" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-master-avatar" itemprop="image" src="/images/qaqu.jpg" alt="QAQu" />
+    <h2 class="site-master-description" itemprop="description">
+        <span>深度学习</span><span>技术笔记</span>
+    </h2>
+</div>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-date">
+			<div class="post-month">12月</div>
+			<div class="post-day">15</div>
+	</div>
+  
+  <div class="post-badge">
+    
+      <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+        <a href="/categories/linux/" itemprop="url" rel="index">
+          <span itemprop="name">linux</span>
+        </a>
+      </span>
+    
+  </div>
+  
+
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://qaqu.net/2018-12-15-ubuntu%E5%BF%85%E8%A6%81%E8%BD%AF%E4%BB%B6%E5%8F%8A%E5%BA%93%E5%AE%89%E8%A3%85%20%E7%BE%8E%E5%8C%96%20from%20%E5%B0%8F%E7%81%B0%E7%81%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QAQu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/qaqu.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QAQu’s Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">(装机)ubuntu必要软件及库安装+美化 from 小灰灰</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-15T00:00:00+08:00">2018-12-15</time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">•</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">794</span>
+              
+
+              
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="change-source"><a href="#change-source" class="headerlink" title="change source"></a>change source</h1><p>aliyun service</p>
+<h1 id="apt"><a href="#apt" class="headerlink" title="apt"></a>apt</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt install fish tmux guake git build-essential baobab gparted vim gconf2 cmake aria2 uget bleachbit pinta speedtest-cli puddletag xdot dconf-editor iotop trash-cli fish gnome-todo backintime-qt4</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="dpkg"><a href="#dpkg" class="headerlink" title="dpkg"></a>dpkg</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dpkg -i wps,chrome,electron-ssr,xmind-zero,virtualbox,sogou-pinyin,nautilus_nutstore,teamviewer,vnciewer,netease</span><br></pre></td></tr></table></figure>
+
+<h1 id="install-gz…"><a href="#install-gz…" class="headerlink" title="install gz…"></a>install gz…</h1><p>veractype,foxitreader</p>
+<h1 id="configure-ssr"><a href="#configure-ssr" class="headerlink" title="configure ssr"></a>configure ssr</h1><h1 id="configure-guake"><a href="#configure-guake" class="headerlink" title="configure guake"></a>configure guake</h1><h1 id="sign-in-to-google"><a href="#sign-in-to-google" class="headerlink" title="sign in to google"></a>sign in to google</h1><h1 id="install-albert"><a href="#install-albert" class="headerlink" title="install albert"></a>install albert</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget -nv https:&#x2F;&#x2F;download.opensuse.org&#x2F;repositories&#x2F;home:manuelschneid3r&#x2F;xUbuntu_18.04&#x2F;Release.key -O Release.key</span><br><span class="line">sudo apt-key add - &lt; Release.key</span><br><span class="line">sudo sh -c &quot;echo &#39;deb http:&#x2F;&#x2F;download.opensuse.org&#x2F;repositories&#x2F;home:&#x2F;manuelschneid3r&#x2F;xUbuntu_18.04&#x2F; &#x2F;&#39; &gt; &#x2F;etc&#x2F;apt&#x2F;sources.list.d&#x2F;home:manuelschneid3r.list&quot;</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install albert</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<h1 id="uninstall-firefox"><a href="#uninstall-firefox" class="headerlink" title="uninstall firefox"></a>uninstall firefox</h1><h1 id="install-markdown-editor"><a href="#install-markdown-editor" class="headerlink" title="install markdown editor"></a>install markdown editor</h1><h2 id="typora"><a href="#typora" class="headerlink" title="typora"></a>typora</h2><p>sudo apt-key adv –keyserver keyserver.ubuntu.com –recv-keys BA300B7755AFCFAE<br>sudo add-apt-repository ‘deb <a href="http://typora.io" target="_blank" rel="noopener">http://typora.io</a> linux/‘<br>sudo apt install typora</p>
+<h1 id="auto-mount"><a href="#auto-mount" class="headerlink" title="auto mount"></a>auto mount</h1><p>C D E dataset</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;dev&#x2F;sda3 &#x2F;media&#x2F;C ntfs defaults,uid&#x3D;1000 0 0</span><br><span class="line">&#x2F;dev&#x2F;sda5 &#x2F;media&#x2F;D ntfs defaults,uid&#x3D;1000 0 0</span><br><span class="line">&#x2F;dev&#x2F;sdb1 &#x2F;media&#x2F;E ntfs defaults,uid&#x3D;1000 0 0</span><br><span class="line">&#x2F;dev&#x2F;sdb4 &#x2F;media&#x2F;Dataset ext4 defaults 0 0</span><br><span class="line">&#x2F;dev&#x2F;sda4 &#x2F;media&#x2F;Ubuntu_Software ext4 defaults 0 0</span><br></pre></td></tr></table></figure>
+
+<h1 id="build-soft-link"><a href="#build-soft-link" class="headerlink" title="build soft link"></a>build soft link</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ln -s &#x2F;media&#x2F;C c</span><br><span class="line">ln -s &#x2F;media&#x2F;D d</span><br><span class="line">ln -s &#x2F;media&#x2F;Dataset&#x2F; dataset</span><br><span class="line">ln -s &#x2F;media&#x2F;E e</span><br><span class="line">ln -s d&#x2F;research&#x2F;</span><br><span class="line">ln -s research&#x2F;workspace&#x2F;</span><br><span class="line">ln -s workspace&#x2F;Github&#x2F; github</span><br><span class="line">ln -s e&#x2F;backup&#x2F;</span><br><span class="line">ln -s e&#x2F;Software&#x2F;LinuxSoftware&#x2F; software</span><br></pre></td></tr></table></figure>
+
+<h1 id="install-python"><a href="#install-python" class="headerlink" title="install python"></a>install python</h1><ol>
+<li>install miniconda</li>
+<li>change pip source</li>
+<li>install from envirnment</li>
+</ol>
+<h1 id="install-program-tool"><a href="#install-program-tool" class="headerlink" title="install program tool"></a>install program tool</h1><p>tar pycharm,clion<br>// tar -xf pycharm-community-2018.2.2.tar.gz -C ~<br>add desktop shortcut</p>
+<p>K71U8DBPNE-eyJsaWNlbnNlSWQiOiJLNzFVOERCUE5FIiwibGljZW5zZWVOYW1lIjoibGFuIHl1IiwiYXNzaWduZWVOYW1lIjoiIiwiYXNzaWduZWVFbWFpbCI6IiIsImxpY2Vuc2VSZXN0cmljdGlvbiI6IkZvciBlZHVjYXRpb25hbCB1c2Ugb25seSIsImNoZWNrQ29uY3VycmVudFVzZSI6ZmFsc2UsInByb2R1Y3RzIjpbeyJjb2RlIjoiSUkiLCJwYWlkVXBUbyI6IjIwMTktMDUtMDQifSx7ImNvZGUiOiJSUzAiLCJwYWlkVXBUbyI6IjIwMTktMDUtMDQifSx7ImNvZGUiOiJXUyIsInBhaWRVcFRvIjoiMjAxOS0wNS0wNCJ9LHsiY29kZSI6IlJEIiwicGFpZFVwVG8iOiIyMDE5LTA1LTA0In0seyJjb2RlIjoiUkMiLCJwYWlkVXBUbyI6IjIwMTktMDUtMDQifSx7ImNvZGUiOiJEQyIsInBhaWRVcFRvIjoiMjAxOS0wNS0wNCJ9LHsiY29kZSI6IkRCIiwicGFpZFVwVG8iOiIyMDE5LTA1LTA0In0seyJjb2RlIjoiUk0iLCJwYWlkVXBUbyI6IjIwMTktMDUtMDQifSx7ImNvZGUiOiJETSIsInBhaWRVcFRvIjoiMjAxOS0wNS0wNCJ9LHsiY29kZSI6IkFDIiwicGFpZFVwVG8iOiIyMDE5LTA1LTA0In0seyJjb2RlIjoiRFBOIiwicGFpZFVwVG8iOiIyMDE5LTA1LTA0In0seyJjb2RlIjoiR08iLCJwYWlkVXBUbyI6IjIwMTktMDUtMDQifSx7ImNvZGUiOiJQUyIsInBhaWRVcFRvIjoiMjAxOS0wNS0wNCJ9LHsiY29kZSI6IkNMIiwicGFpZFVwVG8iOiIyMDE5LTA1LTA0In0seyJjb2RlIjoiUEMiLCJwYWlkVXBUbyI6IjIwMTktMDUtMDQifSx7ImNvZGUiOiJSU1UiLCJwYWlkVXBUbyI6IjIwMTktMDUtMDQifV0sImhhc2giOiI4OTA4Mjg5LzAiLCJncmFjZVBlcmlvZERheXMiOjAsImF1dG9Qcm9sb25nYXRlZCI6ZmFsc2UsImlzQXV0b1Byb2xvbmdhdGVkIjpmYWxzZX0=-Owt3/+LdCpedvF0eQ8635yYt0+ZLtCfIHOKzSrx5hBtbKGYRPFDrdgQAK6lJjexl2emLBcUq729K1+ukY9Js0nx1NH09l9Rw4c7k9wUksLl6RWx7Hcdcma1AHolfSp79NynSMZzQQLFohNyjD+dXfXM5GYd2OTHya0zYjTNMmAJuuRsapJMP9F1z7UTpMpLMxS/JaCWdyX6qIs+funJdPF7bjzYAQBvtbz+6SANBgN36gG1B2xHhccTn6WE8vagwwSNuM70egpahcTktoHxI7uS1JGN9gKAr6nbp+8DbFz3a2wd+XoF3nSJb/d2f/6zJR8yJF8AOyb30kwg3zf5cWw==-MIIEPjCCAiagAwIBAgIBBTANBgkqhkiG9w0BAQsFADAYMRYwFAYDVQQDDA1KZXRQcm9maWxlIENBMB4XDTE1MTEwMjA4MjE0OFoXDTE4MTEwMTA4MjE0OFowETEPMA0GA1UEAwwGcHJvZDN5MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxcQkq+zdxlR2mmRYBPzGbUNdMN6OaXiXzxIWtMEkrJMO/5oUfQJbLLuMSMK0QHFmaI37WShyxZcfRCidwXjot4zmNBKnlyHodDij/78TmVqFl8nOeD5+07B8VEaIu7c3E1N+e1doC6wht4I4+IEmtsPAdoaj5WCQVQbrI8KeT8M9VcBIWX7fD0fhexfg3ZRt0xqwMcXGNp3DdJHiO0rCdU+Itv7EmtnSVq9jBG1usMSFvMowR25mju2JcPFp1+I4ZI+FqgR8gyG8oiNDyNEoAbsR3lOpI7grUYSvkB/xVy/VoklPCK2h0f0GJxFjnye8NT1PAywoyl7RmiAVRE/EKwIDAQABo4GZMIGWMAkGA1UdEwQCMAAwHQYDVR0OBBYEFGEpG9oZGcfLMGNBkY7SgHiMGgTcMEgGA1UdIwRBMD+AFKOetkhnQhI2Qb1t4Lm0oFKLl/GzoRykGjAYMRYwFAYDVQQDDA1KZXRQcm9maWxlIENBggkA0myxg7KDeeEwEwYDVR0lBAwwCgYIKwYBBQUHAwEwCwYDVR0PBAQDAgWgMA0GCSqGSIb3DQEBCwUAA4ICAQC9WZuYgQedSuOc5TOUSrRigMw4/+wuC5EtZBfvdl4HT/8vzMW/oUlIP4YCvA0XKyBaCJ2iX+ZCDKoPfiYXiaSiH+HxAPV6J79vvouxKrWg2XV6ShFtPLP+0gPdGq3x9R3+kJbmAm8w+FOdlWqAfJrLvpzMGNeDU14YGXiZ9bVzmIQbwrBA+c/F4tlK/DV07dsNExihqFoibnqDiVNTGombaU2dDup2gwKdL81ua8EIcGNExHe82kjF4zwfadHk3bQVvbfdAwxcDy4xBjs3L4raPLU3yenSzr/OEur1+jfOxnQSmEcMXKXgrAQ9U55gwjcOFKrgOxEdek/Sk1VfOjvS+nuM4eyEruFMfaZHzoQiuw4IqgGc45ohFH0UUyjYcuFxxDSU9lMCv8qdHKm+wnPRb0l9l5vXsCBDuhAGYD6ss+Ga+aDY6f/qXZuUCEUOH3QUNbbCUlviSz6+GiRnt1kA9N2Qachl+2yBfaqUqr8h7Z2gsx5LcIf5kYNsqJ0GavXTVyWh7PYiKX4bs354ZQLUwwa/cG++2+wNWP+HtBhVxMRNTdVhSm38AknZlD+PTAsWGu9GyLmhti2EnVwGybSD2Dxmhxk3IPCkhKAK+pl0eWYGZWG3tJ9mZ7SowcXLWDFAk0lRJnKGFMTggrWjV8GYpw5bq23VmIqqDLgkNzuoog==</p>
+<h1 id="隐藏开机选择界面"><a href="#隐藏开机选择界面" class="headerlink" title="隐藏开机选择界面"></a>隐藏开机选择界面</h1><ul>
+<li>sudo gedit /etc/default/grub</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">GRUB_HIDDEN_TIMEOUT&#x3D;0</span><br><span class="line">GRUB_HIDDEN_TIMEOUT_QUIET&#x3D;true &#x2F;&#x2F;隐藏开机选择界面</span><br><span class="line">GRUB_TIMEOUT&#x3D;0 &#x2F;&#x2F; 设置开机选择界面等待时间，0 不显示</span><br><span class="line">GRUB_DISABLE_OS_PROBER&#x3D;true</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>sudo update-grub // update grub</li>
+</ul>
+<h1 id="theme-beauty"><a href="#theme-beauty" class="headerlink" title="theme beauty"></a>theme beauty</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install gnome gnome-shell</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install gnome-tweak-tool chrome-gnome-shell gnome-shell-extensions</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="papirus图标"><a href="#papirus图标" class="headerlink" title="papirus图标"></a>papirus图标</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:papirus&#x2F;papirus</span><br><span class="line">sudo apt update </span><br><span class="line">sudo apt-get install papirus-icon-theme</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Arc主题"><a href="#Arc主题" class="headerlink" title="Arc主题"></a>Arc主题</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo sh -c &quot;echo &#39;deb http:&#x2F;&#x2F;download.opensuse.org&#x2F;repositories&#x2F;home:&#x2F;Horst3180&#x2F;xUbuntu_16.04&#x2F; &#x2F;&#39; &gt;&gt; &#x2F;etc&#x2F;apt&#x2F;sources.list.d&#x2F;arc-theme.list&quot;</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install arc-theme</span><br></pre></td></tr></table></figure>
+
+<h2 id="install-extensions"><a href="#install-extensions" class="headerlink" title="install extensions"></a>install extensions</h2><p>the website is <a href="https://extensions.gnome.org/local/" target="_blank" rel="noopener">here</a>.</p>
+<p>should install:</p>
+<ol>
+<li>Hide Top Bar</li>
+<li>Dash to Dock</li>
+<li>TopIcons Plus</li>
+</ol>
+<h1 id="install-NVIDIA-driver"><a href="#install-NVIDIA-driver" class="headerlink" title="install NVIDIA-driver"></a>install NVIDIA-driver</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:graphics-drivers&#x2F;ppa</span><br><span class="line">sudo apt update</span><br><span class="line">ubuntu-drivers devices</span><br><span class="line">sudo ubuntu-drivers autoinstall</span><br></pre></td></tr></table></figure>
+
+<p>more detail <a href="https://www.jianshu.com/p/4366ed27add9" target="_blank" rel="noopener">here</a></p>
+<h1 id="install-vlc"><a href="#install-vlc" class="headerlink" title="install vlc"></a>install vlc</h1><p>sudo snap install vlc</p>
+<h1 id="install-wine-app"><a href="#install-wine-app" class="headerlink" title="install wine app"></a>install wine app</h1><ol>
+<li>qq</li>
+<li>wechat</li>
+<li>thurder</li>
+</ol>
+<p>more detail <a href="https://blog.csdn.net/qq_25987491/article/details/81364461" target="_blank" rel="noopener">here</a> and <a href="https://github.com/wszqkzqk/deepin-wine-ubuntu" target="_blank" rel="noopener">here(github)</a> and <a href="http://mirrors.aliyun.com/deepin/pool/non-free/d/" target="_blank" rel="noopener">here(resouce)</a></p>
+<h1 id="install-fusuma"><a href="#install-fusuma" class="headerlink" title="install fusuma"></a>install <a href="https://github.com/iberianpig/fusuma" target="_blank" rel="noopener">fusuma</a></h1><p>a touchpad tool.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo gpasswd -a $USER input</span><br><span class="line">sudo apt install libinput-tools</span><br><span class="line">sudo apt install ruby</span><br><span class="line">sudo gem install fusuma</span><br><span class="line">sudo apt install xdotool</span><br><span class="line"># Touchpad not working in GNOME</span><br><span class="line">gsettings set org.gnome.desktop.peripherals.touchpad send-events enabled</span><br></pre></td></tr></table></figure>
+
+<h1 id="setting-shortcut"><a href="#setting-shortcut" class="headerlink" title="setting shortcut"></a>setting shortcut</h1><h2 id="Customize-Gesture-Mapping"><a href="#Customize-Gesture-Mapping" class="headerlink" title="Customize Gesture Mapping"></a>Customize Gesture Mapping</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p ~&#x2F;.config&#x2F;w        # create config directory</span><br><span class="line">nano ~&#x2F;.config&#x2F;fusuma&#x2F;config.yml # edit config file.</span><br></pre></td></tr></table></figure>
+
+<p>Example</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">swipe:</span><br><span class="line">  3: </span><br><span class="line">    left: </span><br><span class="line">      command: &#39;xdotool key ctrl+Prior&#39;</span><br><span class="line">    right: </span><br><span class="line">      command: &#39;xdotool key ctrl+Next&#39;</span><br><span class="line">    up: </span><br><span class="line">      command: &#39;xdotool key super+w&#39;</span><br><span class="line">#      threshold: 1.5</span><br><span class="line">    down: </span><br><span class="line">      command: &#39;xdotool key super+s&#39;</span><br><span class="line">#      threshold: 1.5</span><br><span class="line">  4:</span><br><span class="line">    left: </span><br><span class="line">      command: &#39;xdotool key alt+Left&#39;</span><br><span class="line">    right: </span><br><span class="line">      command: &#39;xdotool key alt+Right&#39;</span><br><span class="line">    up: </span><br><span class="line">      command: &#39;xdotool key super+e&#39;</span><br><span class="line">    down: </span><br><span class="line">      command: &#39;xdotool key super+a&#39;</span><br><span class="line">pinch:</span><br><span class="line">  2:</span><br><span class="line">    in:</span><br><span class="line">      command: &#39;xdotool key ctrl+plus&#39;</span><br><span class="line">      threshold: 0.1</span><br><span class="line">    out:</span><br><span class="line">      command: &#39;xdotool key ctrl+minus&#39;</span><br><span class="line">      threshold: 0.1</span><br><span class="line"></span><br><span class="line">threshold:</span><br><span class="line">  swipe: 1</span><br><span class="line">  pinch: 1</span><br><span class="line"></span><br><span class="line">interval:</span><br><span class="line">  swipe: 1</span><br><span class="line">  pinch: 1</span><br></pre></td></tr></table></figure>
+
+<h1 id="nvidia转换问题"><a href="#nvidia转换问题" class="headerlink" title="nvidia转换问题"></a>nvidia转换问题</h1><p>NVIDIA转换为intel可以在NVIDIA setting中设置<br>intel转换为NVIDIA，先命令行sudo prime-select nvidia，然后重启就好</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div class="post-share">分享到：</div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>赞赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="QAQu 微信扫一扫，向我赞赏"/>
+        <p>微信扫一扫，向我赞赏</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ubuntu/" rel="tag"># ubuntu</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018-6-28-%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/" rel="next" title="算法设计小结">
+                <i class="fa fa-chevron-left"></i> 算法设计小结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019-2-20-MOSSE/" rel="prev" title="MOSSE">
+                MOSSE <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="vcomments"></div>
+    </div>
+  
+
+
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/card.jpg"
+                alt="QAQu" />
+            
+              <p class="site-author-name" itemprop="name"><span style="opacity:.2;">什么鬼</span>QAQu</p>
+              <p class="site-description motion-element" itemprop="description">深度学习技术笔记</p>
+          </div>
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/lyp22" target="_blank" title="GitHub" data-balloon="GitHub" data-balloon-pos="up">
+                    
+                       <i class="fa fa-fw fa-github"></i></a>
+                </span>
+              
+            
+          </div>
+
+          
+		  
+		  
+		  
+		  
+
+          
+            <div class="feed-link motion-element">
+              
+              <a class="feed-rss" href="/atom.xml" rel="alternate" target="_blank">
+                <i class="fa fa-rss"></i>
+                <span>RSS 订阅</span>
+              </a>
+            </div>
+          
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+            
+
+          </nav>
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.png" alt="Creative Commons" />
+              </a>
+            </div>
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#change-source"><span class="nav-number">1.</span> <span class="nav-text">change source</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#apt"><span class="nav-number">2.</span> <span class="nav-text">apt</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#dpkg"><span class="nav-number">3.</span> <span class="nav-text">dpkg</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#install-gz…"><span class="nav-number">4.</span> <span class="nav-text">install gz…</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#configure-ssr"><span class="nav-number">5.</span> <span class="nav-text">configure ssr</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#configure-guake"><span class="nav-number">6.</span> <span class="nav-text">configure guake</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sign-in-to-google"><span class="nav-number">7.</span> <span class="nav-text">sign in to google</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#install-albert"><span class="nav-number">8.</span> <span class="nav-text">install albert</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#uninstall-firefox"><span class="nav-number">9.</span> <span class="nav-text">uninstall firefox</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#install-markdown-editor"><span class="nav-number">10.</span> <span class="nav-text">install markdown editor</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#typora"><span class="nav-number">10.1.</span> <span class="nav-text">typora</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#auto-mount"><span class="nav-number">11.</span> <span class="nav-text">auto mount</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#build-soft-link"><span class="nav-number">12.</span> <span class="nav-text">build soft link</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#install-python"><span class="nav-number">13.</span> <span class="nav-text">install python</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#install-program-tool"><span class="nav-number">14.</span> <span class="nav-text">install program tool</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#隐藏开机选择界面"><span class="nav-number">15.</span> <span class="nav-text">隐藏开机选择界面</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#theme-beauty"><span class="nav-number">16.</span> <span class="nav-text">theme beauty</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#papirus图标"><span class="nav-number">16.1.</span> <span class="nav-text">papirus图标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Arc主题"><span class="nav-number">16.2.</span> <span class="nav-text">Arc主题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#install-extensions"><span class="nav-number">16.3.</span> <span class="nav-text">install extensions</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#install-NVIDIA-driver"><span class="nav-number">17.</span> <span class="nav-text">install NVIDIA-driver</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#install-vlc"><span class="nav-number">18.</span> <span class="nav-text">install vlc</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#install-wine-app"><span class="nav-number">19.</span> <span class="nav-text">install wine app</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#install-fusuma"><span class="nav-number">20.</span> <span class="nav-text">install fusuma</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#setting-shortcut"><span class="nav-number">21.</span> <span class="nav-text">setting shortcut</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Customize-Gesture-Mapping"><span class="nav-number">21.1.</span> <span class="nav-text">Customize Gesture Mapping</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#nvidia转换问题"><span class="nav-number">22.</span> <span class="nav-text">nvidia转换问题</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-image"></div>
+      <div class="footer-inner">
+        <p>博客已萌萌哒运行<span id="since"></span><span class="my-face">(●'◡'●)ﾉ♥</span></p>
+<p>托管于<a href="https://www.aliyun.com/" target="_blank" rel="nofollow"> 阿里云服务器</a>.  <a href="http://www.google.com/analytics/" target="_blank" rel="nofollow">Google Analytics </a>提供网站统计服务.</p>
+
+<p>© <span itemprop="copyrightYear">2021</span> QAQu’s Blog.
+    由 <a href="https://hexo.io/" target="_blank" class="external" rel="nofollow">Hexo</a> 强力驱动.
+    Theme By <a href="https://github.com/DIYgod/hexo-theme-sagiri" target="_blank" class="external" rel="nofollow">Sagiri</a> .
+    <a href="/sitemap.xml" target="_blank">站点地图</a>.
+    .
+</p>
+<p>Made with <i class="fa fa-heart throb" style="color: #d43f57;"></i> by <span class="author" itemprop="copyrightHolder">QAQu</span>. </p>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    <canvas id="evanyou"></canvas>
+    
+
+    
+
+  </div>
+
+  <script type="text/javascript" src="/js/sagiri.min.js?v="></script>
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+  <!--<script>
+    // remove service worker cache
+    // from https://stackoverflow.com/questions/33704791/how-do-i-uninstall-a-service-worker
+    "use strict";
+    if(navigator.serviceWorker)
+    {
+        navigator.serviceWorker.getRegistrations().then(function(registrations) {
+            for(let registration of registrations) {
+                registration.unregister()
+            }
+        })
+    }
+  </script>-->
+
+  <script>
+    
+  </script>
+</body>
+</html>

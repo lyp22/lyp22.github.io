@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#fff">
+
+<link rel="preload" href="/fonts/sigmarone3.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+
+
+
+
+
+
+
+  
+
+<link href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+
+
+  
+
+<link href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=" rel="stylesheet" type="text/css" />
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=">
+
+
+  <link rel="mask-icon" href="/safari-pinned-tab.svg?v=" color="#fff">
+
+
+
+
+
+
+  <meta name="keywords" content="概率图," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="QAQu’s Blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="概率图模型学习笔记：HMM、MEMM、CRF">
+<meta property="og:type" content="article">
+<meta property="og:title" content="概率图模型：HMM、MEMM、CRF">
+<meta property="og:url" content="https://qaqu.net/2019-2-28-%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B/index.html">
+<meta property="og:site_name" content="QAQu’s Blog">
+<meta property="og:description" content="概率图模型学习笔记：HMM、MEMM、CRF">
+<meta property="og:image" content="https://qaqu.net/2019-2-28-%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B/f8.png">
+<meta property="og:image" content="https://qaqu.net/2019-2-28-%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B/f9.png">
+<meta property="article:published_time" content="2019-02-27T16:00:00.000Z">
+<meta property="article:modified_time" content="2019-12-20T08:48:54.327Z">
+<meta property="article:author" content="QAQu">
+<meta property="article:tag" content="概率图">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://qaqu.net/2019-2-28-%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B/f8.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '',
+    sidebar: {"position":"right","display":"always","offset":52,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    since: '12/10/2018 11:30:00',
+    onlineAPI: 'wss://onlinecount.herokuapp.com/online',
+    site: {
+      title: 'QAQu’s Blog',
+      subtitle: '',
+      author: 'QAQu'
+    },
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    leancloud: {
+      enable: false,
+      appID: 'h3Y827lG7R3s3eFGdBDMka2u-MdYXbMMI',
+      appKey: '7AyfA498Cr1eGenSgpHgLfxO'
+    },
+    favicon: {
+      visibilitychange: false,
+      narmal: '/favicon.ico',
+      hidden: '/failure.ico',
+      show_text: '(/≧▽≦/)欢迎回来!',
+      hide_text: '(●—●)QAQu’s Blog'
+    }
+  };
+</script>
+
+
+
+
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/disqusjs@1.2.2/dist/disqus.js"></script>
+
+
+
+
+  <link rel="canonical" href="https://qaqu.net/2019-2-28-概率图模型/"/>
+
+
+
+
+
+  <title>概率图模型：HMM、MEMM、CRF | QAQu’s Blog</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans" class="theme-darling">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-首页">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+          
+        </li>
+      
+        
+        <li class="menu-item menu-item-归档">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+          
+        </li>
+      
+        
+        <li class="menu-item menu-item-标签">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tag"></i> <br />
+            
+            标签
+          </a>
+          
+        </li>
+      
+        
+        <li class="menu-item menu-item-分类">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tag"></i> <br />
+            
+            分类
+          </a>
+          
+        </li>
+      
+        
+        <li class="menu-item menu-item-友链">
+          <a href="/friends/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-mars"></i> <br />
+            
+            友链
+          </a>
+          
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+      <li class="menu-item search">
+          <form class="search-form">
+            <input name="keyword" type="text" class="search-input" placeholder="站内搜索">
+            <button type="submit" class="search-submit"><i class="fa fa-search"></i></button>
+          </form>
+      </li>
+      <li class="menu-item online"><span id="online-count">?</span>人在线</li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+<div class="site-brand-wrapper" style="background-image: url(/images/header-leg.jpg)">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <div class="brand">
+        <span class="logo-line-before"><i></i></span>
+        <div class="site-title">
+          <div id="animate" class="animate">
+            <span>Q</span><span>A</span><span>Q</span><span>u</span><span>’</span><span>s</span><span> </span><span>B</span><span>l</span><span>o</span><span>g</span>
+          </div>
+          <div id="guide" class="guide">
+            <span>Q</span><span>A</span><span>Q</span><span>u</span><span>’</span><span>s</span><span> </span><span>B</span><span>l</span><span>o</span><span>g</span>
+          </div>
+        </div>
+        <span class="logo-line-after"><i></i></span>
+      </div>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+<div class="site-master" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-master-avatar" itemprop="image" src="/images/qaqu.jpg" alt="QAQu" />
+    <h2 class="site-master-description" itemprop="description">
+        <span>深度学习</span><span>技术笔记</span>
+    </h2>
+</div>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-date">
+			<div class="post-month">02月</div>
+			<div class="post-day">28</div>
+	</div>
+  
+  <div class="post-badge">
+    
+      <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+        <a href="/categories/Algorithm/" itemprop="url" rel="index">
+          <span itemprop="name">Algorithm</span>
+        </a>
+      </span>
+    
+  </div>
+  
+
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://qaqu.net/2019-2-28-%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QAQu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/qaqu.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QAQu’s Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">概率图模型：HMM、MEMM、CRF</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-28T00:00:00+08:00">2019-02-28</time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">•</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">1533</span>
+              
+
+              
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>概率图模型学习笔记：HMM、MEMM、CRF</p>
+<a id="more"></a>
+
+<h1 id="Preface"><a href="#Preface" class="headerlink" title="Preface"></a>Preface</h1><blockquote>
+<p>统计机器学习所有的模型（个别instant model和优化算法以及其他的特种工程知识点除外）的工作流程都是如此：</p>
+</blockquote>
+<blockquote>
+<p>a.训练模型参数，得到模型（由参数唯一确定），</p>
+</blockquote>
+<blockquote>
+<p>b.预测给定的测试数据。</p>
+</blockquote>
+<blockquote>
+<p>拿这个流程去挨个学习模型，思路上会非常顺畅。</p>
+</blockquote>
+<h1 id="Prerequisite"><a href="#Prerequisite" class="headerlink" title="Prerequisite"></a>Prerequisite</h1><h2 id="概率图"><a href="#概率图" class="headerlink" title="概率图"></a>概率图</h2><p>之前刚接触CRF时，一上来试图越过一堆繁琐的概率图相关概念，不过sad to say, 这是后面的前驱知识，后面还得反过来补这个点。所以若想整体把握，系统地拿下这一块，应该还是要越过这块门槛的。 当然了，一开始只需略略快速看一篇，后面可再返过来补查。</p>
+<h3 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h3><p>在统计概率图（probability graph models）中，参考宗成庆老师的书，是这样的体系结构（个人非常喜欢这种类型的图）：</p>
+
+
+<p>在概率图模型中，数据(样本)由公式G=(V,E)建模表示：  V表示节点，即随机变量（放在此处的，可以是一个token或者一个label），具体地，用Y=(y1,y2,……,yn)  为随机变量建模，注意  现在是代表了一批随机变量（想象对应一条sequence，包含了很多的token），  P(Y)为这些随机变量的分布； E表示边，即概率依赖关系。具体咋理解，还是要在后面结合HMM或CRF的graph具体解释。</p>
+<h3 id="有向图-vs-无向图"><a href="#有向图-vs-无向图" class="headerlink" title="有向图 vs. 无向图"></a>有向图 vs. 无向图</h3><p>上图可以看到，贝叶斯网络（信念网络）都是有向的，马尔科夫网络无向。所以，贝叶斯网络适合为有单向依赖的数据建模，马尔科夫网络适合实体之间互相依赖的建模。具体地，他们的核心差异表现在如何求 P=(Y) ，即怎么表示 Y=(y1,y2,……,yn) 这个的联合概率。</p>
+<h4 id="有向图"><a href="#有向图" class="headerlink" title="有向图"></a>有向图</h4><p>对于有向图模型，这么求联合概率： </p>
+
+
+
+<p>举个例子，对于下面的这个有向图的随机变量(注意，这个图我画的还是比较广义的)：</p>
+
+
+<p>应该这样表示他们的联合概率:</p>
+
+
+<h4 id="无向图"><a href="#无向图" class="headerlink" title="无向图"></a>无向图</h4><p>对于无向图，我看资料一般就指马尔科夫网络(注意，这个图我画的也是比较广义的)。</p>
+
+
+<p>如果一个graph太大，可以用因子分解将 P=(Y) 写为若干个联合概率的乘积。咋分解呢，将一个图分为若干个“小团”，注意每个团必须是“最大团”（就是里面任何两个点连在了一块，具体……算了不解释，有点“最大连通子图”的感觉），则有：</p>
+
+
+<p>, 其中  ，公式应该不难理解吧，归一化是为了让结果算作概率。</p>
+<p>所以像上面的无向图：</p>
+
+
+<p>其中，  是一个最大团 C 上随机变量们的联合概率，一般取指数函数的：</p>
+
+
+<p>好了，管这个东西叫做势函数。注意 <img src="/2019-2-28-%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B/f8.png" class> 是否有看到CRF的影子。</p>
+<p>那么概率无向图的联合概率分布可以在因子分解下表示为：</p>
+<img src="/2019-2-28-%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B/f9.png" class>
+
+<p>注意，这里的理解还蛮重要的，注意递推过程，敲黑板，这是CRF的开端！<br>这个由Hammersly-Clifford law保证，具体不展开。</p>
+<h3 id="马尔科夫假设-amp-马尔科夫性"><a href="#马尔科夫假设-amp-马尔科夫性" class="headerlink" title="马尔科夫假设&amp;马尔科夫性"></a>马尔科夫假设&amp;马尔科夫性</h3><p>这个也属于前馈知识。</p>
+<h4 id="马尔科夫假设"><a href="#马尔科夫假设" class="headerlink" title="马尔科夫假设"></a>马尔科夫假设</h4><p>额应该是齐次马尔科夫假设，这样假设：马尔科夫链(X1,……,Xn)里的Xi  总是只受Xi-1  一个人的影响。马尔科夫假设这里相当于就是个1-gram。马尔科夫过程呢？即，在一个过程中，每个状态的转移只依赖于前n个状态，并且只是个n阶的模型。最简单的马尔科夫过程是一阶的，即只依赖于器哪一个状态。</p>
+<h4 id="马尔科夫性"><a href="#马尔科夫性" class="headerlink" title="马尔科夫性"></a>马尔科夫性</h4><p>马尔科夫性是是保证或者判断概率图是否为概率无向图的条件。三点内容：a. 成对，b. 局部，c. 全局。我觉得这个不用展开。</p>
+<h2 id="判别式（discriminative）模型-vs-生成式-generative-模型"><a href="#判别式（discriminative）模型-vs-生成式-generative-模型" class="headerlink" title="判别式（discriminative）模型 vs. 生成式(generative)模型"></a>判别式（discriminative）模型 vs. 生成式(generative)模型</h2><p>在监督学习下，模型可以分为判别式模型与生成式模型。重点来了。上面有提到，我理解了HMM、CRF模型的区别是从理解了判别式模型与生成式模型的那刻，并且瞬间对其他的模型有一个恍然大悟。我记得是一年前就开始纠结这两者的区别，但我只能说，栽在了一些烂博客上，大部分都没有自己的insightful理解，也就是一顿官话，也真是难以理解。后来在知乎上一直琢磨别人的答案，然后某日早晨终于豁然开朗，就是这种感觉。好了，我要用自己的理解来转述两者的区别了below。先问个问题，根据经验，A批模型（神经网络模型、SVM、perceptron、LR、DT……）与B批模型（NB、LDA……），有啥区别不？（这个问题需要一些模型使用经验）应该是这样的：</p>
+<blockquote>
+<ol>
+<li>A批模型是这么工作的，他们直接将数据的Y（或者label），根据所提供的features，学习，最后画出了一个明显或者比较明显的边界（具体怎么做到的？通过复杂的函数映射，或者决策叠加等等mechanism），这一点线性LR、线性SVM应该很明显吧。 </li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="2">
+<li>B批模型是这么工作的，他们先从训练样本数据中，将所有的数据的分布情况摸透，然后最终确定一个分布，来作为我的所有的输入数据的分布，并且他是一个联合分布P(X,Y)  (注意 X 包含所有的特征xi  ，  Y包含所有的label)。然后我来了新的样本数据（inference），好，通过学习来的模型的联合分布P(X,Y)  ，再结合新样本给的X  ，通过条件概率就能出来Y  ：<br>P(Y|X)=P(X,Y)/P(X)</li>
+</ol>
+</blockquote>
+<p>好了，应该说清楚了。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div class="post-share">分享到：</div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>赞赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="QAQu 微信扫一扫，向我赞赏"/>
+        <p>微信扫一扫，向我赞赏</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E6%A6%82%E7%8E%87%E5%9B%BE/" rel="tag"># 概率图</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019-2-27-SVM%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/" rel="next" title="SVM支持向量机">
+                <i class="fa fa-chevron-left"></i> SVM支持向量机
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019-3-1-%E7%BB%BC%E8%BF%B0_tracklet/" rel="prev" title="综述_tracklet">
+                综述_tracklet <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="vcomments"></div>
+    </div>
+  
+
+
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/card.jpg"
+                alt="QAQu" />
+            
+              <p class="site-author-name" itemprop="name"><span style="opacity:.2;">什么鬼</span>QAQu</p>
+              <p class="site-description motion-element" itemprop="description">深度学习技术笔记</p>
+          </div>
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/lyp22" target="_blank" title="GitHub" data-balloon="GitHub" data-balloon-pos="up">
+                    
+                       <i class="fa fa-fw fa-github"></i></a>
+                </span>
+              
+            
+          </div>
+
+          
+		  
+		  
+		  
+		  
+
+          
+            <div class="feed-link motion-element">
+              
+              <a class="feed-rss" href="/atom.xml" rel="alternate" target="_blank">
+                <i class="fa fa-rss"></i>
+                <span>RSS 订阅</span>
+              </a>
+            </div>
+          
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+            
+
+          </nav>
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.png" alt="Creative Commons" />
+              </a>
+            </div>
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Preface"><span class="nav-number">1.</span> <span class="nav-text">Preface</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Prerequisite"><span class="nav-number">2.</span> <span class="nav-text">Prerequisite</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概率图"><span class="nav-number">2.1.</span> <span class="nav-text">概率图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概览"><span class="nav-number">2.1.1.</span> <span class="nav-text">概览</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有向图-vs-无向图"><span class="nav-number">2.1.2.</span> <span class="nav-text">有向图 vs. 无向图</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#有向图"><span class="nav-number">2.1.2.1.</span> <span class="nav-text">有向图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#无向图"><span class="nav-number">2.1.2.2.</span> <span class="nav-text">无向图</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#马尔科夫假设-amp-马尔科夫性"><span class="nav-number">2.1.3.</span> <span class="nav-text">马尔科夫假设&amp;马尔科夫性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#马尔科夫假设"><span class="nav-number">2.1.3.1.</span> <span class="nav-text">马尔科夫假设</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#马尔科夫性"><span class="nav-number">2.1.3.2.</span> <span class="nav-text">马尔科夫性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#判别式（discriminative）模型-vs-生成式-generative-模型"><span class="nav-number">2.2.</span> <span class="nav-text">判别式（discriminative）模型 vs. 生成式(generative)模型</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-image"></div>
+      <div class="footer-inner">
+        <p>博客已萌萌哒运行<span id="since"></span><span class="my-face">(●'◡'●)ﾉ♥</span></p>
+<p>托管于<a href="https://www.aliyun.com/" target="_blank" rel="nofollow"> 阿里云服务器</a>.  <a href="http://www.google.com/analytics/" target="_blank" rel="nofollow">Google Analytics </a>提供网站统计服务.</p>
+
+<p>© <span itemprop="copyrightYear">2021</span> QAQu’s Blog.
+    由 <a href="https://hexo.io/" target="_blank" class="external" rel="nofollow">Hexo</a> 强力驱动.
+    Theme By <a href="https://github.com/DIYgod/hexo-theme-sagiri" target="_blank" class="external" rel="nofollow">Sagiri</a> .
+    <a href="/sitemap.xml" target="_blank">站点地图</a>.
+    .
+</p>
+<p>Made with <i class="fa fa-heart throb" style="color: #d43f57;"></i> by <span class="author" itemprop="copyrightHolder">QAQu</span>. </p>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    <canvas id="evanyou"></canvas>
+    
+
+    
+
+  </div>
+
+  <script type="text/javascript" src="/js/sagiri.min.js?v="></script>
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+  <!--<script>
+    // remove service worker cache
+    // from https://stackoverflow.com/questions/33704791/how-do-i-uninstall-a-service-worker
+    "use strict";
+    if(navigator.serviceWorker)
+    {
+        navigator.serviceWorker.getRegistrations().then(function(registrations) {
+            for(let registration of registrations) {
+                registration.unregister()
+            }
+        })
+    }
+  </script>-->
+
+  <script>
+    
+  </script>
+</body>
+</html>
