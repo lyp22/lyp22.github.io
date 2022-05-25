@@ -1,6 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Latex 修改公式前后间距</title>
+    <url>/2022-5-3-Latex%20%E4%BF%AE%E6%94%B9%E5%85%AC%E5%BC%8F%E5%89%8D%E5%90%8E%E9%97%B4%E8%B7%9D/</url>
+    <content><![CDATA[<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">\makeatletter</span><br><span class="line">\renewcommand\normalsize&#123;%</span><br><span class="line">\abovedisplayskip 5\p@ \@plus2\p@ \@minus5\p@</span><br><span class="line">\abovedisplayshortskip \z@ \@plus3\p@</span><br><span class="line">\belowdisplayshortskip 6\p@ \@plus3\p@ \@minus3\p@</span><br><span class="line">\belowdisplayskip \abovedisplayskip</span><br><span class="line">\let\@listi\@listI&#125;</span><br><span class="line">\makeatother</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+]]></content>
+      <categories>
+        <category>LATEX</category>
+      </categories>
+      <tags>
+        <tag>LATEX</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>FRP 内网端口映射</title>
+    <url>/2022-2-4-FRP%20%E5%86%85%E7%BD%91%E7%AB%AF%E5%8F%A3%E6%98%A0%E5%B0%84/</url>
+    <content><![CDATA[<h1 id="frp的作用"><a href="#frp的作用" class="headerlink" title="frp的作用"></a>frp的作用</h1><p>利用处于内网或防火墙后的机器，对外网环境提供 http 或 https 服务。<br>对于 http, https 服务支持基于域名的虚拟主机，支持自定义域名绑定，使多个域名可以共用一个80端口。<br>利用处于内网或防火墙后的机器，对外网环境提供 tcp 和 udp 服务，例如在家里通过 ssh 访问处于公司内网环境内的主机。</p>
+<a id="more"></a>
+
+<h1 id="配置说明"><a href="#配置说明" class="headerlink" title="配置说明"></a>配置说明</h1><p>1、实现功能</p>
+<p>（1）外网通过ssh访问内网机器<br>（2）自定义绑定域名访问内网web服务</p>
+<p>2、配置前准备</p>
+<p>（1）公网服务器1台<br>（2）内网服务器1台（我这里演示的是linux环境，win10上面vmware安装的centos7）<br>（3）公网服务器绑定域名1个（实现二1中（1）功能不需要公网服务器绑定域名，二1中（2）功能必须需要公网服务器绑定域名）<br>（4）内网服务器部署一个web服务，可以用tomcat模拟，这里就不演示了</p>
+<h1 id="安装frp"><a href="#安装frp" class="headerlink" title="安装frp"></a>安装frp</h1><p>1、公网服务器与内网服务器都需要下载frp进行安装，公网服务器（服务端）配置关注步骤6,内网服务器（客户端）关注步骤7<br>2、下载地址是</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">https:&#x2F;&#x2F;github.com&#x2F;fatedier&#x2F;frp&#x2F;releases，下载linux版本frp_0.13.0_linux_amd64.tar.gz</span><br></pre></td></tr></table></figure>
+
+
+<p>也可以这样选择下载</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">wget https:&#x2F;&#x2F;github.com&#x2F;fatedier&#x2F;frp&#x2F;releases&#x2F;download&#x2F;v0.13.0&#x2F;frp_0.13.0_linux_amd64.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>3、新建目录</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mkdir -p &#x2F;usr&#x2F;local&#x2F;frp</span><br></pre></td></tr></table></figure>
+<p>上传frp_0.13.0_linux_amd64.tar.gz至linux服务器该目录下</p>
+<p>4、解压tar -zxvf  frp_0.13.0_linux_amd64.tar.gz</p>
+<p>5、进入解压目录</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cd frp_0.13.0_linux_amd64</span><br></pre></td></tr></table></figure>
+<p>这里主要关注4个文件，分别是frpc、frpc.ini和frps、frps.ini，前者两个文件是客户端所关注文件，后者两个文件是服务端所关注两个文件。</p>
+<p>6、配置服务端（公网服务器），首先删掉frpc、frpc.ini两个文件，然后再进行配置，vi ./frps.ini，</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[common]</span><br><span class="line">bind_port &#x3D; 7000 #与客户端绑定的进行通信的端口</span><br><span class="line">vhost_http_port &#x3D; 6081 #访问客户端web服务自定义的端口号</span><br></pre></td></tr></table></figure>
+
+<p>保存然后启动服务</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.&#x2F;frps -c .&#x2F;frps.ini</span><br></pre></td></tr></table></figure>
+<p>这是前台启动，后台启动命令为</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">nohup .&#x2F;frps -c .&#x2F;frps.ini &amp;</span><br></pre></td></tr></table></figure>
+
+<p>7、配置客户端（内网服务器），首先删掉frps、frps.ini两个文件,然后再进行配置，vi ./frpc.ini</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[common]</span><br><span class="line">server_addr &#x3D; 120.56.37.48 #公网服务器ip</span><br><span class="line">server_port &#x3D; 7000 #与服务端bind_port一致</span><br><span class="line">#公网通过ssh访问内部服务器</span><br><span class="line">[ssh]</span><br><span class="line">type &#x3D; tcp #连接协议</span><br><span class="line">local_ip &#x3D; 192.168.3.48 #内网服务器ip</span><br><span class="line">local_port &#x3D; 22 #ssh默认端口号</span><br><span class="line">remote_port &#x3D; 6000 #自定义的访问内部ssh端口号</span><br><span class="line">#公网访问内部web服务器以http方式</span><br><span class="line">[web]</span><br><span class="line">type &#x3D; http #访问协议</span><br><span class="line">local_port &#x3D; 8081 #内网web服务的端口号</span><br><span class="line">custom_domains &#x3D; repo.iwi.com #所绑定的公网服务器域名，一级、二级域名都可以</span><br></pre></td></tr></table></figure>
+
+<p>保存然后执行</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.&#x2F;frpc -c .&#x2F;frpc.ini</span><br></pre></td></tr></table></figure>
+<p>启动，这是前台启动，后台启动命令为</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">nohup .&#x2F;frpc -c .&#x2F;frpc.ini &amp;</span><br></pre></td></tr></table></figure>
+
+<p>8、访问方式</p>
+<p>（1）外网ssh访问内网服务器（直接使用配置里面数据演示）</p>
+<p>ip：120.56.37.48  port:6000   用户名：linux服务器的用户  密码：linux服务器的密码        或者</p>
+<p>ip：120.56.37.48  port:22   用户名：linux服务器的用户  密码：linux服务器的密码            或者</p>
+<p>ip：repo.iwi.com  port:6000   用户名：linux服务器的用户  密码：linux服务器的密码         或者</p>
+<p>ip：repo.iwi.com  port:22   用户名：linux服务器的用户  密码：linux服务器的密码</p>
+<p>（2）自定义绑定域名访问内网web服务（直接使用配置里面数据演示）</p>
+<p>  repo.iwi.com:6081</p>
+<h1 id="可以正常运行的配置文件"><a href="#可以正常运行的配置文件" class="headerlink" title="可以正常运行的配置文件"></a>可以正常运行的配置文件</h1><p>通过外网IP：6000端口，可以ssh和FTP</p>
+<p>公共服务器<br>[common]<br>bind_port = 7000<br>vhost_http_port = 23333</p>
+<p>内网服务器</p>
+<p>[common]<br>server_addr = 外网IP<br>server_port = 7000<br>[ssh]<br>type = tcp<br>local_ip = 127.0.0.1<br>local_port = 23333<br>remote_port = 6000</p>
+]]></content>
+      <categories>
+        <category>ubuntu</category>
+      </categories>
+      <tags>
+        <tag>端口映射</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>xlrd无法读取xlsx</title>
+    <url>/2021-9-18-xlrd%E6%97%A0%E6%B3%95%E8%AF%BB%E5%8F%96xlsx/</url>
+    <content><![CDATA[<p>参考：<a href="https://blog.csdn.net/zhaoleiedu/article/details/111472654" target="_blank" rel="noopener">https://blog.csdn.net/zhaoleiedu/article/details/111472654</a></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pip install xlrd&#x3D;&#x3D;1.2.0</span><br></pre></td></tr></table></figure>
+
+
+<a id="more"></a>
+
+
+]]></content>
+      <categories>
+        <category>ubuntu</category>
+      </categories>
+      <tags>
+        <tag>xlrd</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>更新nvidia驱动</title>
+    <url>/2021-5-24-%E6%9B%B4%E6%96%B0nvidia%E9%A9%B1%E5%8A%A8/</url>
+    <content><![CDATA[<p>查看之前对驱动的操作</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo dpkg --list | grep nvidia-*</span><br></pre></td></tr></table></figure>
+
+<p>卸载当前驱动</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo apt-get purge nvidia*</span><br></pre></td></tr></table></figure>
+
+<p>把显卡驱动加入ppa</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo add-apt-repository ppa:graphics-drivers</span><br><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure>
+
+<p>之前安装nvidia驱动</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo apt-get install nvidia-415 nvidia-settings nvidia-prime</span><br></pre></td></tr></table></figure>
+
+<p>Ubuntu 20 安装nvidia驱动</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo apt install nvidia-driver-450</span><br></pre></td></tr></table></figure>
+
+<p>禁用nvidia的本地更新</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo apt-mark hold nvidia-driver-450</span><br></pre></td></tr></table></figure>
+
+
+<a id="more"></a>
+
+
+]]></content>
+      <categories>
+        <category>ubuntu</category>
+      </categories>
+      <tags>
+        <tag>nvidia</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>本地仓库上传github</title>
     <url>/2021-4-29-%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E4%B8%8A%E4%BC%A0github/</url>
     <content><![CDATA[<h1 id="远程库与本地库之间的操作"><a href="#远程库与本地库之间的操作" class="headerlink" title="远程库与本地库之间的操作"></a>远程库与本地库之间的操作</h1><p>1.从远程克隆一份到本地可以通过git clone</p>
@@ -36,6 +162,23 @@
       </tags>
   </entry>
   <entry>
+    <title>服务器更换用户cuda版本</title>
+    <url>/2021-4-19-%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%9B%B4%E6%8D%A2%E7%94%A8%E6%88%B7cuda%E7%89%88%E6%9C%AC/</url>
+    <content><![CDATA[<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">export PATH&#x3D;&#x2F;usr&#x2F;local&#x2F;cuda-10.0&#x2F;bin$&#123;PATH:+:$&#123;PATH&#125;&#125;</span><br><span class="line">export LD_LIBRARY_PATH&#x3D;&#x2F;usr&#x2F;local&#x2F;cuda-10.0&#x2F;lib64$&#123;LD_LIBRARY_PATH:+:$&#123;LD_LIBRARY_PATH&#125;&#125;</span><br><span class="line">export CUDA_HOME&#x3D;&#x2F;usr&#x2F;local&#x2F;cuda-10.0</span><br></pre></td></tr></table></figure>
+
+
+<a id="more"></a>
+
+
+]]></content>
+      <categories>
+        <category>ubuntu</category>
+      </categories>
+      <tags>
+        <tag>cuda</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>bashrc中更新cuda指向</title>
     <url>/2021-2-26-bashrc%E4%B8%AD%E6%9B%B4%E6%96%B0cuda%E6%8C%87%E5%90%91/</url>
     <content><![CDATA[<p>这里是指向cuda11.0，其他版本替换cuda-11.0</p>
@@ -46,6 +189,41 @@
       </categories>
       <tags>
         <tag>常用</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>编译安装GCC7.5.0</title>
+    <url>/2021-2-26-%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85GCC7.5.0/</url>
+    <content><![CDATA[<h1 id="安装GMP"><a href="#安装GMP" class="headerlink" title="安装GMP"></a>安装GMP</h1><p>安装GMP 之前需要先安装m4 (不然会出错），m4可以通过命名自动安装$sudo apt-get install m4</p>
+<p>去去libgmp官网下载最新的gmp包，<a href="https://gmplib.org/，例如我下载的是gmp-6.1.2" target="_blank" rel="noopener">https://gmplib.org/，例如我下载的是gmp-6.1.2</a><br>解压下载的包<br>tar -jvxf gmp-6.1.2.tar.bz2</p>
+<p>之后按如下操作：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cd gmp-6.1.2</span><br><span class="line">.&#x2F;configure --enable-cxx -prefix&#x3D;&#x2F;usr&#x2F;local&#x2F;gmp-6.0.0</span><br><span class="line">make</span><br><span class="line">make check</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
+
+
+
+<a id="more"></a>
+
+
+<h1 id="安装mpfr"><a href="#安装mpfr" class="headerlink" title="安装mpfr"></a>安装mpfr</h1><p><a href="https://www.mpfr.org/mpfr-current/" target="_blank" rel="noopener">https://www.mpfr.org/mpfr-current/</a> 下载</p>
+<p>tar -zxvf mpfr-3.1.6.tar.gz 解压</p>
+<p>进入mpfr-3.1.6</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> .&#x2F;configure --with-gmp-include&#x3D;&#x2F;usr&#x2F;local&#x2F;include --with-gmp-lib&#x3D;&#x2F;usr&#x2F;local&#x2F;lib(删除)</span><br><span class="line"> </span><br><span class="line">.&#x2F;configure --prefix&#x3D;&#x2F;usr&#x2F;local&#x2F;mpfr-4.1.0 --with-gmp&#x3D;&#x2F;usr&#x2F;local&#x2F;gmp-6.0.0</span><br><span class="line"></span><br><span class="line">make</span><br><span class="line">make check</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
+
+<h1 id="安装MPC"><a href="#安装MPC" class="headerlink" title="安装MPC"></a>安装MPC</h1><p><a href="http://ftp.gnu.org/gnu/mpc/" target="_blank" rel="noopener">http://ftp.gnu.org/gnu/mpc/</a><br>下载，然后解压<br>tar -zxvf mpc-1.2.1.tar.gz</p>
+<p> ./configure –prefix=/usr/local/mpc-1.2.1 –with-gmp=/usr/local/gmp-6.0.0 –with-mpfr=/usr/local/mpfr-4.1.0<br> make<br> make check</p>
+<h1 id="安装GCC"><a href="#安装GCC" class="headerlink" title="安装GCC"></a>安装GCC</h1><p><a href="http://ftp.gnu.org/gnu/gcc/gcc-7.5.0/" target="_blank" rel="noopener">http://ftp.gnu.org/gnu/gcc/gcc-7.5.0/</a><br>下载，然后解压<br>tar -zxvf </p>
+<p>../gcc-7.5.0/configure –prefix=/usr/local/gcc-7.5.0 –build=x86_64-linux（会出错）</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">..&#x2F;gcc-7.5.0&#x2F;configure --disable-multilib --enable-languages&#x3D;c,c++（删除）</span><br><span class="line"></span><br><span class="line">.&#x2F;configure --prefix&#x3D;&#x2F;usr&#x2F;local&#x2F;gcc-7.5.0 -enable-threads&#x3D;posix -disable-checking -disable-multilib -enable-languages&#x3D;c,c++ --with-gmp&#x3D;&#x2F;usr&#x2F;local&#x2F;gmp-6.0.0 --with-mpfr&#x3D;&#x2F;usr&#x2F;local&#x2F;mpfr-4.1.0 --with-mpc&#x3D;&#x2F;usr&#x2F;local&#x2F;mpc-1.2.1</span><br><span class="line"></span><br><span class="line">make</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
+
+
+
+
+]]></content>
+      <categories>
+        <category>GCC</category>
+      </categories>
+      <tags>
+        <tag>GCC</tag>
       </tags>
   </entry>
   <entry>
